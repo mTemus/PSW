@@ -1,5 +1,6 @@
 package com.lab.grupa4;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,15 +11,17 @@ public class Cwiczenie1 {
     int width = 0;
     int input = 0;
     boolean x = true;
-    double[] tabPremade = {2, 3, 3.5, 4, 4.5, 5};
-    double[] tabUser = new double[width];
+    double[] arrPremade = {2, 3, 3.5, 4, 4.5, 5};
+    double[] arrUser = new double[width];
 
     Random random = new Random();
 
-    void fillingTable() {
+    void fillingArray() {
         for (int i = 0; i < width; i++) {
-            int randomNumber = random.nextInt(tabPremade.length);
-            tabUser[i] = tabPremade[randomNumber];
+            System.out.println("fillingArray");
+            int randomNumber = random.nextInt(arrPremade.length);
+            arrUser[i] = arrPremade[randomNumber];
+            System.out.println(arrUser[i]);
         }
     }
 
@@ -26,10 +29,10 @@ public class Cwiczenie1 {
 
         System.out.println("Podaj dlugość tablicy.");
         width = scan.nextInt();
-        fillingTable();
+        fillingArray();
 
         System.out.println("Tablica wygląda następująco:");
-        System.out.println(tabUser);
+        System.out.println(arrUser);
 
         System.out.println("Podaj opcję: ");
         input = scan.nextInt();
@@ -39,11 +42,12 @@ public class Cwiczenie1 {
                 case 1:
                     tabAverage();
                     break;
+                case 2:
+                    arrMinMax();
+                    break;
 
             }
         }
-
-
     }
 
     void tabAverage() {
@@ -51,12 +55,20 @@ public class Cwiczenie1 {
         double average = 0;
 
         for (int i = 0; i < width; i++) {
-            average += tabUser[i];
+            average += arrUser[i];
         }
         average /= width;
 
         System.out.println("Srednia wartości z tablicy wynosi: " + average);
     }
 
+    void arrMinMax() {
+
+        double min = Arrays.stream(arrUser).min().getAsDouble();
+        double max = Arrays.stream(arrUser).max().getAsDouble();
+
+        System.out.println("Najmniejsza wartość w tablicy wynosi: " + min);
+        System.out.println("Największa wartość w tablicy wynosi: " + max);
+    }
 
 }

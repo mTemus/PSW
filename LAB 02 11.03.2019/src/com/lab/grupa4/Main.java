@@ -8,14 +8,30 @@ public class Main {
 
         Cwiczenie1 zad1 = new Cwiczenie1();
 
-        zad1.mainMethod();
+        Scanner scan = new Scanner(System.in);
+        boolean x = true;
+        int option;
 
-        Scanner scanner = new Scanner(System.in);
+        while (x) {
 
+            System.out.println("1. Wyświetl ćwiczenie nr 1.");
+            System.out.println("2. Wyświetl ćwiczenie nr 2.");
+            System.out.println("3. Wyjście.");
+            System.out.println("Wybierz opcję.");
+            option = scan.nextInt();
 
+            switch (option) {
+                case 1:
+                    zad1.mainMethod();
+                    break;
+                case 2:
 
-
+                    break;
+                case 3:
+                    System.out.println("Wyjście z programu.");
+                    x = false;
+                    break;
+            }
+        }
     }
-
-
 }

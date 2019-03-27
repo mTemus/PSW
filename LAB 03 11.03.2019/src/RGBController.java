@@ -34,22 +34,22 @@ public class RGBController {
 
     void mixColors (RGB C1, RGB C2) {
         color3.setR_value(C1.getR_value()+C2.getR_value());
-        if(C1.getR_value() > 255)
-            C1.setR_value(255);
-        else if(C1.getR_value() < 0)
-            C1.setR_value(0);
+        if(color3.getR_value() > 255)
+            color3.setR_value(255);
+        else if(color3.getR_value() < 0)
+            color3.setR_value(0);
 
         color3.setG_value(C1.getG_value()+C2.getG_value());
-        if(C1.getG_value() > 255)
-            C1.setG_value(255);
-        else if(C1.getG_value() < 0)
-            C1.setG_value(0);
+        if(color3.getG_value() > 255)
+            color3.setG_value(255);
+        else if(color3.getG_value() < 0)
+            color3.setG_value(0);
 
         color3.setB_value(C1.getB_value()+C2.getB_value());
-        if(C1.getB_value() > 255)
-            C1.setB_value(255);
-        else if(C1.getB_value() < 0)
-            C1.setB_value(0);
+        if(color3.getB_value() > 255)
+            color3.setB_value(255);
+        else if(color3.getB_value() < 0)
+            color3.setB_value(0);
 
         System.out.println("Nowy kolor: ");
         System.out.println("R: " + color3.getR_value());

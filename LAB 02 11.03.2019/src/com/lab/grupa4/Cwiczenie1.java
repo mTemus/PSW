@@ -21,9 +21,6 @@ public class Cwiczenie1 {
         double[] arrPremade = {2, 3, 3.5, 4, 4.5, 5};
         double[] arrUser = new double[width];
 
-        System.out.println(width);
-        System.out.println(arrUser.length);
-
         for (int i = 0; i < width; i++) {
             int randomNumber = random.nextInt(arrPremade.length);
             arrUser[i] = arrPremade[randomNumber];

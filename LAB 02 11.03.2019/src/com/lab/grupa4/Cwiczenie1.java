@@ -113,6 +113,7 @@ public class Cwiczenie1 {
             standardDeviationI = arrUser[i] - average;
             standardDeviation += Math.pow(standardDeviationI, 2);
         }
+        standardDeviation /= arrUser.length;
         standardDeviation = Math.sqrt(standardDeviation);
 
         System.out.println("Odchylenie standardowe wynosi: " + standardDeviation);

@@ -13,7 +13,7 @@ public class Cwiczenie2 {
         boolean x = true;
 
         while (x) {
-            System.out.println("Podaj liczbę wiersz5y.");
+            System.out.println("Podaj liczbę wierszy.");
             int height = scan.nextInt();
             System.out.println("Podaj liczbę kolumn.");
             int width = scan.nextInt();
@@ -44,7 +44,7 @@ public class Cwiczenie2 {
                 while (x) {
 
                     System.out.println("1. Dodawanie macierzy.");
-                    System.out.println("2. Odejmowanei macierzy.");
+                    System.out.println("2. Odejmowanie macierzy.");
                     System.out.println("3. Mnożenie macierzy.");
                     System.out.println("4. Wyjście.");
                     System.out.println("Podaj opcję: ");
@@ -115,9 +115,6 @@ public class Cwiczenie2 {
             for (int column = 0; column < width; column++) {
 
                 for (int tmpColumn = 0; tmpColumn < height; tmpColumn++) {
-                    //System.out.println("for tmp");
-                    //System.out.println(matrixOne[line][tmpColumn]);
-                    //System.out.println(matrixTwo[tmpColumn][line]);
 
                     cell += (matrixOne[line][tmpColumn] * matrixTwo[tmpColumn][column]);
                 }

@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args) {
 
         Cwiczenie1 zad1 = new Cwiczenie1();
+        Cwiczenie2 zad2 = new Cwiczenie2();
+
 
         Scanner scan = new Scanner(System.in);
         boolean x = true;
@@ -25,7 +27,7 @@ public class Main {
                     zad1.mainMethod();
                     break;
                 case 2:
-
+                    zad2.mainMethod();
                     break;
                 case 3:
                     System.out.println("Wyjście z programu.");

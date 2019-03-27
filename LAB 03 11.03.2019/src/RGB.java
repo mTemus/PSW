@@ -10,6 +10,12 @@ public class RGB {
         setB_value(0);
     }
 
+    public RGB(int r_value, int g_value, int b_value) {
+        R_value = r_value;
+        G_value = g_value;
+        B_value = b_value;
+    }
+
     @Override
     public String toString() {
         return "RGB{" +

@@ -243,13 +243,21 @@ public class EventController {
         String Query = "INSERT INTO user " +
                 "(id, " +
                 "name, " +
+                "surname, " +
+                "login, " +
+                "password, " +
                 "email, " +
-                "salary) " +
+                "perrmisions, " +
+                "date_of_registration) " +
                 "VALUES " +
-                "(" + employee.getId() + ", " +
-                "'" + employee.getName() + "', " +
-                "'" + employee.getEmail() + "', " +
-                employee.getSalary() + ");";
+                "(DEFAULT," +
+                "'" + userToAdd.getName() + "', " +
+                "'" + userToAdd.getSurname() + "', " +
+                "'" + userToAdd.getLogin() + "', " +
+                "'" + userToAdd.getPassword() + "', " +
+                "'" + userToAdd.getEmail() + "', " +
+                "'user', " +
+                "(NOW())," + ");";
 
         Statement Stm = null;
         try {

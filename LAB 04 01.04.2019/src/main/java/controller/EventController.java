@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 
 public class EventController {
@@ -59,9 +60,28 @@ public class EventController {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
 
+        User logginingInUser = searchForExistingUser(login, password);
 
+        if (loginAttempts < 3) {
+            if (logginingInUser != null) {
 
+                if (logginingInUser.getPermissions() == User.Permissions.USER){
+                    login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"User View\" tab.");
+                    loginAttempts = 0;
+                }
+                else if (logginingInUser.getPermissions() == User.Permissions.ADMINISTRATOR){
+                    login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"Administrator View\" tab.");
+                    loginAttempts = 0;
+                }
+
+            } else {
+                login_alert_field.setPromptText("Incorrect user or password! Try again.");
+                loginAttempts++;
+            }
+        }
     }
+
+
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -81,7 +101,8 @@ public class EventController {
 
     /* ======================================== Other Fields ======================================== */
 
-    int loginAttempts = 0;
+    private int loginAttempts = 0;
+
     private enum whoIsLogin {
         USER, ADMINISTRATOR, NONE
     }
@@ -108,7 +129,7 @@ public class EventController {
         return MySQLConnection;
     }
 
-    private User searchForExistingUser (String login, String password){
+    private User searchForExistingUser(String login, String password) {
 
         User existingUser = null;
 
@@ -140,8 +161,14 @@ public class EventController {
                         userResultFind.getString("login"),
                         userResultFind.getString("password"),
                         userResultFind.getString("email"));
+                String permission = userResultFind.getString("permissions");
+
+                if (permission.matches("administrator")){
+                    tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
+                }
+
             } else {
-                Throwable new Exception("Creating user from result error.");
+                throw new RuntimeException("Creating user from result error.");
             }
             MySQLConnection().close();
         } catch (SQLException e) {
@@ -153,9 +180,7 @@ public class EventController {
 
 
 
-
-
-
+    /*
 
 
     @FXML
@@ -240,8 +265,6 @@ public class EventController {
     boolean updateEmployee = Boolean.parseBoolean(null);
 
 
-
-
     public enum SortType {
         sortById, sortByName, sortByEmail, sortBySalary, sortNull
     }
@@ -265,12 +288,10 @@ public class EventController {
     }
 
 
-
     public void initialize() {
         findAll();
 
     }
-
 
 
     public Employee findOne(Integer id_emp) {

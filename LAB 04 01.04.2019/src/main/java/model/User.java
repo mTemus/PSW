@@ -6,9 +6,11 @@ public class User {
     Long id;
     private String name, surname, login, password, email;
 
-    private enum Permissions {
+    public enum Permissions {
         USER, ADMINISTRATOR, NULL;
     }
+
+    Permissions permissions = null;
 
     public User(Long id, String name, String surname, String login, String password, String email) {
         this.id = id;
@@ -17,7 +19,7 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
-        Permissions permissions = Permissions.USER;
+        permissions = Permissions.USER;
     }
 
     public Long getId() {
@@ -66,6 +68,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Permissions getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Permissions permissions) {
+        this.permissions = permissions;
     }
 
 }

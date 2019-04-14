@@ -8,7 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.User;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.*;
+import java.util.Properties;
 
 public class EventController {
 
@@ -108,6 +112,9 @@ public class EventController {
                     addUserToDatabase(tmp_user);
                     register_text_area.setPromptText("Registration of user " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
                     registrationComplete();
+
+                    sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
+
                 } else
                     register_text_area.setPromptText("User already exists. Please log in.");
             } else
@@ -304,6 +311,7 @@ public class EventController {
         register_field_password.setText("");
         register_field_password_r.setText("");
         register_field_email.setText("");
+
     }
 
     private void userLoggedIn(User user) {
@@ -371,33 +379,41 @@ public class EventController {
         }
     }
 
-    private void sendEmailAfterRegistering(String userEmail){
+    private void sendEmailAfterRegistering(String userEmail, String userName, String userSurname) {
 
-//        String from = "temuso@wir.pl";
-//        String host = "localhost";
-//
-//        //Get the session object
-//        Properties properties = System.getProperties();
-//        properties.setProperty("mail.smtp.host", host);
-//        Session session = Session.getDefaultInstance(properties);
-//
-//        //compose the message
-//        try{
-//            MimeMessage message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(from));
-//            message.addRecipient(Message.RecipientType.TO,new InternetAddress(userEmail));
-//            message.setSubject("Ping");
-//            message.setText("Hello, this is example of sending email  ");
-//
-//            // Send message
-//            Transport.send(message);
-//            System.out.println("message sent successfully....");
-//
-//        }catch (MessagingException mex) {mex.printStackTrace();} catch (AddressException e) {
-//            e.printStackTrace();
-//        } catch (javax.mail.MessagingException e) {
-//            e.printStackTrace();
-//        }
+        final String username = "TemusOrigami@gmail.com";
+        final String password = "ZP()PS\\/\\/Utp@";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("TemusOrigami@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(userEmail));
+            message.setSubject("Registration Complete.");
+            message.setText("Dear " + userName + " " + userSurname + ","
+                    + "\n\n No spam to my email, please!");
+
+            Transport.send(message);
+
+            System.out.println("Message sent.");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

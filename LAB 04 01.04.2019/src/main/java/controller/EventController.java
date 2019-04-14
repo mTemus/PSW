@@ -1,5 +1,8 @@
 package controller;
 
+import com.mysql.cj.Session;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import com.sun.xml.internal.ws.api.message.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,9 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.User;
+import sun.rmi.transport.Transport;
 
-import javax.jws.soap.SOAPBinding;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.*;
+import java.util.Properties;
 
 public class EventController {
 
@@ -371,4 +378,37 @@ public class EventController {
             e.printStackTrace();
         }
     }
+
+    private void sendEmailAfterRegistering(String userEmail){
+
+//        String from = "temuso@wir.pl";
+//        String host = "localhost";
+//
+//        //Get the session object
+//        Properties properties = System.getProperties();
+//        properties.setProperty("mail.smtp.host", host);
+//        Session session = Session.getDefaultInstance(properties);
+//
+//        //compose the message
+//        try{
+//            MimeMessage message = new MimeMessage(session);
+//            message.setFrom(new InternetAddress(from));
+//            message.addRecipient(Message.RecipientType.TO,new InternetAddress(userEmail));
+//            message.setSubject("Ping");
+//            message.setText("Hello, this is example of sending email  ");
+//
+//            // Send message
+//            Transport.send(message);
+//            System.out.println("message sent successfully....");
+//
+//        }catch (MessagingException mex) {mex.printStackTrace();} catch (AddressException e) {
+//            e.printStackTrace();
+//        } catch (javax.mail.MessagingException e) {
+//            e.printStackTrace();
+//        }
+    }
+
 }
+
+
+

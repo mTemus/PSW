@@ -4,7 +4,12 @@ public class User {
 
 
     Long id;
-    private String name, surname, login, password, email, date, permission;
+    private String name;
+    private String surname;
+    private String login;
+    private String password;
+    private String email;
+    private String date;
 
     public enum Permissions {
         USER, ADMINISTRATOR, NULL;
@@ -98,4 +103,11 @@ public class User {
         this.permissions = permissions;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }

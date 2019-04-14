@@ -3,7 +3,7 @@ package model;
 public class User {
 
 
-    Long id;
+    private Long id;
     private String name;
     private String surname;
     private String login;
@@ -12,7 +12,7 @@ public class User {
     private String date;
 
     public enum Permissions {
-        USER, ADMINISTRATOR, NULL;
+        USER, ADMINISTRATOR
     }
 
     private Permissions permissions = null;

@@ -119,25 +119,44 @@ public class EventController {
 
     public void user_logout(ActionEvent event) {
 
-        someoneIsLogged = false;
-        uv_field_name.setText("");
-        uv_field_surname.setText("");
-        uv_field_email.setText("");
-        uv_field_join_date.setText("");
-        loggedUser = null;
-        uv_password_change_alert.setText("Logged off successfully.");
+        if (someoneIsLogged && loggedUser.getPermissions() == User.Permissions.USER) {
+            someoneIsLogged = false;
+            uv_field_name.setText("");
+            uv_field_surname.setText("");
+            uv_field_email.setText("");
+            uv_field_join_date.setText("");
+            loggedUser = null;
+            userJoinDate = null;
+            uv_password_change_alert.setPromptText("Logged off successfully.");
+        } else
+            uv_password_change_alert.setPromptText("You are not logged in!");
     }
 
     public void administrator_logout(ActionEvent event) {
 
-        users.clear();
-        someoneIsLogged = false;
-        login_alert_field.setText("Logged off successfully.");
-
-
+        if (someoneIsLogged && loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
+            users.clear();
+            someoneIsLogged = false;
+            login_alert_field.setPromptText("Logged off successfully.");
+        }
     }
 
     public void uv_change_password(ActionEvent event) {
+        if (someoneIsLogged && loggedUser.getPermissions() == User.Permissions.USER) {
+            if (uv_old_password.getText().contentEquals(loggedUser.getPassword())) {
+                if (uv_new_password.getText().contentEquals(uv_new_password_r.getText())) {
+                    changeUsersPassword(loggedUser.getLogin(), uv_new_password.getText());
+                    uv_password_change_alert.setPromptText("Password changed successfully.");
+                    uv_old_password.setText("");
+                    uv_new_password.setText("");
+                    uv_new_password_r.setText("");
+                } else
+                    uv_password_change_alert.setPromptText("New passwords don't match. Write it correctly and try again.");
+            } else
+                uv_password_change_alert.setPromptText("Old password is wrong. Write it correctly and try again.");
+        } else
+            uv_password_change_alert.setPromptText("You are not logged in!");
+
     }
 
     @FXML
@@ -233,7 +252,7 @@ public class EventController {
                         userResultFind.getString("password"),
                         userResultFind.getString("email"));
                 String permission = userResultFind.getString("permissions");
-                userJoinDate = userResultFind.getString("date_of_registration");
+                userJoinDate = userResultFind.getString("registrationDate");
 
                 if (permission.matches("administrator")) {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
@@ -260,7 +279,7 @@ public class EventController {
                 "password, " +
                 "email, " +
                 "permissions, " +
-                "date_of_registration) " +
+                "registrationDate) " +
 
                 "VALUES " +
                 "(DEFAULT," +
@@ -293,6 +312,8 @@ public class EventController {
         uv_field_surname.setText(user.getSurname());
         uv_field_email.setText(user.getEmail());
         uv_field_join_date.setText(userJoinDate);
+        login_text_field.setText("");
+        password_text_field.setText("");
     }
 
     private void administratorLoggedIn() {
@@ -306,11 +327,11 @@ public class EventController {
         col_login.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
         col_password.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
         col_email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-        col_date.setCellValueFactory(new PropertyValueFactory<User, String>("date_of_registration"));
+        col_date.setCellValueFactory(new PropertyValueFactory<User, String>("registrationDate"));
         tbl_users.setItems(usersList);
     }
 
-    public void findAllUsers() {
+    private void findAllUsers() {
         try {
             Statement myStatement = MySQLConnection().createStatement();
             ResultSet myResultSet = myStatement.executeQuery("select * from user");
@@ -322,7 +343,7 @@ public class EventController {
                         myResultSet.getString("login"),
                         myResultSet.getString("password"),
                         myResultSet.getString("email"),
-                        myResultSet.getString("date_of_registration"));
+                        myResultSet.getString("registrationDate"));
                 users.add(u);
                 addDataToTable(users);
             }
@@ -333,5 +354,21 @@ public class EventController {
             e.printStackTrace();
         }
 
+    }
+
+    private void changeUsersPassword(String usersLogin, String newPassword) {
+        try {
+            String Query = "UPDATE user " +
+                    "SET " +
+                    "password = '" + newPassword + "'" +
+                    "WHERE login LIKE '" + usersLogin + "';";
+            System.out.println(Query);
+
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

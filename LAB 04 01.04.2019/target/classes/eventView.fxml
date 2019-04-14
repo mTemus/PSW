@@ -16,7 +16,7 @@
               </Menu>
           </menus>
        </MenuBar>
-       <TabPane layoutX="1.0" layoutY="32.0" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+       <TabPane layoutY="32.0" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
           <tabs>
               <Tab text="Sing in">
                  <content>
@@ -86,13 +86,13 @@
                         <children>
                             <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="425.0" prefWidth="765.0">
                                 <columns>
-                                    <TableColumn fx:id="col_id" prefWidth="60.0" text="ID" />
-                                    <TableColumn fx:id="col_name" prefWidth="100.0" text="NAME" />
+                                    <TableColumn fx:id="col_id" prefWidth="47.0" text="ID" />
+                                    <TableColumn fx:id="col_name" prefWidth="113.0" text="NAME" />
                                     <TableColumn fx:id="col_surname" prefWidth="100.0" text="SURNAME" />
                                     <TableColumn fx:id="col_login" prefWidth="100.0" text="LOGIN" />
                                     <TableColumn fx:id="col_password" prefWidth="100.0" text="PASSWORD" />
-                                    <TableColumn fx:id="col_email" prefWidth="100.0" text="E-MAIL" />
-                                    <TableColumn fx:id="col_date" prefWidth="204.0" text="DATE_OF_REGISTRATION" />
+                                    <TableColumn fx:id="col_email" prefWidth="128.0" text="E-MAIL" />
+                                    <TableColumn fx:id="col_date" prefWidth="176.0" text="REGISTRATION DATE" />
                                 </columns>
                             </TableView>
                             <Button fx:id="administrator_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#administrator_logout" text="Log out" />

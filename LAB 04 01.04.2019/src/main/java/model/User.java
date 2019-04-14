@@ -4,7 +4,7 @@ public class User {
 
 
     Long id;
-    private String name, surname, login, password, email;
+    private String name, surname, login, password, email, date, permission;
 
     public enum Permissions {
         USER, ADMINISTRATOR, NULL;
@@ -29,6 +29,16 @@ public class User {
         this.password = password;
         this.email = email;
         permissions = Permissions.USER;
+    }
+
+    public User(Long id, String name, String surname, String login, String password, String email, String date) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.date = date;
     }
 
 

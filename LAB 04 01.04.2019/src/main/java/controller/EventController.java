@@ -78,10 +78,12 @@ public class EventController {
                     login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"User View\" tab.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    userLoggedIn(loggedUser);
                 } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
                     login_alert_field.setPromptText("Successfully logged in. You can now access data in \"Administrator View\" tab.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    administratorLoggedIn();
                 }
             }
         } else {
@@ -105,14 +107,14 @@ public class EventController {
                 if (tmp_user == null) {
                     tmp_user = new User(name, surname, login, password, email);
                     addUserToDatabase(tmp_user);
-                    register_text_area.setPromptText("Registration successfully, you can log in now.");
-                }
+                    register_text_area.setPromptText("Registration of user " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
+                    registrationComplete();
+                } else
+                    register_text_area.setPromptText("User already exists. Please log in.");
             } else
                 register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
         } else
-            register_text_area.setPromptText("Please log off first.");
-
-
+            register_text_area.setPromptText("You are logged in. Please logout first.");
     }
 
     public void user_logout(ActionEvent event) {
@@ -162,12 +164,9 @@ public class EventController {
     private User loggedUser = null;
     private String userJoinDate = null;
 
-
-    private enum whoIsLogin {
-        USER, ADMINISTRATOR, NONE
-    }
-
     boolean someoneIsLogged = Boolean.parseBoolean(null);
+
+    private ObservableList<User> users = FXCollections.observableArrayList();
 
     /* ======================================== Other Methods ======================================== */
 
@@ -247,8 +246,9 @@ public class EventController {
                 "login, " +
                 "password, " +
                 "email, " +
-                "perrmisions, " +
+                "permissions, " +
                 "date_of_registration) " +
+
                 "VALUES " +
                 "(DEFAULT," +
                 "'" + userToAdd.getName() + "', " +
@@ -257,30 +257,72 @@ public class EventController {
                 "'" + userToAdd.getPassword() + "', " +
                 "'" + userToAdd.getEmail() + "', " +
                 "'user', " +
-                "(NOW())," + ");";
-
-        Statement Stm = null;
+                "(NOW())" + ");";
         try {
-            Stm = MySQLConnection().createStatement();
+            Statement Stm = MySQLConnection().createStatement();
             Stm.executeUpdate(Query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    private void registrationComplete() {
+        register_field_name.setText("");
+        register_field_surname.setText("");
+        register_field_login.setText("");
+        register_field_password.setText("");
+        register_field_password_r.setText("");
+        register_field_email.setText("");
+    }
 
-    private void userLoggedIn() {
-
+    private void userLoggedIn(User user) {
+        uv_field_name.setText(user.getName());
+        uv_field_surname.setText(user.getSurname());
+        uv_field_email.setText(user.getEmail());
+        uv_field_join_date.setText(userJoinDate);
     }
 
     private void administratorLoggedIn() {
+        findAllUsers();
+    }
+
+    private void addDataToTable(ObservableList<User> employeesList) {
+        col_id.setCellValueFactory(new PropertyValueFactory<User, Long>("id"));
+        col_name.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        col_surname.setCellValueFactory(new PropertyValueFactory<User, String>("surname"));
+        col_login.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
+        col_password.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
+        col_email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        col_date.setCellValueFactory(new PropertyValueFactory<User, String>("date_of_registration"));
+        tbl_users.setItems(employeesList);
+    }
+
+    public void findAllUsers() {
+        try {
+            Statement myStatement = MySQLConnection().createStatement();
+            ResultSet myResultSet = myStatement.executeQuery("select * from user");
+
+            while (myResultSet.next()) {
+                User u = new User(myResultSet.getLong("id"),
+                        myResultSet.getString("name"),
+                        myResultSet.getString("surname"),
+                        myResultSet.getString("login"),
+                        myResultSet.getString("password"),
+                        myResultSet.getString("email"),
+                        myResultSet.getString("date_of_registration"));
+                users.add(u);
+                addDataToTable(users);
+
+            }
+            MySQLConnection().close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
-
-  /*
+/*
 
 
     @FXML

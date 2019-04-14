@@ -65,22 +65,20 @@ public class EventController {
         if (loginAttempts < 3) {
             if (logginingInUser != null) {
 
-                if (logginingInUser.getPermissions() == User.Permissions.USER){
+                if (logginingInUser.getPermissions() == User.Permissions.USER) {
                     login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"User View\" tab.");
                     loginAttempts = 0;
-                }
-                else if (logginingInUser.getPermissions() == User.Permissions.ADMINISTRATOR){
+                } else if (logginingInUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
                     login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"Administrator View\" tab.");
                     loginAttempts = 0;
                 }
 
-            } else {
-                login_alert_field.setPromptText("Incorrect user or password! Try again.");
-                loginAttempts++;
             }
         }
+        else {
+            login_alert_field.setText("You failed 3 times, logging in is denied.");
+        }
     }
-
 
 
     @FXML
@@ -163,12 +161,13 @@ public class EventController {
                         userResultFind.getString("email"));
                 String permission = userResultFind.getString("permissions");
 
-                if (permission.matches("administrator")){
+                if (permission.matches("administrator")) {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
                 }
 
             } else {
-                throw new RuntimeException("Creating user from result error.");
+                login_alert_field.setPromptText("Incorrect user or password! Try again.");
+                loginAttempts++;
             }
             MySQLConnection().close();
         } catch (SQLException e) {

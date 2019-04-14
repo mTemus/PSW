@@ -1,106 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EventController">
-   <children>
-       <MenuBar layoutX="-28.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <menus>
-              <Menu mnemonicParsing="false" text="Options">
-                 <items>
-                     <MenuItem fx:id="mi_exit" mnemonicParsing="false" onAction="#exitAction" text="Close" />
-                 </items>
-              </Menu>
-          </menus>
-       </MenuBar>
-       <TabPane layoutY="32.0" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-          <tabs>
-              <Tab text="Sing in">
-                 <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="723.0">
-                        <children>
-                            <TextField fx:id="password_text_field_u" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" />
-                            <TextField fx:id="login_text_field" layoutX="220.0" layoutY="177.0" prefHeight="31.0" prefWidth="360.0" promptText="Login" />
-                            <TextField fx:id="login_alert_field" editable="false" layoutX="15.0" layoutY="466.0" prefHeight="31.0" prefWidth="770.0" promptText="To login fill login and password fields and click the login button." />
-                            <PasswordField fx:id="password_text_field" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" promptText="Password" />
-                            <CheckBox fx:id="password_checkbox" layoutX="594.0" layoutY="231.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" />
-                            <Button fx:id="login_button" layoutX="340.0" layoutY="287.0" mnemonicParsing="false" onAction="#login_check_user" prefHeight="31.0" prefWidth="120.0" text="Login" />
-                        </children>
-                     </AnchorPane>
-                 </content>
-              </Tab>
-              <Tab text="Register">
-                 <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                        <TextField fx:id="register_field_password_r_un" layoutX="98.0" layoutY="256.0" />
-                        <TextField fx:id="register_field_password_un" layoutX="98.0" layoutY="210.0" />
-                            <TextField fx:id="register_field_name" layoutX="98.0" layoutY="67.0" promptText="Name" />
-                            <TextField fx:id="register_field_surname" layoutX="98.0" layoutY="115.0" promptText="Surname" />
-                            <TextField fx:id="register_field_login" layoutX="98.0" layoutY="162.0" promptText="Login" />
-                            <TextField fx:id="register_field_email" layoutX="98.0" layoutY="302.0" promptText="E-mail address" />
-                            <Button fx:id="register_button" layoutX="134.0" layoutY="362.0" mnemonicParsing="false" onAction="#register_check_user" prefHeight="31.0" prefWidth="116.0" text="Register" />
-                            <TextArea fx:id="register_text_area" editable="false" layoutX="400.0" layoutY="67.0" prefHeight="336.0" prefWidth="357.0" promptText="To register, fill in areas with your data and click the register button." />
-                        <CheckBox fx:id="register_password_checkbox" layoutX="296.0" layoutY="215.0" mnemonicParsing="false" onAction="#register_show_password" text="Show" />
-                        <CheckBox fx:id="register_password_r_checkbox" layoutX="296.0" layoutY="261.0" mnemonicParsing="false" onAction="#register_show_password_r" text="Show" />
-                        <PasswordField fx:id="register_field_password" layoutX="98.0" layoutY="210.0" promptText="Password" />
-                        <PasswordField fx:id="register_field_password_r" layoutX="98.0" layoutY="256.0" promptText="Repeat password" />
-                        </children>
-                     </AnchorPane>
-                 </content>
-              </Tab>
-              <Tab text="User View">
-                 <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                            <Button fx:id="user_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#user_logout" text="Log out" />
-                        <Text layoutX="54.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change your password" />
-                        <TextField fx:id="uv_old_password" layoutX="36.0" layoutY="91.0" promptText="Your password." />
-                        <TextField fx:id="uv_new_password" layoutX="36.0" layoutY="135.0" promptText="New password." />
-                        <TextField fx:id="uv_new_password_r" layoutX="36.0" layoutY="179.0" promptText="Repeat new password." />
-                        <Button fx:id="uv_password_change_button" layoutX="94.0" layoutY="225.0" mnemonicParsing="false" onAction="#uv_change_password" text="Change" />
-                        <TextField fx:id="uv_field_name" editable="false" layoutX="544.0" layoutY="91.0" />
-                        <TextField fx:id="uv_field_surname" editable="false" layoutX="544.0" layoutY="135.0" />
-                        <TextField fx:id="uv_field_email" editable="false" layoutX="544.0" layoutY="179.0" />
-                        <TextField fx:id="uv_field_join_date" editable="false" layoutX="544.0" layoutY="225.0" />
-                        <Text layoutX="474.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-                        <Text layoutX="454.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname:" />
-                        <Text layoutX="476.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
-                        <Text layoutX="453.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Join date:" />
-                        <Text layoutX="495.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your data" textAlignment="CENTER">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Text>
-                        <TextField fx:id="uv_password_change_alert" editable="false" layoutX="14.0" layoutY="371.0" prefHeight="31.0" prefWidth="766.0" />
-                        </children>
-                     </AnchorPane>
-                 </content>
-              </Tab>
-              <Tab text="Administrator View">
-                 <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                            <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="425.0" prefWidth="765.0">
-                                <columns>
-                                    <TableColumn fx:id="col_id" prefWidth="47.0" text="ID" />
-                                    <TableColumn fx:id="col_name" prefWidth="113.0" text="NAME" />
-                                    <TableColumn fx:id="col_surname" prefWidth="100.0" text="SURNAME" />
-                                    <TableColumn fx:id="col_login" prefWidth="100.0" text="LOGIN" />
-                                    <TableColumn fx:id="col_password" prefWidth="100.0" text="PASSWORD" />
-                                    <TableColumn fx:id="col_email" prefWidth="128.0" text="E-MAIL" />
-                                    <TableColumn fx:id="col_date" prefWidth="176.0" text="REGISTRATION DATE" />
-                                </columns>
-                            </TableView>
-                            <Button fx:id="administrator_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#administrator_logout" text="Log out" />
-                        </children>
-                     </AnchorPane>
-                 </content>
-              </Tab>
-          </tabs>
-       </TabPane>
-   </children>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EventController">
+    <MenuBar layoutX="-28.0" layoutY="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
+        <Menu mnemonicParsing="false" text="Options">
+            <MenuItem fx:id="mi_exit" mnemonicParsing="false" onAction="#exitAction" text="Close"/>
+        </Menu>
+    </MenuBar>
+    <TabPane layoutY="32.0" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Sing in">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="723.0">
+                <TextField fx:id="password_text_field_u" layoutX="220.0" layoutY="226.0" prefHeight="31.0"
+                           prefWidth="360.0"/>
+                <TextField fx:id="login_text_field" layoutX="220.0" layoutY="177.0" prefHeight="31.0"
+                           prefWidth="360.0" promptText="Login"/>
+                <TextField fx:id="login_alert_field" editable="false" layoutX="15.0" layoutY="466.0"
+                           prefHeight="31.0" prefWidth="770.0"
+                           promptText="To login fill login and password fields and click the login button."/>
+                <PasswordField fx:id="password_text_field" layoutX="220.0" layoutY="226.0" prefHeight="31.0"
+                               prefWidth="360.0" promptText="Password"/>
+                <CheckBox fx:id="password_checkbox" layoutX="594.0" layoutY="231.0" mnemonicParsing="false"
+                          onAction="#showPassword" text="Show password"/>
+                <Button fx:id="login_button" layoutX="340.0" layoutY="287.0" mnemonicParsing="false"
+                        onAction="#login_check_user" prefHeight="31.0" prefWidth="120.0" text="Login"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="Register">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TextField fx:id="register_field_password_r_un" layoutX="98.0" layoutY="256.0"/>
+                <TextField fx:id="register_field_password_un" layoutX="98.0" layoutY="210.0"/>
+                <TextField fx:id="register_field_name" layoutX="98.0" layoutY="67.0" promptText="Name"/>
+                <TextField fx:id="register_field_surname" layoutX="98.0" layoutY="115.0"
+                           promptText="Surname"/>
+                <TextField fx:id="register_field_login" layoutX="98.0" layoutY="162.0" promptText="Login"/>
+                <TextField fx:id="register_field_email" layoutX="98.0" layoutY="302.0"
+                           promptText="E-mail address"/>
+                <Button fx:id="register_button" layoutX="134.0" layoutY="362.0" mnemonicParsing="false"
+                        onAction="#register_check_user" prefHeight="31.0" prefWidth="116.0"
+                        text="Register"/>
+                <TextArea fx:id="register_text_area" editable="false" layoutX="400.0" layoutY="67.0"
+                          prefHeight="336.0" prefWidth="357.0"
+                          promptText="To register, fill in areas with your data and click the register button."/>
+                <CheckBox fx:id="register_password_checkbox" layoutX="296.0" layoutY="215.0"
+                          mnemonicParsing="false" onAction="#register_show_password" text="Show"/>
+                <CheckBox fx:id="register_password_r_checkbox" layoutX="296.0" layoutY="261.0"
+                          mnemonicParsing="false" onAction="#register_show_password_r" text="Show"/>
+                <PasswordField fx:id="register_field_password" layoutX="98.0" layoutY="210.0"
+                               promptText="Password"/>
+                <PasswordField fx:id="register_field_password_r" layoutX="98.0" layoutY="256.0"
+                               promptText="Repeat password"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="User View">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <Button fx:id="user_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false"
+                        onAction="#user_logout" text="Log out"/>
+                <Text layoutX="54.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Change your password"/>
+                <TextField fx:id="uv_old_password" layoutX="36.0" layoutY="91.0"
+                           promptText="Your password."/>
+                <TextField fx:id="uv_new_password" layoutX="36.0" layoutY="135.0"
+                           promptText="New password."/>
+                <TextField fx:id="uv_new_password_r" layoutX="36.0" layoutY="179.0"
+                           promptText="Repeat new password."/>
+                <Button fx:id="uv_password_change_button" layoutX="94.0" layoutY="225.0"
+                        mnemonicParsing="false" onAction="#uv_change_password" text="Change"/>
+                <TextField fx:id="uv_field_name" editable="false" layoutX="544.0" layoutY="91.0"/>
+                <TextField fx:id="uv_field_surname" editable="false" layoutX="544.0" layoutY="135.0"/>
+                <TextField fx:id="uv_field_email" editable="false" layoutX="544.0" layoutY="179.0"/>
+                <TextField fx:id="uv_field_join_date" editable="false" layoutX="544.0" layoutY="225.0"/>
+                <Text layoutX="474.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:"/>
+                <Text layoutX="454.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Surname:"/>
+                <Text layoutX="476.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:"/>
+                <Text layoutX="453.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Join date:"/>
+                <Text layoutX="495.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your data"
+                      textAlignment="CENTER">
+                    <font>
+                        <Font size="36.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="uv_password_change_alert" editable="false" layoutX="14.0" layoutY="371.0"
+                           prefHeight="31.0" prefWidth="766.0"/>
+            </AnchorPane>
+        </Tab>
+        <Tab text="Administrator View">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="425.0"
+                           prefWidth="765.0">
+                    <columns>
+                        <TableColumn fx:id="col_id" prefWidth="47.0" text="ID"/>
+                        <TableColumn fx:id="col_name" prefWidth="113.0" text="NAME"/>
+                        <TableColumn fx:id="col_surname" prefWidth="100.0" text="SURNAME"/>
+                        <TableColumn fx:id="col_login" prefWidth="100.0" text="LOGIN"/>
+                        <TableColumn fx:id="col_password" prefWidth="100.0" text="PASSWORD"/>
+                        <TableColumn fx:id="col_email" prefWidth="128.0" text="E-MAIL"/>
+                        <TableColumn fx:id="col_date" prefWidth="176.0" text="REGISTRATION DATE"/>
+                    </columns>
+                </TableView>
+                <Button fx:id="administrator_logout_button" layoutX="14.0" layoutY="466.0"
+                        mnemonicParsing="false" onAction="#administrator_logout" text="Log out"/>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
 </AnchorPane>

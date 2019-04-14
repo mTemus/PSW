@@ -1,8 +1,5 @@
 package controller;
 
-import com.mysql.cj.Session;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import com.sun.xml.internal.ws.api.message.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,13 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.User;
-import sun.rmi.transport.Transport;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.sql.*;
-import java.util.Properties;
 
 public class EventController {
 
@@ -204,7 +196,7 @@ public class EventController {
     private User loggedUser = null;
     private String userJoinDate = null;
 
-    boolean someoneIsLogged = Boolean.parseBoolean(null);
+    private boolean someoneIsLogged = false;
 
     private ObservableList<User> users = FXCollections.observableArrayList();
 

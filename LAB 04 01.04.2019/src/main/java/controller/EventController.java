@@ -6,88 +6,156 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.User;
 
 import java.sql.*;
 
 public class EventController {
 
+
+    /* ======================================== FX Fields etc. ======================================== */
+    public TextField register_field_name;
+    public TextField register_field_surname;
+    public TextField register_field_login;
+    public TextField register_field_password;
+    public TextField register_field_password_r;
+    public TextField register_field_email;
+    public Button register_button;
+    public TextArea register_text_area;
+    public Button user_logout_button;
+    public TextField login_text_field;
+    public TextField login_alert_field;
+    public PasswordField password_text_field;
+    public CheckBox password_checkbox;
+    public Button login_button;
+    public Button administrator_logout_button;
+    public TextField password_text_field_u;
+    @FXML
+    private TableView<User> tbl_users;
+    @FXML
+    private TableColumn<User, Long> col_id;
+    @FXML
+    private TableColumn<User, String> col_name;
+    @FXML
+    private TableColumn<User, String> col_surname;
+    @FXML
+    private TableColumn<User, String> col_login;
+    @FXML
+    private TableColumn<User, String> col_password;
+    @FXML
+    private TableColumn<User, String> col_email;
+    @FXML
+    private TableColumn<User, String> col_date;
+
     @FXML
     private MenuItem mi_exit;
 
-    @FXML
-    private TableView<Employee> tbl_employee;
+    /* ======================================== FX Event Methods ======================================== */
+    public void register_check_user(ActionEvent event) {
+    }
 
-    @FXML
-    private TableView<Employee> tbl_find_employee;
+    public void login_check_user(ActionEvent event) {
 
-    @FXML
-    private TableColumn<Employee, Long> col_id;
+        String login = login_text_field.getText();
+        String password = password_text_field.getText();
 
-    @FXML
-    private TableColumn<Employee, String> col_name;
 
-    @FXML
-    private TableColumn<Employee, String> col_email;
 
-    @FXML
-    private TableColumn<Employee, String> col_salary;
-
-    @FXML
-    private TableColumn<Employee, Long> col_id_find;
-
-    @FXML
-    private TableColumn<Employee, String> col_name_find;
-
-    @FXML
-    private TableColumn<Employee, String> col_email_find;
-
-    @FXML
-    private TableColumn<Employee, String> col_salary_find;
-
+    }
 
     @FXML
     void exitAction(ActionEvent event) {
         System.exit(0);
     }
 
-    @FXML
-    private TextField employee_id_field;
 
-    @FXML
-    private TextField employee_name_field;
+    public void showPassword(ActionEvent event) {
 
-    @FXML
-    private TextField employee_delete_field;
+        password_text_field_u.managedProperty().bind(password_checkbox.selectedProperty());
+        password_text_field_u.visibleProperty().bind(password_checkbox.selectedProperty());
+        password_text_field.managedProperty().bind(password_checkbox.selectedProperty().not());
+        password_text_field.visibleProperty().bind(password_checkbox.selectedProperty().not());
+        password_text_field_u.textProperty().bindBidirectional(password_text_field.textProperty());
 
-    @FXML
-    private TextField employee_info_field_delete;
+    }
 
-    @FXML
-    private TextField employee_add_field_id;
+    /* ======================================== Other Fields ======================================== */
 
-    @FXML
-    private TextField employee_add_field_name;
+    int loginAttempts = 0;
+    private enum whoIsLogin {
+        USER, ADMINISTRATOR, NONE
+    }
 
-    @FXML
-    private TextField employee_add_field_email;
+    boolean loginUserExists = false;
+    boolean registerUserExists = false;
 
-    @FXML
-    private TextField employee_add_field_salary;
+    /* ======================================== Other Methods ======================================== */
 
-    @FXML
-    private RadioButton sortByNull;
+    private Connection MySQLConnection() {
+        Connection MySQLConnection = null;
 
-    @FXML
-    private RadioButton sortById;
+        try {
+            MySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/psw" +
+                            "?useUnicode=true" +
+                            "&useJDBCCompliantTimezoneShift=true" +
+                            "&useLegacyDatetimeCode=false" +
+                            "&serverTimezone=UTC",
+                    "root", "admin");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-    @FXML
-    private RadioButton sortByName;
+        return MySQLConnection;
+    }
 
-    @FXML
-    private RadioButton sortByEmail;
+    private User searchForExistingUser (String login, String password){
 
-    @FXML
-    private RadioButton sortBySalary;
+        User existingUser = null;
+
+        PreparedStatement findingStm = null;
+        try {
+            findingStm = MySQLConnection().prepareStatement("SELECT * FROM user WHERE login LIKE ? AND password LIKE ?");
+            findingStm.setString(1, login);
+            findingStm.setString(2, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        existingUser = doFindingQuery(findingStm);
+
+        return existingUser;
+    }
+
+
+    private User doFindingQuery(PreparedStatement findStm) {
+        User tmp_user = null;
+        ResultSet userResultFind;
+
+        try {
+            userResultFind = findStm.executeQuery();
+            if (userResultFind.next()) {
+                tmp_user = new User(userResultFind.getLong("id"),
+                        userResultFind.getString("name"),
+                        userResultFind.getString("surname"),
+                        userResultFind.getString("login"),
+                        userResultFind.getString("password"),
+                        userResultFind.getString("email"));
+            } else {
+                Throwable new Exception("Creating user from result error.");
+            }
+            MySQLConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp_user;
+    }
+
+
+
+
+
+
+
 
 
     @FXML
@@ -171,6 +239,9 @@ public class EventController {
 
     boolean updateEmployee = Boolean.parseBoolean(null);
 
+
+
+
     public enum SortType {
         sortById, sortByName, sortByEmail, sortBySalary, sortNull
     }
@@ -193,48 +264,14 @@ public class EventController {
         tbl_find_employee.setItems(employeesList);
     }
 
-    private Connection MySQLConnection() {
-        Connection MySQLConnection = null;
 
-        try {
-            MySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zpo" +
-                            "?useUnicode=true" +
-                            "&useJDBCCompliantTimezoneShift=true" +
-                            "&useLegacyDatetimeCode=false" +
-                            "&serverTimezone=UTC",
-                    "root", "admin");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return MySQLConnection;
-    }
 
     public void initialize() {
         findAll();
 
     }
 
-    public Employee doFindingQuery(PreparedStatement prpStm) {
-        Employee tmp_empl = null;
-        ResultSet emplResultFind;
 
-        try {
-            emplResultFind = prpStm.executeQuery();
-            if (emplResultFind.next()) {
-                tmp_empl = new Employee((long) emplResultFind.getInt("id"),
-                        emplResultFind.getString("name"),
-                        emplResultFind.getString("email"),
-                        emplResultFind.getString("salary"));
-            } else {
-                System.out.println("Employee result error");
-            }
-            MySQLConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return tmp_empl;
-    }
 
     public Employee findOne(Integer id_emp) {
 
@@ -445,7 +482,9 @@ public class EventController {
                     myResultSet.getString("email"),
                     myResultSet.getString("salary"));
             employeeSort.add(e);
-               addDataToEmployee(employeeSort);
+            addDataToEmployee(employeeSort);
         }
     }
+
+     */
 }

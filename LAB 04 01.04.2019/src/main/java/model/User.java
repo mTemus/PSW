@@ -10,7 +10,7 @@ public class User {
         USER, ADMINISTRATOR, NULL;
     }
 
-    Permissions permissions = null;
+    private Permissions permissions = null;
 
     public User(Long id, String name, String surname, String login, String password, String email) {
         this.id = id;
@@ -21,6 +21,16 @@ public class User {
         this.email = email;
         permissions = Permissions.USER;
     }
+
+    public User(String name, String surname, String login, String password, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        permissions = Permissions.USER;
+    }
+
 
     public Long getId() {
         return id;

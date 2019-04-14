@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -35,14 +36,18 @@
                  <content>
                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                         <children>
+                        <TextField fx:id="register_field_password_r_un" layoutX="98.0" layoutY="256.0" />
+                        <TextField fx:id="register_field_password_un" layoutX="98.0" layoutY="210.0" />
                             <TextField fx:id="register_field_name" layoutX="98.0" layoutY="67.0" promptText="Name" />
                             <TextField fx:id="register_field_surname" layoutX="98.0" layoutY="115.0" promptText="Surname" />
                             <TextField fx:id="register_field_login" layoutX="98.0" layoutY="162.0" promptText="Login" />
-                            <TextField fx:id="register_field_password" layoutX="98.0" layoutY="210.0" promptText="Password" />
-                            <TextField fx:id="register_field_password_r" layoutX="98.0" layoutY="256.0" promptText="Repeat password" />
                             <TextField fx:id="register_field_email" layoutX="98.0" layoutY="302.0" promptText="E-mail address" />
                             <Button fx:id="register_button" layoutX="134.0" layoutY="362.0" mnemonicParsing="false" onAction="#register_check_user" prefHeight="31.0" prefWidth="116.0" text="Register" />
-                            <TextArea fx:id="register_text_area" editable="false" layoutX="359.0" layoutY="67.0" prefHeight="336.0" prefWidth="357.0" promptText="To register, fill in areas with your data and click the register button." />
+                            <TextArea fx:id="register_text_area" editable="false" layoutX="400.0" layoutY="67.0" prefHeight="336.0" prefWidth="357.0" promptText="To register, fill in areas with your data and click the register button." />
+                        <CheckBox fx:id="register_password_checkbox" layoutX="296.0" layoutY="215.0" mnemonicParsing="false" onAction="#register_show_password" text="Show" />
+                        <CheckBox fx:id="register_password_r_checkbox" layoutX="296.0" layoutY="261.0" mnemonicParsing="false" onAction="#register_show_password_r" text="Show" />
+                        <PasswordField fx:id="register_field_password" layoutX="98.0" layoutY="210.0" promptText="Password" />
+                        <PasswordField fx:id="register_field_password_r" layoutX="98.0" layoutY="256.0" promptText="Repeat password" />
                         </children>
                      </AnchorPane>
                  </content>
@@ -51,7 +56,26 @@
                  <content>
                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                         <children>
-                            <Button fx:id="user_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" text="Log out" />
+                            <Button fx:id="user_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#user_logout" text="Log out" />
+                        <Text layoutX="54.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change your password" />
+                        <TextField fx:id="uv_old_password" layoutX="36.0" layoutY="91.0" promptText="Your password." />
+                        <TextField fx:id="uv_new_password" layoutX="36.0" layoutY="135.0" promptText="New password." />
+                        <TextField fx:id="uv_new_password_r" layoutX="36.0" layoutY="179.0" promptText="Repeat new password." />
+                        <Button fx:id="uv_password_change_button" layoutX="94.0" layoutY="225.0" mnemonicParsing="false" onAction="#uv_change_password" text="Change" />
+                        <TextField fx:id="uv_field_name" layoutX="544.0" layoutY="91.0" />
+                        <TextField fx:id="uv_field_surname" layoutX="544.0" layoutY="135.0" />
+                        <TextField fx:id="uv_field_email" layoutX="544.0" layoutY="179.0" />
+                        <TextField fx:id="uv_field_join_date" layoutX="544.0" layoutY="225.0" />
+                        <Text layoutX="474.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+                        <Text layoutX="454.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname:" />
+                        <Text layoutX="476.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+                        <Text layoutX="453.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Join date:" />
+                        <Text layoutX="495.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your data" textAlignment="CENTER">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="uv_password_change_alert" editable="false" layoutX="14.0" layoutY="371.0" prefHeight="31.0" prefWidth="766.0" />
                         </children>
                      </AnchorPane>
                  </content>
@@ -71,7 +95,7 @@
                                     <TableColumn fx:id="col_date" prefWidth="204.0" text="DATE_OF_REGISTRATION" />
                                 </columns>
                             </TableView>
-                            <Button fx:id="administrator_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" text="Log out" />
+                            <Button fx:id="administrator_logout_button" layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="#administrator_logout" text="Log out" />
                         </children>
                      </AnchorPane>
                  </content>

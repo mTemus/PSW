@@ -18,19 +18,33 @@ public class EventController {
     public TextField register_field_name;
     public TextField register_field_surname;
     public TextField register_field_login;
-    public TextField register_field_password;
-    public TextField register_field_password_r;
     public TextField register_field_email;
-    public Button register_button;
-    public TextArea register_text_area;
-    public Button user_logout_button;
-    public TextField login_text_field;
+    public TextField register_field_password_r_un;
+    public TextField register_field_password_un;
+    public TextField uv_old_password;
+    public TextField uv_new_password;
+    public TextField uv_new_password_r;
+    public TextField uv_field_name;
+    public TextField uv_field_surname;
+    public TextField uv_field_email;
+    public TextField uv_field_join_date;
+    public TextField uv_password_change_alert;
     public TextField login_alert_field;
+    public TextField login_text_field;
+    public TextField password_text_field_u;
     public PasswordField password_text_field;
+    public PasswordField register_field_password;
+    public PasswordField register_field_password_r;
+    public TextArea register_text_area;
     public CheckBox password_checkbox;
+    public CheckBox register_password_checkbox;
+    public CheckBox register_password_r_checkbox;
+    public Button register_button;
+    public Button user_logout_button;
     public Button login_button;
     public Button administrator_logout_button;
-    public TextField password_text_field_u;
+    public Button uv_password_change_button;
+
     @FXML
     private TableView<User> tbl_users;
     @FXML
@@ -52,34 +66,63 @@ public class EventController {
     private MenuItem mi_exit;
 
     /* ======================================== FX Event Methods ======================================== */
-    public void register_check_user(ActionEvent event) {
-    }
-
     public void login_check_user(ActionEvent event) {
-
         String login = login_text_field.getText();
         String password = password_text_field.getText();
 
-        User logginingInUser = searchForExistingUser(login, password);
+        loggedUser = searchForExistingUser(login, password);
 
         if (loginAttempts < 3) {
-            if (logginingInUser != null) {
-
-                if (logginingInUser.getPermissions() == User.Permissions.USER) {
+            if (loggedUser != null) {
+                if (loggedUser.getPermissions() == User.Permissions.USER) {
                     login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"User View\" tab.");
                     loginAttempts = 0;
-                } else if (logginingInUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
-                    login_alert_field.setPromptText("Successfully logged in. You can now access your data in \"Administrator View\" tab.");
+                    someoneIsLogged = true;
+                } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
+                    login_alert_field.setPromptText("Successfully logged in. You can now access data in \"Administrator View\" tab.");
                     loginAttempts = 0;
+                    someoneIsLogged = true;
                 }
-
             }
-        }
-        else {
+        } else {
             login_alert_field.setText("You failed 3 times, logging in is denied.");
         }
     }
 
+    public void register_check_user(ActionEvent event) {
+
+        String name = register_field_name.getText();
+        String surname = register_field_surname.getText();
+        String login = register_field_login.getText();
+        String password = register_field_password.getText();
+        String password_r = register_field_password_r.getText();
+        String email = register_field_email.getText();
+
+        User tmp_user = searchForExistingUser(login, password);
+
+        if (!someoneIsLogged) {
+            if (password.contentEquals(password_r)) {
+                if (tmp_user == null) {
+                    tmp_user = new User(name, surname, login, password, email);
+                    addUserToDatabase(tmp_user);
+                    register_text_area.setPromptText("Registration successfully, you can log in now.");
+                }
+            } else
+                register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
+        } else
+            register_text_area.setPromptText("Please log off first.");
+
+
+    }
+
+    public void user_logout(ActionEvent event) {
+    }
+
+    public void administrator_logout(ActionEvent event) {
+    }
+
+    public void uv_change_password(ActionEvent event) {
+    }
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -88,25 +131,43 @@ public class EventController {
 
 
     public void showPassword(ActionEvent event) {
-
         password_text_field_u.managedProperty().bind(password_checkbox.selectedProperty());
         password_text_field_u.visibleProperty().bind(password_checkbox.selectedProperty());
         password_text_field.managedProperty().bind(password_checkbox.selectedProperty().not());
         password_text_field.visibleProperty().bind(password_checkbox.selectedProperty().not());
         password_text_field_u.textProperty().bindBidirectional(password_text_field.textProperty());
-
     }
+
+    public void register_show_password(ActionEvent event) {
+        register_field_password_un.managedProperty().bind(register_password_checkbox.selectedProperty());
+        register_field_password_un.visibleProperty().bind(register_password_checkbox.selectedProperty());
+        register_field_password.managedProperty().bind(register_password_checkbox.selectedProperty().not());
+        register_field_password.visibleProperty().bind(register_password_checkbox.selectedProperty().not());
+        register_field_password_un.textProperty().bindBidirectional(register_field_password.textProperty());
+    }
+
+    public void register_show_password_r(ActionEvent event) {
+        register_field_password_r_un.managedProperty().bind(register_password_r_checkbox.selectedProperty());
+        register_field_password_r_un.visibleProperty().bind(register_password_r_checkbox.selectedProperty());
+        register_field_password_r.managedProperty().bind(register_password_r_checkbox.selectedProperty().not());
+        register_field_password_r.visibleProperty().bind(register_password_r_checkbox.selectedProperty().not());
+        register_field_password_r_un.textProperty().bindBidirectional(register_field_password_r.textProperty());
+    }
+
+
 
     /* ======================================== Other Fields ======================================== */
 
     private int loginAttempts = 0;
+    private User loggedUser = null;
+    private String userJoinDate = null;
+
 
     private enum whoIsLogin {
         USER, ADMINISTRATOR, NONE
     }
 
-    boolean loginUserExists = false;
-    boolean registerUserExists = false;
+    boolean someoneIsLogged = Boolean.parseBoolean(null);
 
     /* ======================================== Other Methods ======================================== */
 
@@ -160,6 +221,7 @@ public class EventController {
                         userResultFind.getString("password"),
                         userResultFind.getString("email"));
                 String permission = userResultFind.getString("permissions");
+                userJoinDate = userResultFind.getString("date_of_registration");
 
                 if (permission.matches("administrator")) {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
@@ -176,10 +238,41 @@ public class EventController {
         return tmp_user;
     }
 
+    private void addUserToDatabase(User userToAdd) {
+
+        String Query = "INSERT INTO user " +
+                "(id, " +
+                "name, " +
+                "email, " +
+                "salary) " +
+                "VALUES " +
+                "(" + employee.getId() + ", " +
+                "'" + employee.getName() + "', " +
+                "'" + employee.getEmail() + "', " +
+                employee.getSalary() + ");";
+
+        Statement Stm = null;
+        try {
+            Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
+    }
 
-    /*
+
+    private void userLoggedIn() {
+
+    }
+
+    private void administratorLoggedIn() {
+
+    }
+
+
+  /*
 
 
     @FXML

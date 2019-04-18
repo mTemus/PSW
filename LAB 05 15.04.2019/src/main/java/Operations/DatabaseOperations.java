@@ -1,9 +1,12 @@
 package Operations;
 
 import model.User;
+
 import java.sql.*;
 
 public class DatabaseOperations {
+
+    public User tmp_user = null;
 
     private Connection MySQLConnection() {
         Connection MySQLConnection = null;
@@ -41,7 +44,6 @@ public class DatabaseOperations {
     }
 
     private User doFindingQuery(PreparedStatement findStm) {
-        User tmp_user = null;
         ResultSet userResultFind;
 
         try {
@@ -56,13 +58,9 @@ public class DatabaseOperations {
                         userResultFind.getString("date"));
                 String permission = userResultFind.getString("permissions");
 
-
                 if (permission.matches("administrator")) {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
                 }
-
-            } else {
-                System.out.println("User login error.");
             }
             MySQLConnection().close();
         } catch (SQLException e) {
@@ -81,7 +79,7 @@ public class DatabaseOperations {
                 "password, " +
                 "email, " +
                 "permissions, " +
-                "registrationDate) " +
+                "date) " +
 
                 "VALUES " +
                 "(DEFAULT," +

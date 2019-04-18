@@ -6,17 +6,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    boolean login = false;
-    private enum LoginType {
-        ADMINISTRATOR, USER
-    }
+    Stage window;
+    Scene loginScene;
+    Scene administratorScene;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
-        primaryStage.setTitle("Login View.");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+    public void start(Stage primaryStage) throws Exception {
+        window = primaryStage;
+
+        Parent loginViewParent = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+        loginScene = new Scene(loginViewParent);
+
+        window.setTitle("Login view");
+        window.setScene(loginScene);
+        window.show();
+
     }
 
 

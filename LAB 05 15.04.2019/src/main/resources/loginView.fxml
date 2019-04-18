@@ -8,15 +8,15 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
-        <TabPane prefHeight="570.0" prefWidth="809.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="570.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Login">
                    <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="531.0" prefWidth="741.0">
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="531.0" prefWidth="800.0">
                           <children>
                               <TextField fx:id="password_text_field_u" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" />
                               <TextField fx:id="login_text_field" layoutX="220.0" layoutY="177.0" prefHeight="31.0" prefWidth="360.0" promptText="Login" />
-                              <TextField fx:id="login_alert_field" editable="false" layoutX="15.0" layoutY="467.0" prefHeight="31.0" prefWidth="770.0" promptText="To login fill login and password fields and click the login button." />
+                              <TextField fx:id="login_alert_field" editable="false" layoutX="15.0" layoutY="450.0" prefHeight="30.0" prefWidth="770.0" promptText="To login fill login and password fields and click the login button." />
                               <PasswordField fx:id="password_text_field" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" promptText="Password" />
                               <CheckBox fx:id="password_checkbox" layoutX="594.0" layoutY="231.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" />
                               <Button fx:id="login_button" layoutX="340.0" layoutY="287.0" mnemonicParsing="false" onAction="#login_check_user" prefHeight="31.0" prefWidth="120.0" text="Login" />

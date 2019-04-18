@@ -5,15 +5,20 @@ import Operations.EmailOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import model.User;
+
+import java.io.IOException;
 
 public class LoginController {
 
     private int loginAttempts = 0;
     private User loggedUser = null;
-    private String userJoinDate = null;
-
     private boolean someoneIsLogged = false;
 
     private ObservableList<User> users = FXCollections.observableArrayList();
@@ -40,7 +45,7 @@ public class LoginController {
     DatabaseOperations DO = new DatabaseOperations();
     EmailOperations EO = new EmailOperations();
 
-    public void login_check_user(ActionEvent event) {
+    public void login_check_user(ActionEvent event) throws IOException {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
 
@@ -52,11 +57,16 @@ public class LoginController {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    changeSceneToUser(event);
+
                 } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
-                    login_alert_field.setPromptText("Successfully logged in. You can now access data in \"Administrator View\" tab.");
+                    login_alert_field.setPromptText("Successfully logged in as an Administrator.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
                 }
+            } else {
+                loginAttempts++;
+                login_alert_field.setPromptText("Invalid user or password, please try again.");
             }
         } else {
             login_alert_field.setText("You failed 3 times, logging in is denied.");
@@ -126,4 +136,26 @@ public class LoginController {
 
     }
 
+    public void changeSceneToUser (ActionEvent event) throws IOException {
+        Parent EventViewParent = FXMLLoader.load(getClass().getResource("/eventView.fxml"));
+        Scene eventScene = new Scene(EventViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(eventScene);
+        window.setTitle("Event view");
+        window.show();
+    }
+
+
+
+    public void setLoginAttempts(int loginAttempts) {
+        this.loginAttempts = loginAttempts;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public boolean isSomeoneIsLogged() {
+        return someoneIsLogged;
+    }
 }

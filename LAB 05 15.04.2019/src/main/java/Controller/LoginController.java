@@ -1,6 +1,7 @@
 package Controller;
 
 import Operations.DatabaseOperations;
+import Operations.EmailOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,13 +37,14 @@ public class LoginController {
     public PasswordField register_field_password;
     public PasswordField register_field_password_r;
 
-
+    DatabaseOperations DO = new DatabaseOperations();
+    EmailOperations EO = new EmailOperations();
 
     public void login_check_user(ActionEvent event) {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
 
-        loggedUser = searchForExistingUser(login, password);
+        loggedUser = DO.searchForExistingUser(login, password);
 
         if (loginAttempts < 3) {
             if (loggedUser != null) {
@@ -63,8 +65,6 @@ public class LoginController {
 
     public void register_check_user(ActionEvent event) {
 
-        EmailOperations
-
         String name = register_field_name.getText();
         String surname = register_field_surname.getText();
         String login = register_field_login.getText();
@@ -72,17 +72,17 @@ public class LoginController {
         String password_r = register_field_password_r.getText();
         String email = register_field_email.getText();
 
-        User tmp_user = searchForExistingUser(login, password);
+        User tmp_user = DO.searchForExistingUser(login, password);
 
         if (!someoneIsLogged) {
             if (password.contentEquals(password_r)) {
                 if (tmp_user == null) {
                     tmp_user = new User(name, surname, login, password, email);
-                    addUserToDatabase(tmp_user);
+                    DO.addUserToDatabase(tmp_user);
                     register_text_area.setPromptText("Registration of User " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
                     registrationComplete();
 
-                    sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
+                    EO.sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
 
                 } else
                     register_text_area.setPromptText("User already exists. Please log in.");
@@ -91,7 +91,6 @@ public class LoginController {
         } else
             register_text_area.setPromptText("You are logged in. Please logout first.");
     }
-
 
     public void showPassword(ActionEvent event) {
         password_text_field_u.managedProperty().bind(password_checkbox.selectedProperty());
@@ -117,12 +116,14 @@ public class LoginController {
         register_field_password_r_un.textProperty().bindBidirectional(register_field_password_r.textProperty());
     }
 
+    private void registrationComplete() {
+        register_field_name.setText("");
+        register_field_surname.setText("");
+        register_field_login.setText("");
+        register_field_password.setText("");
+        register_field_password_r.setText("");
+        register_field_email.setText("");
 
-
-
-
-
-
-
+    }
 
 }

@@ -7,10 +7,23 @@ import java.util.Properties;
 
 public class EmailOperations {
 
-    private void sendEmailAfterRegistering(String userEmail, String userName, String userSurname) {
+    private String usernameEmail;
+    private String passwordEmail;
 
-        final String username = "TemusOrigami@gmail.com";
-        final String password = "ZP()PS\\/\\/Utp@";
+    public EmailOperations() {
+        usernameEmail = "TemusOrigami@gmail.com";
+        passwordEmail = "ZP()PS\\/\\/Utp@";
+    }
+
+    public EmailOperations(String usernameEmail, String passwordEmail) {
+        this.usernameEmail = usernameEmail;
+        this.passwordEmail = passwordEmail;
+    }
+
+    public void sendEmailAfterRegistering(String userEmail, String userName, String userSurname) {
+
+        final String username = usernameEmail;
+        final String password = passwordEmail;
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -24,7 +37,6 @@ public class EmailOperations {
                         return new PasswordAuthentication(username, password);
                     }
                 });
-
         try {
 
             Message message = new MimeMessage(session);

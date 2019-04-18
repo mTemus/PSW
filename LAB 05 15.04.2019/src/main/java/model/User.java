@@ -10,6 +10,19 @@ public class User {
     private String email;
     private String date;
 
+    public User(String name, String surname, String login, String password, String email) {
+        this.id = null;
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.date = null;
+        this.permissions = Permissions.USER;
+        this.foodPreferences = null;
+        this.participationType = null;
+    }
+
     public enum Permissions {
         USER, ADMINISTRATOR
     }

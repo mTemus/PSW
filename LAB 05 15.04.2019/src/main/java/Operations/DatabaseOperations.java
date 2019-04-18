@@ -5,9 +5,6 @@ import java.sql.*;
 
 public class DatabaseOperations {
 
-    public DatabaseOperations() {
-    }
-
     private Connection MySQLConnection() {
         Connection MySQLConnection = null;
 
@@ -25,7 +22,7 @@ public class DatabaseOperations {
         return MySQLConnection;
     }
 
-    private User searchForExistingUser(String login, String password) {
+    public User searchForExistingUser(String login, String password) {
 
         User existingUser = null;
 
@@ -74,7 +71,7 @@ public class DatabaseOperations {
         return tmp_user;
     }
 
-    private void addUserToDatabase(User userToAdd) {
+    public void addUserToDatabase(User userToAdd) {
 
         String Query = "INSERT INTO user " +
                 "(id, " +

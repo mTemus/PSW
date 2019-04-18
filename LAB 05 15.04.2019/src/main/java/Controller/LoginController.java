@@ -42,8 +42,8 @@ public class LoginController {
     public PasswordField register_field_password;
     public PasswordField register_field_password_r;
 
-    DatabaseOperations DO = new DatabaseOperations();
-    EmailOperations EO = new EmailOperations();
+    private DatabaseOperations DO = new DatabaseOperations();
+    private EmailOperations EO = new EmailOperations();
 
     public void login_check_user(ActionEvent event) throws IOException {
         String login = login_text_field.getText();
@@ -63,6 +63,7 @@ public class LoginController {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    changeSceneToAdministrator(event);
                 }
             } else {
                 loginAttempts++;
@@ -136,15 +137,23 @@ public class LoginController {
 
     }
 
-    public void changeSceneToUser (ActionEvent event) throws IOException {
+    private void changeSceneToUser(ActionEvent event) throws IOException {
         Parent EventViewParent = FXMLLoader.load(getClass().getResource("/eventView.fxml"));
         Scene eventScene = new Scene(EventViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(eventScene);
-        window.setTitle("Event view");
+        window.setTitle("Event panel");
         window.show();
     }
 
+    private void changeSceneToAdministrator(ActionEvent event) throws IOException {
+        Parent AdministratorViewParent = FXMLLoader.load(getClass().getResource("/administratorView.fxml"));
+        Scene administratorScene = new Scene(AdministratorViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(administratorScene);
+        window.setTitle("Administration panel");
+        window.show();
+    }
 
 
     public void setLoginAttempts(int loginAttempts) {

@@ -6,20 +6,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    Stage window;
-    Scene loginScene;
-    Scene administratorScene;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        window = primaryStage;
-
         Parent loginViewParent = FXMLLoader.load(getClass().getResource("loginView.fxml"));
-        loginScene = new Scene(loginViewParent);
-
-        window.setTitle("Login view");
-        window.setScene(loginScene);
-        window.show();
+        Scene loginScene = new Scene(loginViewParent);
+        primaryStage.setTitle("Login view");
+        primaryStage.setScene(loginScene);
+        primaryStage.show();
 
     }
 

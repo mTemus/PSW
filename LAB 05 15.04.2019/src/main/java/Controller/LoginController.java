@@ -19,6 +19,7 @@ public class LoginController {
 
     private int loginAttempts = 0;
     private User loggedUser = null;
+
     private boolean someoneIsLogged = false;
 
     private ObservableList<User> users = FXCollections.observableArrayList();
@@ -58,6 +59,7 @@ public class LoginController {
                     loginAttempts = 0;
                     someoneIsLogged = true;
                     changeSceneToUser(event);
+
 
                 } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator.");
@@ -153,5 +155,9 @@ public class LoginController {
         window.setScene(administratorScene);
         window.setTitle("Administration panel");
         window.show();
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
     }
 }

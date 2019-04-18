@@ -1,7 +1,65 @@
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.EventController"
-            prefHeight="570.0" prefWidth="800.0">
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EventController">
+   <children>
+      <TextArea fx:id="event_agenda_field" editable="false" layoutX="489.0" layoutY="54.0" prefHeight="486.0" prefWidth="297.0" promptText="Event's agenda." />
+      <ComboBox fx:id="event_combobox" layoutX="14.0" layoutY="54.0" prefHeight="31.0" prefWidth="461.0" />
+      <GridPane layoutX="14.0" layoutY="137.0" prefHeight="401.0" prefWidth="211.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="0.0" prefWidth="0.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participation type:" wrappingWidth="192.6708984375" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Food preferences:" GridPane.rowIndex="6" />
+            <RadioButton fx:id="participation_radio_listener" mnemonicParsing="false" text="Listener" GridPane.rowIndex="1">
+               <toggleGroup>
+                  <ToggleGroup fx:id="participation_t" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="participation_radio_author" mnemonicParsing="false" text="Author" toggleGroup="$participation_t" GridPane.rowIndex="2" />
+            <RadioButton fx:id="participation_radio_sponsor" mnemonicParsing="false" text="Sponsor" toggleGroup="$participation_t" GridPane.rowIndex="3" />
+            <RadioButton fx:id="participation_radio_organizer" mnemonicParsing="false" text="Organizer" toggleGroup="$participation_t" GridPane.rowIndex="4" />
+            <RadioButton fx:id="food_radio_noPreferences" mnemonicParsing="false" selected="true" text="No preferneces" GridPane.rowIndex="7">
+               <toggleGroup>
+                  <ToggleGroup fx:id="food_p" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="food_radio_vegetarian" mnemonicParsing="false" text="Vegetarian" toggleGroup="$food_p" GridPane.rowIndex="8" />
+            <RadioButton fx:id="food_radio_glutenFree" mnemonicParsing="false" text="Gluen free" toggleGroup="$food_p" GridPane.rowIndex="9" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="14.0" layoutY="100.0" prefHeight="30.0" prefWidth="243.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="7.0" prefWidth="49.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.0" minWidth="10.0" prefWidth="191.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="event_date_field" editable="false" prefHeight="31.0" prefWidth="280.0" GridPane.columnIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+         </children>
+      </GridPane>
+      <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose event:" />
+      <Button fx:id="register_on_event_button" layoutX="245.0" layoutY="487.0" mnemonicParsing="false" onAction="#registerOnEvent" prefHeight="53.0" prefWidth="182.0" text="Register" />
+   </children>
 </AnchorPane>

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="V0.2.1">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="V0.2.3">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eventView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eventView.fxml" afterDir="false" />
     </list>
     <list id="6661d616-c521-4c50-9234-73ad1a9b3975" name="INNE" comment="">
       <change beforePath="$PROJECT_DIR$/../LAB 02 11.03.2019/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LAB 02 11.03.2019/.idea/workspace.xml" afterDir="false" />
@@ -80,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+            <state relative-caret-position="119">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#665#666#0" expanded="true" />
@@ -91,14 +96,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="556">
+              <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#register_check_user#0;class#LoginController#0" />
+                <element signature="method#showPassword#0;class#LoginController#0" />
+                <element signature="method#register_show_password#0;class#LoginController#0" />
+                <element signature="method#register_show_password_r#0;class#LoginController#0" />
+                <element signature="method#registrationComplete#0;class#LoginController#0" />
+                <element signature="method#changeSceneToUser#0;class#LoginController#0" />
+                <element signature="method#changeSceneToUser#1;class#LoginController#0" />
               </folding>
             </state>
           </provider>
@@ -117,32 +128,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/eventView.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            <state relative-caret-position="85">
+              <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseOperations.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/EventController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="45" column="59" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
+            <state relative-caret-position="102">
+              <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#MySQLConnection#0;class#DatabaseOperations#0" />
-                <element signature="method#doFindingQuery#0;class#DatabaseOperations#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/Event.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="29">
+              <caret line="45" column="59" lean-forward="true" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#MySQLConnection#0;class#DatabaseOperations#0" />
+                <element signature="method#doFindingQuery#0;class#DatabaseOperations#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,6 +170,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>combo</find>
+    </findStrings>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -176,7 +195,6 @@
         <option value="$PROJECT_DIR$/src/sample/EventController.java" />
         <option value="$PROJECT_DIR$/src/main/java/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Controller/EventController.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/event.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/user.java" />
         <option value="$PROJECT_DIR$/src/main/java/DatabaseAccess.java" />
@@ -186,11 +204,13 @@
         <option value="$PROJECT_DIR$/src/main/java/model/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/Operations/EmailOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Operations/DatabaseOperations.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/loginView.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/administratorView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/eventView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/eventView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/Controller/EventController.java" />
       </list>
     </option>
   </component>
@@ -403,7 +423,7 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1555582465236" duration="6511000" />
       <workItem from="1555593823161" duration="11350000" />
-      <workItem from="1555609490783" duration="320000" />
+      <workItem from="1555609490783" duration="2817000" />
     </task>
     <task id="LOCAL-00001" summary="V0.1">
       <created>1555583193604</created>
@@ -454,17 +474,31 @@
       <option name="project" value="LOCAL" />
       <updated>1555609693064</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="V0.2.2">
+      <created>1555609830573</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1555609830573</updated>
+    </task>
+    <task id="LOCAL-00009" summary="V0.2.3">
+      <created>1555609880949</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1555609880949</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19483000" />
+    <option name="totallyTimeSpent" value="21980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18590604" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18590604" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -473,7 +507,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30736545" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30736545" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -484,7 +518,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32577905" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32577905" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Terminal" order="16" />
@@ -551,20 +585,15 @@
     <MESSAGE value="Laboratory Instructions." />
     <MESSAGE value="V0.2" />
     <MESSAGE value="V0.2.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="V0.2.1" />
+    <MESSAGE value="V0.2.2" />
+    <MESSAGE value="V0.2.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="V0.2.3" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/EventController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -653,18 +682,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#665#666#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/administratorView.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -673,18 +690,54 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#register_check_user#0;class#LoginController#0" />
+            <element signature="method#showPassword#0;class#LoginController#0" />
+            <element signature="method#register_show_password#0;class#LoginController#0" />
+            <element signature="method#register_show_password_r#0;class#LoginController#0" />
+            <element signature="method#registrationComplete#0;class#LoginController#0" />
+            <element signature="method#changeSceneToUser#0;class#LoginController#0" />
+            <element signature="method#changeSceneToUser#1;class#LoginController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/eventView.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="85">
+          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="45" column="59" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
+        <state relative-caret-position="29">
+          <caret line="45" column="59" lean-forward="true" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MySQLConnection#0;class#DatabaseOperations#0" />
@@ -693,20 +746,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Event.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/EventController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#register_check_user#0;class#LoginController#0" />
           </folding>
         </state>
       </provider>

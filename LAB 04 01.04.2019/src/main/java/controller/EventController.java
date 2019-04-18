@@ -405,7 +405,7 @@ public class EventController {
                     InternetAddress.parse(userEmail));
             message.setSubject("Registration Complete.");
             message.setText("Dear " + userName + " " + userSurname + ","
-                    + "\n\n No spam to my email, please!");
+                    + "\n\n Registration wet successfully!");
 
             Transport.send(message);
 

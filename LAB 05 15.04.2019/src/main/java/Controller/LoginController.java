@@ -154,17 +154,4 @@ public class LoginController {
         window.setTitle("Administration panel");
         window.show();
     }
-
-
-    public void setLoginAttempts(int loginAttempts) {
-        this.loginAttempts = loginAttempts;
-    }
-
-    public User getLoggedUser() {
-        return loggedUser;
-    }
-
-    public boolean isSomeoneIsLogged() {
-        return someoneIsLogged;
-    }
 }

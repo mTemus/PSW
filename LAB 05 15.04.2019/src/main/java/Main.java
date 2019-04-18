@@ -6,6 +6,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    boolean login = false;
+    private enum LoginType {
+        ADMINISTRATOR, USER
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));

@@ -1,9 +1,9 @@
 package Controller;
 
+import Operations.DatabaseOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.User;
 
@@ -38,57 +38,59 @@ public class LoginController {
 
 
 
-//    public void login_check_user(ActionEvent event) {
-//        String login = login_text_field.getText();
-//        String password = password_text_field.getText();
-//
-//        loggedUser = searchForExistingUser(login, password);
-//
-//        if (loginAttempts < 3) {
-//            if (loggedUser != null) {
-//                if (loggedUser.getPermissions() == User.Permissions.USER) {
-//                    login_alert_field.setPromptText("Successfully logged in.");
-//                    loginAttempts = 0;
-//                    someoneIsLogged = true;
-//                } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
-//                    login_alert_field.setPromptText("Successfully logged in. You can now access data in \"Administrator View\" tab.");
-//                    loginAttempts = 0;
-//                    someoneIsLogged = true;
-//                }
-//            }
-//        } else {
-//            login_alert_field.setText("You failed 3 times, logging in is denied.");
-//        }
-//    }
-//
-//    public void register_check_user(ActionEvent event) {
-//
-//        String name = register_field_name.getText();
-//        String surname = register_field_surname.getText();
-//        String login = register_field_login.getText();
-//        String password = register_field_password.getText();
-//        String password_r = register_field_password_r.getText();
-//        String email = register_field_email.getText();
-//
-//        User tmp_user = searchForExistingUser(login, password);
-//
-//        if (!someoneIsLogged) {
-//            if (password.contentEquals(password_r)) {
-//                if (tmp_user == null) {
-//                    tmp_user = new User(name, surname, login, password, email);
-//                    addUserToDatabase(tmp_user);
-//                    register_text_area.setPromptText("Registration of User " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
-//                    registrationComplete();
-//
-//                    sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
-//
-//                } else
-//                    register_text_area.setPromptText("User already exists. Please log in.");
-//            } else
-//                register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
-//        } else
-//            register_text_area.setPromptText("You are logged in. Please logout first.");
-//    }
+    public void login_check_user(ActionEvent event) {
+        String login = login_text_field.getText();
+        String password = password_text_field.getText();
+
+        loggedUser = searchForExistingUser(login, password);
+
+        if (loginAttempts < 3) {
+            if (loggedUser != null) {
+                if (loggedUser.getPermissions() == User.Permissions.USER) {
+                    login_alert_field.setPromptText("Successfully logged in.");
+                    loginAttempts = 0;
+                    someoneIsLogged = true;
+                } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
+                    login_alert_field.setPromptText("Successfully logged in. You can now access data in \"Administrator View\" tab.");
+                    loginAttempts = 0;
+                    someoneIsLogged = true;
+                }
+            }
+        } else {
+            login_alert_field.setText("You failed 3 times, logging in is denied.");
+        }
+    }
+
+    public void register_check_user(ActionEvent event) {
+
+        EmailOperations
+
+        String name = register_field_name.getText();
+        String surname = register_field_surname.getText();
+        String login = register_field_login.getText();
+        String password = register_field_password.getText();
+        String password_r = register_field_password_r.getText();
+        String email = register_field_email.getText();
+
+        User tmp_user = searchForExistingUser(login, password);
+
+        if (!someoneIsLogged) {
+            if (password.contentEquals(password_r)) {
+                if (tmp_user == null) {
+                    tmp_user = new User(name, surname, login, password, email);
+                    addUserToDatabase(tmp_user);
+                    register_text_area.setPromptText("Registration of User " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
+                    registrationComplete();
+
+                    sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
+
+                } else
+                    register_text_area.setPromptText("User already exists. Please log in.");
+            } else
+                register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
+        } else
+            register_text_area.setPromptText("You are logged in. Please logout first.");
+    }
 
 
     public void showPassword(ActionEvent event) {

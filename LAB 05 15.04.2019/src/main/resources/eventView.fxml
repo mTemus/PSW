@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EventController">
    <children>
-       <TextArea fx:id="event_agenda_field" editable="false" layoutX="489.0" layoutY="54.0" prefHeight="486.0" prefWidth="297.0" promptText="Event's agenda." />
+       <TextArea fx:id="event_agenda_field" layoutX="489.0" layoutY="54.0" prefHeight="486.0" prefWidth="297.0" promptText="Event's agenda." wrapText="true" />
        <ComboBox fx:id="event_combobox" layoutX="14.0" layoutY="54.0" onAction="#checkCombobox" prefHeight="31.0" prefWidth="461.0" promptText="List of events..." />
        <GridPane layoutX="14.0" layoutY="137.0" prefHeight="401.0" prefWidth="211.0">
            <columnConstraints>

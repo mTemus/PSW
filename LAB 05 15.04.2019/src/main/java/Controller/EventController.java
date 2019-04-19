@@ -10,13 +10,11 @@ import model.User;
 
 public class EventController {
 
-    LoginController LC = new LoginController();
-    DatabaseEventOperations DEO = new DatabaseEventOperations();
-    User loggedUser = LC.getLoggedUser();
+    private DatabaseEventOperations DEO = new DatabaseEventOperations();
+    private User loggedUser = LoginController.getLoggedUser();
+    private static Event choosedEvent = null;
 
     private static ObservableList<Event> events = FXCollections.observableArrayList();
-    private static ObservableList<String> eventsNamesCombobox = FXCollections.observableArrayList();
-
 
     public TextArea event_agenda_field;
     public ComboBox event_combobox;
@@ -41,32 +39,26 @@ public class EventController {
 
     }
 
-
-    public void setComboBox() {
+    private void setComboBox() {
         events = DEO.findAllEvents();
-        eventsNamesCombobox = DEO.findAllEventNames();
+        ObservableList<String> eventsNamesCombobox = DEO.findAllEventNames();
         event_combobox.getItems().addAll(eventsNamesCombobox);
     }
 
     public void checkCombobox(ActionEvent event) {
-        setEventAreas(events);
-
+        String eventName = (String) event_combobox.getValue();
+        setEventAreas(events, eventName);
     }
 
-    public void setEventAreas(ObservableList<Event> events) {
-
-        String eventName = (String) event_combobox.getValue();
-
+    private void setEventAreas(ObservableList<Event> events, String eventName) {
         for (Event e : events) {
             if (eventName.equals(e.getName())) {
                 event_agenda_field.setText(e.getAgenda());
                 event_date_field.setText(e.getDate());
+                choosedEvent = e;
                 break;
             }
-
         }
-
-
     }
 
 

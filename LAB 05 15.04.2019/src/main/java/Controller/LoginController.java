@@ -54,7 +54,6 @@ public class LoginController {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
-                    System.out.println(loggedUser.getLogin());
                     SO.changeSceneToUser(event);
 
 

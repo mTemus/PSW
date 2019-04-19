@@ -1,12 +1,14 @@
 package Operations;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Event;
+
+import java.sql.*;
 
 public class DatabaseEventOperations {
 
-    private Connection MySQLConnection() {
+    public Connection MySQLConnection() {
         Connection MySQLConnection = null;
 
         try {
@@ -21,6 +23,48 @@ public class DatabaseEventOperations {
         }
 
         return MySQLConnection;
+    }
+
+    public ObservableList<Event> findAllEvents() {
+        ObservableList<Event> events = FXCollections.observableArrayList();
+
+        try {
+            Statement eventStatement = MySQLConnection().createStatement();
+            ResultSet eventResultSet = eventStatement.executeQuery("select * from event");
+
+            while (eventResultSet.next()) {
+                Event e = new Event(eventResultSet.getLong("id_event"),
+                        eventResultSet.getString("name"),
+                        eventResultSet.getString("agenda"),
+                        eventResultSet.getString("date")
+                );
+                events.add(e);
+            }
+            MySQLConnection().close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
+    public ObservableList<String> findAllEventNames() {
+        ObservableList<String> eventNames = FXCollections.observableArrayList();
+
+        try {
+            Statement eventNamesStatement = MySQLConnection().createStatement();
+            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select name from event");
+
+            while (eventNamesResultSet.next()) {
+                eventNames.add(eventNamesResultSet.getString("name"));
+
+            }
+            MySQLConnection().close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventNames;
     }
 
 }

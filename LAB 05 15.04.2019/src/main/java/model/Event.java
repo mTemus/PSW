@@ -7,6 +7,13 @@ public class Event {
     private String agenda;
     private String date;
 
+    public Event(Long id, String name, String agenda, String date) {
+        this.id = id;
+        this.name = name;
+        this.agenda = agenda;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }

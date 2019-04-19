@@ -18,6 +18,7 @@ public class StageOperations {
         winDLOw.setScene(eventScene);
         winDLOw.setTitle("Event panel");
         winDLOw.show();
+
     }
 
     public void changeSceneToAdministrator(ActionEvent event) throws IOException {
@@ -28,5 +29,15 @@ public class StageOperations {
         winDLOw.setTitle("Administration panel");
         winDLOw.show();
     }
+
+    public void changeSceneToRegistrationComplete(ActionEvent event) throws IOException {
+        Parent regCompleteViewParent = FXMLLoader.load(getClass().getResource("/registrationCompleteView.fxml"));
+        Scene regCompleteScene = new Scene(regCompleteViewParent);
+        Stage winDLOw = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        winDLOw.setScene(regCompleteScene);
+        winDLOw.setTitle("Registration complete");
+        winDLOw.show();
+    }
+
 
 }

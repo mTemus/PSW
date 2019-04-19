@@ -27,11 +27,11 @@ public class User {
         USER, ADMINISTRATOR
     }
 
-    private enum FoodPreferences {
+    enum FoodPreferences {
         VEGAN, NO_GLUTEN, NO_PREFFERENCES
     }
 
-    private enum ParticipationType {
+    enum ParticipationType {
         LISTENER, AUTHOR, SPONSOR, ORGANIZER
     }
 

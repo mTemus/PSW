@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginController {
 
     private int loginAttempts = 0;
-    private User loggedUser = null;
+    private static User loggedUser;
 
     private boolean someoneIsLogged = false;
 
@@ -55,6 +55,7 @@ public class LoginController {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    System.out.println(loggedUser.getLogin());
                     SO.changeSceneToUser(event);
 
 

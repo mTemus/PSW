@@ -1,13 +1,19 @@
 package Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import model.Event;
 import model.User;
 
 public class EventController {
 
     LoginController LC = new LoginController();
     User loggedUser = LC.getLoggedUser();
+
+    private ObservableList<Event> events = FXCollections.observableArrayList();
+
 
     public TextArea event_agenda_field;
     public ComboBox event_combobox;
@@ -22,9 +28,11 @@ public class EventController {
     public TextField event_date_field;
     public Button register_on_event_button;
 
-
     public void registerOnEvent(ActionEvent event) {
 
+            event_combobox.getItems().addAll(
+
+            );
 
     }
 }

@@ -15,7 +15,6 @@ public class LoginController {
 
     private int loginAttempts = 0;
     private static User loggedUser;
-
     private boolean someoneIsLogged = false;
 
     private ObservableList<User> users = FXCollections.observableArrayList();
@@ -137,8 +136,10 @@ public class LoginController {
 
     }
 
-
-    public User getLoggedUser() {
+    static User getLoggedUser() {
         return loggedUser;
+    }
+    public void setLoggedUser(User loggedUser) {
+        LoginController.loggedUser = loggedUser;
     }
 }

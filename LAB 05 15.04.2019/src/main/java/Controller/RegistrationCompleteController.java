@@ -12,8 +12,7 @@ public class RegistrationCompleteController {
     public Button register_again_button;
     public TextArea registration_text_area;
 
-    StageOperations SO = new StageOperations();
-
+    static StageOperations SO = new StageOperations();
 
     public void initialize() {
         registration_text_area.setText("Registered successfully on " + EventController.getChosenEvent().getName() + ", " +
@@ -26,7 +25,7 @@ public class RegistrationCompleteController {
         SO.changeSceneToUser(event);
     }
 
-    public void userLogout(ActionEvent event) throws IOException {
+    public static void userLogout(ActionEvent event) throws IOException {
         EventController.setLoggedUser(null);
         SO.changeSceneToLogin(event);
     }

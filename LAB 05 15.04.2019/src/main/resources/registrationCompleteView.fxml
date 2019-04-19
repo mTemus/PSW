@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.RegistrationCompleteController"
-            prefHeight="570.0" prefWidth="800.0">
-
+<AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegistrationCompleteController">
+   <children>
+       <GridPane prefHeight="570.0" prefWidth="800.0">
+           <columnConstraints>
+               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+               <RowConstraints maxHeight="388.0" minHeight="10.0" prefHeight="388.0" valignment="CENTER" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="284.0" minHeight="10.0" prefHeight="182.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+          <children>
+              <GridPane prefHeight="205.0" prefWidth="800.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                 <children>
+                     <Button fx:id="register_again_button" mnemonicParsing="false" onAction="#userRegisterAgain" prefHeight="60.0" prefWidth="110.0" text="Register again" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                     <Button fx:id="logout_button" mnemonicParsing="false" onAction="#userLogout" prefHeight="60.0" prefWidth="110.0" text="Logout" />
+                 </children>
+              </GridPane>
+              <GridPane prefHeight="369.0" prefWidth="800.0">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="99.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="518.0" minWidth="10.0" prefWidth="518.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                 <children>
+                     <TextArea fx:id="registration_text_area" editable="false" prefHeight="154.0" prefWidth="404.0" text="Registered successfully on (event name), your entry status is: &quot;Waiting&quot;, we will send you an email, when it will be accepted or denied.&#10;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                 </children>
+              </GridPane>
+          </children>
+       </GridPane>
+   </children>
 </AnchorPane>

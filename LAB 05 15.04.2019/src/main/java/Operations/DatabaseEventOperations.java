@@ -109,7 +109,6 @@ public class DatabaseEventOperations {
 
             if (entryRS.next()){
                 status = entryRS.getString("status");
-                System.out.println(status);
                 return status;
             }
         } catch (SQLException e) {

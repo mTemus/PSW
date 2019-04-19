@@ -17,7 +17,7 @@ public class EventController {
 
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
-    private User loggedUser = LoginController.getLoggedUser();
+    private static User loggedUser = LoginController.getLoggedUser();
     private static Event chosenEvent = null;
 
     private static ObservableList<Event> events = FXCollections.observableArrayList();
@@ -40,6 +40,7 @@ public class EventController {
     public Button register_on_event_button;
 
     public void initialize() {
+        loggedUser = LoginController.getLoggedUser();
         setComboBox();
     }
 
@@ -145,6 +146,18 @@ public class EventController {
         event_text_required_participation.setFill(Color.RED);
 
         return question;
+    }
+
+    static void setLoggedUser(User loggedUser) {
+        EventController.loggedUser = loggedUser;
+    }
+
+    static void setChosenEvent(Event chosenEvent) {
+        EventController.chosenEvent = chosenEvent;
+    }
+
+    public static Event getChosenEvent() {
+        return chosenEvent;
     }
 
 }

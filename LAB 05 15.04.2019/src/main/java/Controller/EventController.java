@@ -1,6 +1,7 @@
 package Controller;
 
 import Operations.DatabaseEventOperations;
+import Operations.StageOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,11 +11,14 @@ import javafx.scene.text.Text;
 import model.Event;
 import model.User;
 
+import java.io.IOException;
+
 public class EventController {
 
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
+    private StageOperations SO = new StageOperations();
     private User loggedUser = LoginController.getLoggedUser();
-    private static Event choosedEvent = null;
+    private static Event chosenEvent = null;
 
     private static ObservableList<Event> events = FXCollections.observableArrayList();
 
@@ -46,21 +50,34 @@ public class EventController {
         if (checkChosen()) {
             checkAndSetParticipation();
             checkAndSetFoodPreferences();
+            event_error_area.setText("");
+
+            if (DEO.registerUserOnEvent(loggedUser, chosenEvent)) {
+                try {
+                    SO.changeSceneToRegistrationComplete(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                event_error_area.setText("Something went wrong, please contact the administrator.");
+            }
+
+
         } else if (event_combobox.getValue() == null && !participationIsSelected()) {
             event_required_event.setText("is required!");
             event_required_event.setFill(Color.RED);
             event_text_required_participation.setText("is required!");
             event_text_required_participation.setFill(Color.RED);
-
+            event_error_area.setText("Please choose your event and participation type and try again.");
         } else if (event_combobox.getValue() == null) {
             event_required_event.setText("is required!");
             event_required_event.setFill(Color.RED);
+            event_error_area.setText("Please choose your event and try again.");
         } else if (!participationIsSelected()) {
             event_text_required_participation.setText("is required!");
             event_text_required_participation.setFill(Color.RED);
+            event_error_area.setText("Please chose participation type and try again.");
         }
-
-
     }
 
     private void setComboBox() {
@@ -79,7 +96,7 @@ public class EventController {
             if (eventName.equals(e.getName())) {
                 event_agenda_field.setText(e.getAgenda());
                 event_date_field.setText(e.getDate());
-                choosedEvent = e;
+                chosenEvent = e;
                 break;
             }
         }
@@ -98,13 +115,11 @@ public class EventController {
 
     private void checkAndSetFoodPreferences() {
         if (food_radio_noPreferences.isSelected())
-            loggedUser.setFoodPreferences(User.FoodPreferences.NO_PREFFERENCES);
+            loggedUser.setFoodPreferences(User.FoodPreferences.NO_PREFERENCES);
         else if (food_radio_vegetarian.isSelected())
             loggedUser.setFoodPreferences(User.FoodPreferences.VEGETARIAN);
         else if (food_radio_glutenFree.isSelected())
             loggedUser.setFoodPreferences(User.FoodPreferences.GLUTEN_FREE);
-
-
     }
 
     private boolean checkChosen() {
@@ -116,7 +131,6 @@ public class EventController {
                 participation_radio_author.isSelected() ||
                 participation_radio_sponsor.isSelected() ||
                 participation_radio_organizer.isSelected();
-
     }
 
 }

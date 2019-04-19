@@ -3,6 +3,7 @@ package Operations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Event;
+import model.User;
 
 import java.sql.*;
 
@@ -66,5 +67,43 @@ public class DatabaseEventOperations {
         }
         return eventNames;
     }
+
+    public boolean registerUserOnEvent(User user, Event event) {
+
+        try {
+            String Query = "INSERT INTO events_entries " +
+                    "(entry_id, " +
+                    "event_id, " +
+                    "user_id, " +
+                    "participation_type, " +
+                    "food_preferences, " +
+                    "status) " +
+                    "VALUES " +
+                    "(default, " +
+                    "'" + event.getId() + "', " +
+                    "'" + user.getId() + "', " +
+                    "'" + user.getParticipationType() + "', " +
+                    "'" + user.getFoodPreferences() + "', " +
+                    "default);";
+
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String checkIfEntryExists(Long userID, Long eventID) {
+        String status = null;
+
+
+
+
+
+        return status;
+    }
+
 
 }

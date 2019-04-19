@@ -28,7 +28,7 @@ public class User {
     }
 
     public enum FoodPreferences {
-        VEGETARIAN, GLUTEN_FREE, NO_PREFFERENCES
+        VEGETARIAN, GLUTEN_FREE, NO_PREFERENCES
     }
 
     public enum ParticipationType {

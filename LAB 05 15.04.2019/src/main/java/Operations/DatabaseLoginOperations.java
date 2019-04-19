@@ -4,7 +4,7 @@ import model.User;
 
 import java.sql.*;
 
-public class DatabaseOperations {
+public class DatabaseLoginOperations {
 
     public User tmp_user = null;
 

@@ -9,10 +9,10 @@
    <children>
        <TextArea fx:id="event_agenda_field" layoutX="489.0" layoutY="54.0" prefHeight="486.0" prefWidth="297.0" promptText="Event's agenda." wrapText="true" />
        <ComboBox fx:id="event_combobox" layoutX="14.0" layoutY="54.0" onAction="#checkCombobox" prefHeight="31.0" prefWidth="461.0" promptText="List of events..." />
-       <GridPane layoutX="14.0" layoutY="137.0" prefHeight="401.0" prefWidth="211.0">
+       <GridPane layoutX="14.0" layoutY="139.0" prefHeight="399.0" prefWidth="243.0">
            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="0.0" prefWidth="0.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="138.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="0.0" prefWidth="105.0" />
            </columnConstraints>
            <rowConstraints>
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -27,7 +27,7 @@
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
           <children>
-              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participation type:" wrappingWidth="192.6708984375" />
+              <Text fx:id="event_participation_text" strokeType="OUTSIDE" strokeWidth="0.0" text="Participation type:" wrappingWidth="122.6708984375" />
               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Food preferences:" GridPane.rowIndex="6" />
               <RadioButton fx:id="participation_radio_listener" mnemonicParsing="false" text="Listener" GridPane.rowIndex="1">
                   <toggleGroup>
@@ -44,6 +44,7 @@
               </RadioButton>
               <RadioButton fx:id="food_radio_vegetarian" mnemonicParsing="false" text="Vegetarian" toggleGroup="$food_p" GridPane.rowIndex="8" />
               <RadioButton fx:id="food_radio_glutenFree" mnemonicParsing="false" text="Gluen free" toggleGroup="$food_p" GridPane.rowIndex="9" />
+            <Text fx:id="event_text_required_participation" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" />
           </children>
        </GridPane>
        <GridPane layoutX="14.0" layoutY="100.0" prefHeight="30.0" prefWidth="243.0">
@@ -59,7 +60,19 @@
               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
           </children>
        </GridPane>
-       <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose event:" />
        <Button fx:id="register_on_event_button" layoutX="245.0" layoutY="487.0" mnemonicParsing="false" onAction="#registerOnEvent" prefHeight="53.0" prefWidth="182.0" text="Register" />
+      <GridPane layoutX="14.0" layoutY="18.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose event:" />
+            <Text fx:id="event_required_event" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

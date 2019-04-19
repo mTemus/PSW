@@ -46,22 +46,27 @@ public class EventController {
     public void registerOnEvent(ActionEvent event) {
         event_required_event.setText("");
         event_text_required_participation.setText("");
-
+        String status;
         if (checkChosen()) {
             checkAndSetParticipation();
             checkAndSetFoodPreferences();
             event_error_area.setText("");
 
-            if (DEO.registerUserOnEvent(loggedUser, chosenEvent)) {
-                try {
-                    SO.changeSceneToRegistrationComplete(event);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (DEO.checkIfEntryExists(loggedUser.getId(), chosenEvent.getId()) == null) {
+                if (DEO.registerUserOnEvent(loggedUser, chosenEvent)) {
+                    try {
+                        SO.changeSceneToRegistrationComplete(event);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    event_error_area.setText("Something went wrong, please contact the administrator.");
                 }
-            } else {
-                event_error_area.setText("Something went wrong, please contact the administrator.");
             }
-
+            else {
+                status = DEO.checkIfEntryExists(loggedUser.getId(), chosenEvent.getId());
+                event_error_area.setText("You have already registered on this event! Your entry status is: " + status);
+            }
 
         } else if (event_combobox.getValue() == null && !participationIsSelected()) {
             event_required_event.setText("is required!");

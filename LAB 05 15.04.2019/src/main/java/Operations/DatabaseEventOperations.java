@@ -97,13 +97,25 @@ public class DatabaseEventOperations {
 
     public String checkIfEntryExists(Long userID, Long eventID) {
         String status = null;
+        ResultSet entryRS;
 
+        PreparedStatement findingEntryStm = null;
+        try {
+            findingEntryStm = MySQLConnection().prepareStatement("SELECT * FROM events_entries WHERE event_id LIKE ? AND user_id LIKE ?");
+            findingEntryStm.setLong(1, eventID);
+            findingEntryStm.setLong(2, userID);
 
+            entryRS = findingEntryStm.executeQuery();
 
-
-
-        return status;
+            if (entryRS.next()){
+                status = entryRS.getString("status");
+                System.out.println(status);
+                return status;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
-
-
 }

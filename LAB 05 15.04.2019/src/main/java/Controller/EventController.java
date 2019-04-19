@@ -12,15 +12,15 @@ import model.User;
 
 public class EventController {
 
-
-    public Text event_text_required_participation;
-    public Text event_required_event;
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private User loggedUser = LoginController.getLoggedUser();
     private static Event choosedEvent = null;
 
     private static ObservableList<Event> events = FXCollections.observableArrayList();
 
+    public Text event_text_required_participation;
+    public Text event_required_event;
+    public TextArea event_error_area;
     public Text event_participation_text;
     public TextArea event_agenda_field;
     public ComboBox event_combobox;
@@ -46,15 +46,16 @@ public class EventController {
         if (checkChosen()) {
             checkAndSetParticipation();
             checkAndSetFoodPreferences();
-        } else if (event_combobox == null) {
+        } else if (event_combobox.getValue() == null && !participationIsSelected()) {
+            event_required_event.setText("is required!");
+            event_required_event.setFill(Color.RED);
+            event_text_required_participation.setText("is required!");
+            event_text_required_participation.setFill(Color.RED);
+
+        } else if (event_combobox.getValue() == null) {
             event_required_event.setText("is required!");
             event_required_event.setFill(Color.RED);
         } else if (!participationIsSelected()) {
-            event_text_required_participation.setText("is required!");
-            event_text_required_participation.setFill(Color.RED);
-        } else {
-            event_required_event.setText("is required!");
-            event_required_event.setFill(Color.RED);
             event_text_required_participation.setText("is required!");
             event_text_required_participation.setFill(Color.RED);
         }

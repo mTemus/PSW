@@ -132,7 +132,7 @@ public class DatabaseAdministratorOperations {
         }
         tmpEntry = doFindingQueryOfEntry(entryPrpStm);
 
-            return tmpEntry;
+        return tmpEntry;
     }
 
     private Boolean doFindingQueryOfEntry(PreparedStatement findStm) {
@@ -141,7 +141,7 @@ public class DatabaseAdministratorOperations {
         try {
             entryResultFind = findStm.executeQuery();
             if (entryResultFind.next()) {
-               return true;
+                return true;
             }
             MySQLConnection().close();
         } catch (SQLException e) {
@@ -164,5 +164,21 @@ public class DatabaseAdministratorOperations {
             e.printStackTrace();
         }
     }
+
+    public void changeUserPassword(int userId, String newPassword) {
+        try {
+            String Query = "UPDATE user " +
+                    "SET " +
+                    "password = '" + newPassword + "'" +
+                    "WHERE id LIKE '" + userId + "';";
+
+            Statement passwordStm = MySQLConnection().createStatement();
+            passwordStm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

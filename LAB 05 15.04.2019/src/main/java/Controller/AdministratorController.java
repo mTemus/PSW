@@ -67,7 +67,7 @@ public class AdministratorController {
 
     public void deleteUser(ActionEvent event) {
 
-        if (isIdPreffered()) {
+        if (isIdSetted()) {
             String user_Id = u_a_id_field.getText();
             int userId = Integer.parseInt(user_Id);
             User existingUserToDelete = DAO.findExistingUserToDelete(userId);
@@ -76,6 +76,7 @@ public class AdministratorController {
                 DAO.deleteUserFromDatabase(userId);
                 u_a_alert_field.setText("User deleted succesfully.");
                 setUsersTable();
+                u_a_id_field.setText("");
 
                 if (DAO.findExistingEntryToDelete(userId)) {
                     DAO.deleteEntryFromDatabase(userId);
@@ -94,11 +95,20 @@ public class AdministratorController {
     }
 
     public void changeUsersPassword(ActionEvent event) {
+        if (isIdSetted()) {
+            String user_Id = u_a_id_field.getText();
+            int userId = Integer.parseInt(user_Id);
 
-        if (isIdPreffered()) {
-            if (u_a_new_password_field.equals(u_a_new_password_r_field)) {
+            if (u_a_new_password_field.getText().equals(u_a_new_password_r_field.getText())) {
                 String newPassword = u_a_new_password_field.getText();
-                //...
+                User existingUserToPasswordChange = DAO.findExistingUserToDelete(userId);
+
+                if (existingUserToPasswordChange != null) {
+                    DAO.changeUserPassword(userId, newPassword);
+                    u_a_alert_field.setText("Password changed successfully.");
+                    u_a_id_field.setText("");
+                    setUsersTable();
+                } else u_a_alert_field.setText("User with this id don't exists.");
             } else u_a_alert_field.setText("Passwords dont match, please try again.");
         } else u_a_alert_field.setText("Please specify users's id.");
 
@@ -106,6 +116,9 @@ public class AdministratorController {
     }
 
     public void addEvent(ActionEvent event) {
+
+
+
     }
 
     public void loadEventToModify(ActionEvent event) {
@@ -173,11 +186,10 @@ public class AdministratorController {
         addDataToEntryTable(entries);
     }
 
-    private boolean isIdPreffered() {
-        if (u_a_id_field.getText() != null)
-            return true;
-        else return false;
+    private boolean isIdSetted() {
+        return !u_a_id_field.getText().equals("");
     }
+
 
 
 }

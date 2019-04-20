@@ -184,7 +184,7 @@
                                                   </TextField>
                                               </children>
                                            </GridPane>
-                                           <Button fx:id="ev_a_delete_event_button" mnemonicParsing="false" text="Delete event" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                           <Button fx:id="ev_a_delete_event_button" mnemonicParsing="false" onAction="#deleteEvent" text="Delete event" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                                <GridPane.margin>
                                                    <Insets left="10.0" />
                                                </GridPane.margin>

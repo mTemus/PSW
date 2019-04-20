@@ -112,8 +112,6 @@ public class AdministratorController {
                 } else u_a_alert_field.setText("User with this id don't exists.");
             } else u_a_alert_field.setText("Passwords dont match, please try again.");
         } else u_a_alert_field.setText("Please specify users's id.");
-
-
     }
 
     public void addEvent(ActionEvent event) {
@@ -123,9 +121,18 @@ public class AdministratorController {
         } else if (dateRegex(ev_a_add_date_field.getText())) {
             ev_a_alert_field.setText("Please insert date correctly.");
         } else {
+            String eventName = ev_a_add_name_field.getText();
+            String eventAgenda = ev_a_add_agenda_field.getText();
+            String eventDate = ev_a_add_date_field.getText();
+
+            DAO.addEventToDatabase(eventName, eventAgenda, eventDate);
             ev_a_alert_field.setText("Event added successfully.");
+            setEventsTable();
         }
 
+    }
+
+    public void deleteEvent(ActionEvent event) {
     }
 
     public void loadEventToModify(ActionEvent event) {
@@ -213,5 +220,6 @@ public class AdministratorController {
         Pattern datePattern = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
         return !datePattern.matcher(date).matches();
     }
+
 
 }

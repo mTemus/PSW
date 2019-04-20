@@ -2,6 +2,7 @@ package Operations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Event;
 import model.EventEntry;
 import model.User;
 
@@ -179,6 +180,48 @@ public class DatabaseAdministratorOperations {
             e.printStackTrace();
         }
     }
+
+    public void addEventToDatabase(String name, String agenda, String date) {
+        String Query = "INSERT INTO event " +
+                "(id_event, " +
+                "event_name, " +
+                "agenda, " +
+                "date) " +
+
+                "VALUES " +
+                "(DEFAULT," +
+                "'" + name + "', " +
+                "'" + agenda + "', " +
+                "'" + date + "');";
+        try {
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    Event doFindingEventQuery(PreparedStatement findStm) {
+        ResultSet eventResultFind;
+        Event tmp_event = null;
+
+
+        try {
+            eventResultFind = findStm.executeQuery();
+            if (eventResultFind.next()) {
+                tmp_event = new Event(eventResultFind.getLong("id_event"),
+                        eventResultFind.getString("event_name"),
+                        eventResultFind.getString("agenda"),
+                        eventResultFind.getString("date"));
+
+            }
+            MySQLConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp_event;
+    }
+
 
 
 }

@@ -43,7 +43,7 @@ public class DatabaseLoginOperations {
         return existingUser;
     }
 
-    public User doFindingQuery(PreparedStatement findStm) {
+    User doFindingQuery(PreparedStatement findStm) {
         ResultSet userResultFind;
 
         try {

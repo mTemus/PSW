@@ -35,7 +35,7 @@ public class DatabaseEventOperations {
 
             while (eventResultSet.next()) {
                 Event e = new Event(eventResultSet.getLong("id_event"),
-                        eventResultSet.getString("name"),
+                        eventResultSet.getString("event_name"),
                         eventResultSet.getString("agenda"),
                         eventResultSet.getString("date")
                 );
@@ -54,10 +54,10 @@ public class DatabaseEventOperations {
 
         try {
             Statement eventNamesStatement = MySQLConnection().createStatement();
-            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select name from event");
+            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select event_name from event");
 
             while (eventNamesResultSet.next()) {
-                eventNames.add(eventNamesResultSet.getString("name"));
+                eventNames.add(eventNamesResultSet.getString("event_name"));
 
             }
             MySQLConnection().close();

@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controller.AdministratorController">
+<AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdministratorController">
    <children>
        <TabPane prefHeight="570.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
           <tabs>
@@ -384,8 +383,8 @@
                  <content>
                      <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="500.0" prefWidth="800.0">
                          <columns>
-                             <TableColumn fx:id="col_id_user" prefWidth="47.0" text="ID" />
-                             <TableColumn fx:id="col_name_user" prefWidth="113.0" text="NAME" />
+                             <TableColumn fx:id="col_id_user" prefWidth="50.0" text="ID" />
+                             <TableColumn fx:id="col_name_user" prefWidth="115.0" text="NAME" />
                              <TableColumn fx:id="col_surname_user" prefWidth="100.0" text="SURNAME" />
                              <TableColumn fx:id="col_login_user" prefWidth="100.0" text="LOGIN" />
                              <TableColumn fx:id="col_password_user" prefWidth="116.0" text="PASSWORD" />
@@ -399,10 +398,10 @@
                   <content>
                       <TableView fx:id="tbl_events" layoutY="-3.0" prefHeight="425.0" prefWidth="800.0">
                           <columns>
-                              <TableColumn fx:id="col_id_event" prefWidth="55.0" text="ID" />
-                              <TableColumn fx:id="col_name_event" prefWidth="151.0" text="NAME" />
-                              <TableColumn fx:id="col_agenda_event" prefWidth="453.0" text="AGENDA" />
-                              <TableColumn fx:id="col_date_event" minWidth="0.0" prefWidth="141.0" text="EVENT DATE" />
+                              <TableColumn fx:id="col_id_event" prefWidth="50.0" text="ID" />
+                              <TableColumn fx:id="col_name_event" prefWidth="115.0" text="NAME" />
+                              <TableColumn fx:id="col_agenda_event" prefWidth="520.0" text="AGENDA" />
+                              <TableColumn fx:id="col_date_event" minWidth="0.0" prefWidth="115.0" text="EVENT DATE" />
                           </columns>
                       </TableView>
                   </content>
@@ -411,13 +410,13 @@
                   <content>
                       <TableView fx:id="tbl_entries" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                              <TableColumn fx:id="col_id_entries" prefWidth="70.0" text="ID" />
+                              <TableColumn fx:id="col_id_entries" prefWidth="50.0" text="ID" />
                               <TableColumn fx:id="col_event_name_entries" prefWidth="110.0" text="EVENT NAME" />
                               <TableColumn fx:id="col_name_entries" prefWidth="120.0" text="NAME" />
                               <TableColumn fx:id="col_surname_entries" prefWidth="120.0" text="SURNAME" />
                               <TableColumn fx:id="col_participation_entries" prefWidth="125.0" text="PARTICIPATION" />
-                              <TableColumn fx:id="col_food_entries" prefWidth="125.0" text="FOOD" />
-                              <TableColumn fx:id="col_entry_status_entries" prefWidth="130.0" text="ENTRY STATUS" />
+                              <TableColumn fx:id="col_food_entries" prefWidth="135.0" text="FOOD" />
+                              <TableColumn fx:id="col_entry_status_entries" prefWidth="140.0" text="ENTRY STATUS" />
                           </columns>
                       </TableView>
                   </content>

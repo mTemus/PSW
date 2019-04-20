@@ -1,7 +1,8 @@
 package Controller;
 
 import Operations.DatabaseAdministratorOperations;
-import javafx.collections.FXCollections;
+import Operations.DatabaseEventOperations;
+import Operations.StageOperations;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -59,11 +60,9 @@ public class AdministratorController {
     public TableColumn col_food_entries;
     public TableColumn col_entry_status_entries;
 
-    private static ObservableList<User> users = FXCollections.observableArrayList();
-    private static ObservableList<Event> events = FXCollections.observableArrayList();
-    private static ObservableList<EventEntry> entries = FXCollections.observableArrayList();
-
-    DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
+    private DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
+    private DatabaseEventOperations DEO = new DatabaseEventOperations();
+    StageOperations SO = new StageOperations();
 
 
     public void deleteUser(ActionEvent event) {
@@ -95,11 +94,13 @@ public class AdministratorController {
 
     public void initialize() {
 
-//        DAO.findAllUsers();
+        setUsersTable();
+        setEventsTable();
+        setEntriesTable();
 
     }
 
-    public void addDataToUserTable(ObservableList<User> usersList) {
+    private void addDataToUserTable(ObservableList<User> usersList) {
         col_id_user.setCellValueFactory(new PropertyValueFactory<User, Long>("id"));
         col_name_user.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         col_surname_user.setCellValueFactory(new PropertyValueFactory<User, String>("surname"));
@@ -110,8 +111,39 @@ public class AdministratorController {
         tbl_users.setItems(usersList);
     }
 
+    private void addDataToEventTable(ObservableList<Event> eventsList) {
+        col_id_event.setCellValueFactory(new PropertyValueFactory<Event, Long>("id"));
+        col_name_event.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        col_agenda_event.setCellValueFactory(new PropertyValueFactory<Event, String>("agenda"));
+        col_date_event.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
+        tbl_events.setItems(eventsList);
+    }
+
+    private void addDataToEntryTable(ObservableList<EventEntry> entriesList) {
+        col_id_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, Long>("id"));
+        col_event_name_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("eventName"));
+        col_name_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("userName"));
+        col_surname_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("userSurname"));
+        col_participation_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("participationType"));
+        col_food_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("foodPreferences"));
+        col_entry_status_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("entryStatus"));
+        tbl_entries.setItems(entriesList);
+    }
 
 
+    private void setUsersTable() {
+        ObservableList<User> users = DAO.findAllUsers();
+        addDataToUserTable(users);
+    }
 
+    private void setEventsTable(){
+        ObservableList<Event> events = DEO.findAllEvents();
+        addDataToEventTable(events);
+    }
+
+    private void setEntriesTable(){
+        ObservableList<EventEntry> entries = DAO.findAllEventEntries();
+        addDataToEntryTable(entries);
+    }
 
 }

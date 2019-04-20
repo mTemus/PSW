@@ -249,8 +249,8 @@ public class DatabaseAdministratorOperations {
         try {
             String Query = "UPDATE event " +
                     "SET " +
-                    "event_name = '" + modifiedEvent.getName() + "'" +
-                    "agenda = '" + modifiedEvent.getAgenda() + "'" +
+                    "event_name = '" + modifiedEvent.getName() + "'," +
+                    "agenda = '" + modifiedEvent.getAgenda() + "'," +
                     "date = '" + modifiedEvent.getDate() + "'" +
                     "WHERE id_event LIKE '" + modifiedEvent.getId() + "';";
 

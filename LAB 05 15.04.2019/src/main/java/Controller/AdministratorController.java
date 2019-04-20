@@ -142,6 +142,7 @@ public class AdministratorController {
         if (eventToDelete != null) {
             DAO.deleteEvent(eventToDelete.getId());
             ev_a_alert_field.setText("Event deleted successfully.");
+            ev_a_delete_ev_id_field.setText("");
             setEventsTable();
         } else {
             ev_a_alert_field.setText("There is no event with such id.");
@@ -178,6 +179,11 @@ public class AdministratorController {
 
         DAO.updateEvent(eventToModify);
         ev_a_alert_field.setText("Event modified successfully.");
+        ev_a_mod_name_field.setText("");
+        ev_a_mod_agenda_field.setText("");
+        ev_a_mod_date_field.setText("");
+        ev_a_mod_ev_id_field.setText("");
+        setEventsTable();
     }
 
     public void acceptEntry(ActionEvent event) {

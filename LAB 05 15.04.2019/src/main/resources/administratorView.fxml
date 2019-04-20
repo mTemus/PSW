@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,67 +9,419 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdministratorController">
-    <children>
-        <TabPane prefHeight="570.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Users administration">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
-                <Tab text="Events administration">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
-                <Tab text="Entries administration">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
-                <Tab text="User table">
-                    <content>
-                        <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="500.0" prefWidth="800.0">
-                            <columns>
-                                <TableColumn fx:id="col_id_user" prefWidth="47.0" text="ID" />
-                                <TableColumn fx:id="col_name_user" prefWidth="113.0" text="NAME" />
-                                <TableColumn fx:id="col_surname_user" prefWidth="100.0" text="SURNAME" />
-                                <TableColumn fx:id="col_login_user" prefWidth="100.0" text="LOGIN" />
-                                <TableColumn fx:id="col_password_user" prefWidth="116.0" text="PASSWORD" />
-                                <TableColumn fx:id="col_email_user" prefWidth="125.0" text="E-MAIL" />
-                                <TableColumn fx:id="col_date_user" prefWidth="199.0" text="REGISTRATION DATE" />
-                            </columns>
-                        </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Event table">
-                    <content>
-                        <TableView layoutY="-3.0" prefHeight="425.0" prefWidth="800.0">
-                            <columns>
-                                <TableColumn fx:id="col_id_event" prefWidth="55.0" text="ID" />
-                                <TableColumn fx:id="col_name_event" prefWidth="151.0" text="NAME" />
-                                <TableColumn fx:id="col_agenda_event" prefWidth="453.0" text="AGENDA" />
-                                <TableColumn fx:id="col_date_event" minWidth="0.0" prefWidth="141.0" text="EVENT'S DATE" />
-                            </columns>
-                        </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Entries table">
-               <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="70.0" text="ID" />
-                      <TableColumn prefWidth="110.0" text="EVENT NAME" />
-                        <TableColumn prefWidth="120.0" text="NAME" />
-                        <TableColumn prefWidth="120.0" text="SURNAME" />
-                        <TableColumn prefWidth="125.0" text="PARTICIPATION" />
-                        <TableColumn prefWidth="125.0" text="FOOD" />
-                        <TableColumn prefWidth="130.0" text="ENTRY STATUS" />
-                    </columns>
-                  </TableView>
-               </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+   <children>
+       <TabPane prefHeight="570.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+              <Tab text="Users administration">
+                 <content>
+                     <GridPane>
+                         <columnConstraints>
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                         </columnConstraints>
+                         <rowConstraints>
+                             <RowConstraints maxHeight="247.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                             <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                             <RowConstraints maxHeight="135.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                             <RowConstraints maxHeight="240.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                             <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                         </rowConstraints>
+                        <children>
+                            <TextField fx:id="u_a_id_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User ID:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                <GridPane.margin>
+                                    <Insets right="10.0" />
+                                </GridPane.margin>
+                            </Text>
+                            <TextField fx:id="u_a_new_password_field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                            <TextField fx:id="u_a_new_password_r_field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New password:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                <GridPane.margin>
+                                    <Insets right="10.0" />
+                                </GridPane.margin>
+                            </Text>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Repeat password:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                <GridPane.margin>
+                                    <Insets right="10.0" />
+                                </GridPane.margin>
+                            </Text>
+                            <Button fx:id="u_a_del_button" mnemonicParsing="false" onAction="#deleteUser" text="Delete user" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                            <Button fx:id="u_a_change_password_button" mnemonicParsing="false" text="Change user password" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                            <CheckBox fx:id="u_a_new_password_checkbox" mnemonicParsing="false" onAction="#showPassword" text="Show" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                <GridPane.margin>
+                                    <Insets bottom="5.0" left="10.0" />
+                                </GridPane.margin>
+                            </CheckBox>
+                            <CheckBox fx:id="u_a_new_password_r_checkbox" mnemonicParsing="false" onAction="#showPasswordR" text="Show" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                <GridPane.margin>
+                                    <Insets bottom="5.0" left="10.0" />
+                                </GridPane.margin>
+                            </CheckBox>
+                            <Button fx:id="administrator_logout_button" mnemonicParsing="false" onAction="#administratorLogout" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                                <GridPane.margin>
+                                    <Insets bottom="30.0" />
+                                </GridPane.margin>
+                            </Button>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Users administration" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                                <GridPane.margin>
+                                    <Insets top="20.0" />
+                                </GridPane.margin>
+                            </Text>
+                            <TextField fx:id="u_a_alert_field" editable="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                                <GridPane.margin>
+                                    <Insets bottom="30.0" />
+                                </GridPane.margin>
+                            </TextField>
+                        </children>
+                     </GridPane>
+                 </content>
+              </Tab>
+              <Tab text="Events administration">
+                 <content>
+                     <BorderPane prefHeight="200.0" prefWidth="200.0">
+                         <bottom>
+                             <TextArea fx:id="ev_a_alert_field" editable="false" prefHeight="40.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </BorderPane.margin>
+                             </TextArea>
+                         </bottom>
+                         <top>
+                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Events administration" BorderPane.alignment="TOP_CENTER">
+                                 <BorderPane.margin>
+                                     <Insets top="20.0" />
+                                 </BorderPane.margin>
+                                 <font>
+                                     <Font size="24.0" />
+                                 </font>
+                             </Text>
+                         </top>
+                         <left>
+                             <GridPane alignment="TOP_CENTER" prefWidth="266.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="0.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                     <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="1.0" vgrow="SOMETIMES" />
+                                     <RowConstraints minHeight="10.0" prefHeight="248.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add event" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Text>
+                                    <GridPane GridPane.rowIndex="1">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="83.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="183.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                       <children>
+                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" GridPane.halignment="RIGHT">
+                                               <GridPane.margin>
+                                                   <Insets right="7.0" />
+                                               </GridPane.margin>
+                                           </Text>
+                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Agenda:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                               <GridPane.margin>
+                                                   <Insets right="7.0" />
+                                               </GridPane.margin>
+                                           </Text>
+                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                               <GridPane.margin>
+                                                   <Insets right="7.0" />
+                                               </GridPane.margin>
+                                           </Text>
+                                           <TextArea fx:id="ev_a_add_agenda_field" prefHeight="200.0" prefWidth="200.0" promptText="Agenda." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                           <TextField fx:id="ev_a_add_name_field" promptText="Name." GridPane.columnIndex="1" />
+                                           <TextField fx:id="ev_a_add_date_field" promptText="YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                           <Button fx:id="ev_a_add_event_button" mnemonicParsing="false" onAction="#addEvent" text="Add event" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                </children>
+                             </GridPane>
+                         </left>
+                         <center>
+                             <GridPane prefWidth="266.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete event" GridPane.halignment="CENTER">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Text>
+                                    <GridPane prefHeight="356.0" prefWidth="268.0" GridPane.rowIndex="1">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints maxHeight="187.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="243.0" minHeight="10.0" prefHeight="243.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                       <children>
+                                           <GridPane prefHeight="107.0" prefWidth="268.0">
+                                               <columnConstraints>
+                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="55.0" />
+                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="213.0" />
+                                               </columnConstraints>
+                                               <rowConstraints>
+                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                               </rowConstraints>
+                                              <children>
+                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" GridPane.halignment="RIGHT" />
+                                                  <TextField fx:id="ev_a_delete_ev_id_field" promptText="Event id." GridPane.columnIndex="1">
+                                                      <GridPane.margin>
+                                                          <Insets left="10.0" right="30.0" />
+                                                      </GridPane.margin>
+                                                  </TextField>
+                                              </children>
+                                           </GridPane>
+                                           <Button fx:id="ev_a_delete_event_button" mnemonicParsing="false" text="Delete event" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                               <GridPane.margin>
+                                                   <Insets left="10.0" />
+                                               </GridPane.margin>
+                                           </Button>
+                                       </children>
+                                    </GridPane>
+                                </children>
+                             </GridPane>
+                         </center>
+                         <right>
+                             <GridPane prefWidth="266.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify event" textAlignment="CENTER" GridPane.halignment="CENTER">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Text>
+                                    <GridPane GridPane.rowIndex="1">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="299.0" minHeight="10.0" prefHeight="299.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                       <children>
+                                           <GridPane>
+                                               <columnConstraints>
+                                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                               </columnConstraints>
+                                               <rowConstraints>
+                                                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                               </rowConstraints>
+                                              <children>
+                                                  <TextField fx:id="ev_a_mod_ev_id_field" promptText="Event id.">
+                                                      <GridPane.margin>
+                                                          <Insets left="10.0" right="10.0" />
+                                                      </GridPane.margin>
+                                                  </TextField>
+                                                  <Button fx:id="ev_a_mod_load_event_button" mnemonicParsing="false" onAction="#loadEventToModify" text="Load event" GridPane.columnIndex="1" />
+                                              </children>
+                                           </GridPane>
+                                           <GridPane GridPane.rowIndex="1">
+                                               <columnConstraints>
+                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="67.0" />
+                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="199.0" />
+                                               </columnConstraints>
+                                               <rowConstraints>
+                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                               </rowConstraints>
+                                              <children>
+                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" GridPane.halignment="RIGHT">
+                                                      <GridPane.margin>
+                                                          <Insets right="7.0" />
+                                                      </GridPane.margin>
+                                                  </Text>
+                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                                      <GridPane.margin>
+                                                          <Insets right="7.0" />
+                                                      </GridPane.margin>
+                                                  </Text>
+                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Agenda:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                                      <GridPane.margin>
+                                                          <Insets right="7.0" />
+                                                      </GridPane.margin>
+                                                  </Text>
+                                                  <TextField fx:id="ev_a_mod_name_field" promptText="Name" GridPane.columnIndex="1">
+                                                      <opaqueInsets>
+                                                          <Insets />
+                                                      </opaqueInsets>
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                                  </TextField>
+                                                  <TextArea fx:id="ev_a_mod_agenda_field" prefHeight="200.0" prefWidth="200.0" promptText="Agenda" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                                  </TextArea>
+                                                  <TextField fx:id="ev_a_mod_date_field" promptText="YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                      <GridPane.margin>
+                                                          <Insets right="10.0" />
+                                                      </GridPane.margin>
+                                                  </TextField>
+                                              </children>
+                                           </GridPane>
+                                           <Button fx:id="ev_a_mod_save_event_button" mnemonicParsing="false" onAction="#saveModifiedEvent" text="Save event" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                       </children>
+                                    </GridPane>
+                                </children>
+                             </GridPane>
+                         </right>
+                     </BorderPane>
+                 </content>
+              </Tab>
+              <Tab text="Entries administration">
+                 <content>
+                     <BorderPane prefHeight="200.0" prefWidth="200.0">
+                         <top>
+                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entries administration" BorderPane.alignment="CENTER">
+                                 <font>
+                                     <Font size="24.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                     <Insets top="20.0" />
+                                 </BorderPane.margin>
+                             </Text>
+                         </top>
+                         <bottom>
+                             <TextArea fx:id="en_a_alert_field" editable="false" prefHeight="40.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </BorderPane.margin>
+                             </TextArea>
+                         </bottom>
+                         <center>
+                             <GridPane prefHeight="329.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                     <RowConstraints maxHeight="355.0" minHeight="10.0" prefHeight="327.0" vgrow="SOMETIMES" />
+                                     <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                <children>
+                                    <GridPane prefHeight="89.0" prefWidth="800.0" GridPane.rowIndex="1">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                       <children>
+                                           <Button fx:id="en_a_accept_button" mnemonicParsing="false" onAction="#acceptEntry" prefHeight="100.0" prefWidth="150.0" text="Accept" GridPane.halignment="CENTER">
+                                               <GridPane.margin>
+                                                   <Insets bottom="5.0" />
+                                               </GridPane.margin>
+                                           </Button>
+                                           <Button fx:id="en_a_discard_button" mnemonicParsing="false" onAction="#discardEntry" prefHeight="100.0" prefWidth="150.0" text="Discard" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                               <GridPane.margin>
+                                                   <Insets bottom="5.0" />
+                                               </GridPane.margin>
+                                           </Button>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane>
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="284.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="569.0" minWidth="10.0" prefWidth="516.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                       <children>
+                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Entry id:" GridPane.halignment="RIGHT">
+                                               <GridPane.margin>
+                                                   <Insets right="2.0" />
+                                               </GridPane.margin>
+                                           </Text>
+                                           <TextField fx:id="en_a_entry_id_field" GridPane.columnIndex="1">
+                                               <GridPane.margin>
+                                                   <Insets left="5.0" right="300.0" />
+                                               </GridPane.margin>
+                                           </TextField>
+                                       </children>
+                                    </GridPane>
+                                </children>
+                             </GridPane>
+                         </center>
+                     </BorderPane>
+                 </content>
+              </Tab>
+              <Tab text="User table">
+                 <content>
+                     <TableView fx:id="tbl_users" layoutX="14.0" layoutY="14.0" prefHeight="500.0" prefWidth="800.0">
+                         <columns>
+                             <TableColumn fx:id="col_id_user" prefWidth="47.0" text="ID" />
+                             <TableColumn fx:id="col_name_user" prefWidth="113.0" text="NAME" />
+                             <TableColumn fx:id="col_surname_user" prefWidth="100.0" text="SURNAME" />
+                             <TableColumn fx:id="col_login_user" prefWidth="100.0" text="LOGIN" />
+                             <TableColumn fx:id="col_password_user" prefWidth="116.0" text="PASSWORD" />
+                             <TableColumn fx:id="col_email_user" prefWidth="125.0" text="E-MAIL" />
+                             <TableColumn fx:id="col_date_user" prefWidth="199.0" text="REGISTRATION DATE" />
+                         </columns>
+                     </TableView>
+                 </content>
+              </Tab>
+              <Tab text="Event table">
+                  <content>
+                      <TableView fx:id="tbl_events" layoutY="-3.0" prefHeight="425.0" prefWidth="800.0">
+                          <columns>
+                              <TableColumn fx:id="col_id_event" prefWidth="55.0" text="ID" />
+                              <TableColumn fx:id="col_name_event" prefWidth="151.0" text="NAME" />
+                              <TableColumn fx:id="col_agenda_event" prefWidth="453.0" text="AGENDA" />
+                              <TableColumn fx:id="col_date_event" minWidth="0.0" prefWidth="141.0" text="EVENT DATE" />
+                          </columns>
+                      </TableView>
+                  </content>
+              </Tab>
+              <Tab text="Entries table">
+                  <content>
+                      <TableView fx:id="tbl_entries" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                              <TableColumn fx:id="col_id_entries" prefWidth="70.0" text="ID" />
+                              <TableColumn fx:id="col_event_name_entries" prefWidth="110.0" text="EVENT NAME" />
+                              <TableColumn fx:id="col_name_entries" prefWidth="120.0" text="NAME" />
+                              <TableColumn fx:id="col_surname_entries" prefWidth="120.0" text="SURNAME" />
+                              <TableColumn fx:id="col_participation_entries" prefWidth="125.0" text="PARTICIPATION" />
+                              <TableColumn fx:id="col_food_entries" prefWidth="125.0" text="FOOD" />
+                              <TableColumn fx:id="col_entry_status_entries" prefWidth="130.0" text="ENTRY STATUS" />
+                          </columns>
+                      </TableView>
+                  </content>
+              </Tab>
+          </tabs>
+       </TabPane>
+   </children>
 </AnchorPane>

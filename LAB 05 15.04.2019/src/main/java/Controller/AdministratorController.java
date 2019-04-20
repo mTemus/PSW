@@ -20,7 +20,7 @@ public class AdministratorController {
     public CheckBox u_a_new_password_checkbox;
     public CheckBox u_a_new_password_r_checkbox;
     public Button administrator_logout_button;
-    public TextField u_a_alert_field;
+    public TextArea u_a_alert_field;
     public TextArea ev_a_alert_field;
     public TextArea ev_a_add_agenda_field;
     public TextField ev_a_add_name_field;
@@ -66,7 +66,18 @@ public class AdministratorController {
 
 
     public void deleteUser(ActionEvent event) {
+        String user_Id = u_a_id_field.getText();
+        Integer userId = Integer.parseInt(user_Id);
+        User existingUserToDelete = DAO.findExistingUserToDelete(userId);
+
+        if (existingUserToDelete != null) {
+            DAO.deleteUserFromDatabase(userId);
+            u_a_alert_field.setText("User deleted succesfully.");
+            setUsersTable();
+        } else
+            u_a_alert_field.setText("There is no user with this ID. Try again.");
     }
+
 
     public void showPassword(ActionEvent event) {
     }
@@ -97,7 +108,6 @@ public class AdministratorController {
         setUsersTable();
         setEventsTable();
         setEntriesTable();
-
     }
 
     private void addDataToUserTable(ObservableList<User> usersList) {
@@ -136,12 +146,12 @@ public class AdministratorController {
         addDataToUserTable(users);
     }
 
-    private void setEventsTable(){
+    private void setEventsTable() {
         ObservableList<Event> events = DEO.findAllEvents();
         addDataToEventTable(events);
     }
 
-    private void setEntriesTable(){
+    private void setEntriesTable() {
         ObservableList<EventEntry> entries = DAO.findAllEventEntries();
         addDataToEntryTable(entries);
     }

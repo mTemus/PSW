@@ -73,11 +73,11 @@
                                     <Insets top="20.0" />
                                 </GridPane.margin>
                             </Text>
-                            <TextField fx:id="u_a_alert_field" editable="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-                                <GridPane.margin>
-                                    <Insets bottom="30.0" />
-                                </GridPane.margin>
-                            </TextField>
+                        <TextArea fx:id="u_a_alert_field" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </TextArea>
                         </children>
                      </GridPane>
                  </content>

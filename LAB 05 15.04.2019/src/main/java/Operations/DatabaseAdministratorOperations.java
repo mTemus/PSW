@@ -9,6 +9,8 @@ import java.sql.*;
 
 public class DatabaseAdministratorOperations {
 
+    DatabaseLoginOperations DLO = new DatabaseLoginOperations();
+
     private Connection MySQLConnection() {
         Connection MySQLConnection = null;
 
@@ -86,5 +88,37 @@ public class DatabaseAdministratorOperations {
             return null;
         }
     }
+
+    public User findExistingUserToDelete(Integer userID) {
+        User tmpUser = null;
+        PreparedStatement userPrpStm = null;
+
+        try {
+            userPrpStm = MySQLConnection().prepareStatement("select * from user where id = ?");
+            userPrpStm.setLong(1, userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tmpUser = DLO.doFindingQuery(userPrpStm);
+
+        if (tmpUser != null)
+            return tmpUser;
+        else
+            return null;
+    }
+
+    public void deleteUserFromDatabase(long userID) {
+
+        try {
+            String Query = "DELETE FROM user WHERE id = " + userID;
+
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

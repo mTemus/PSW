@@ -12,6 +12,7 @@ import model.EventEntry;
 import model.User;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class AdministratorController {
     public TextField u_a_id_field;
@@ -117,7 +118,13 @@ public class AdministratorController {
 
     public void addEvent(ActionEvent event) {
 
-
+        if (!isEventNameSetted() || !isEventAgendaSetted() || !isEventDateSetted()) {
+            ev_a_alert_field.setText("Please set values of the event properly.");
+        } else if (dateRegex(ev_a_add_date_field.getText())) {
+            ev_a_alert_field.setText("Please insert date correctly.");
+        } else {
+            ev_a_alert_field.setText("Event added successfully.");
+        }
 
     }
 
@@ -190,6 +197,21 @@ public class AdministratorController {
         return !u_a_id_field.getText().equals("");
     }
 
+    private boolean isEventNameSetted() {
+        return !ev_a_add_name_field.getText().equals("");
+    }
 
+    private boolean isEventAgendaSetted() {
+        return !ev_a_add_agenda_field.getText().equals("");
+    }
+
+    private boolean isEventDateSetted() {
+        return !ev_a_add_date_field.getText().equals("");
+    }
+
+    private boolean dateRegex(String date) {
+        Pattern datePattern = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
+        return !datePattern.matcher(date).matches();
+    }
 
 }

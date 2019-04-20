@@ -12,7 +12,7 @@ public class RegistrationCompleteController {
     public Button register_again_button;
     public TextArea registration_text_area;
 
-    static StageOperations SO = new StageOperations();
+    private static StageOperations SO = new StageOperations();
 
     public void initialize() {
         registration_text_area.setText("Registered successfully on " + EventController.getChosenEvent().getName() + ", " +

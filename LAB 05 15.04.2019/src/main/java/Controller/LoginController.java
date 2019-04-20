@@ -3,8 +3,6 @@ package Controller;
 import Operations.DatabaseLoginOperations;
 import Operations.EmailOperations;
 import Operations.StageOperations;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import model.User;
@@ -16,8 +14,6 @@ public class LoginController {
     private int loginAttempts = 0;
     private static User loggedUser;
     private boolean someoneIsLogged = false;
-
-    private ObservableList<User> users = FXCollections.observableArrayList();
 
     public TextField password_text_field_u;
     public TextField login_text_field;
@@ -134,7 +130,8 @@ public class LoginController {
     static User getLoggedUser() {
         return loggedUser;
     }
-    public void setLoggedUser(User loggedUser) {
+
+    void setLoggedUser(User loggedUser) {
         LoginController.loggedUser = loggedUser;
     }
 }

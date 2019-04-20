@@ -201,10 +201,23 @@ public class DatabaseAdministratorOperations {
         }
     }
 
-    Event doFindingEventQuery(PreparedStatement findStm) {
+    public PreparedStatement lookForExistingEvent(Long eventID) {
+
+        PreparedStatement findingEventStm = null;
+        try {
+            findingEventStm = MySQLConnection().prepareStatement("SELECT * FROM event WHERE id_event LIKE ?");
+            findingEventStm.setLong(1, eventID);
+
+            return findingEventStm;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Event doFindingEventQuery(PreparedStatement findStm) {
         ResultSet eventResultFind;
         Event tmp_event = null;
-
 
         try {
             eventResultFind = findStm.executeQuery();
@@ -213,7 +226,6 @@ public class DatabaseAdministratorOperations {
                         eventResultFind.getString("event_name"),
                         eventResultFind.getString("agenda"),
                         eventResultFind.getString("date"));
-
             }
             MySQLConnection().close();
         } catch (SQLException e) {
@@ -222,6 +234,33 @@ public class DatabaseAdministratorOperations {
         return tmp_event;
     }
 
+    public void deleteEvent(Long eventID) {
+        try {
+            String Query = "DELETE FROM event WHERE id_event = " + eventID;
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEvent(Event modifiedEvent) {
+        try {
+            String Query = "UPDATE event " +
+                    "SET " +
+                    "event_name = '" + modifiedEvent.getName() + "'" +
+                    "agenda = '" + modifiedEvent.getAgenda() + "'" +
+                    "date = '" + modifiedEvent.getDate() + "'" +
+                    "WHERE id_event LIKE '" + modifiedEvent.getId() + "';";
+
+            Statement eventStm = MySQLConnection().createStatement();
+            eventStm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

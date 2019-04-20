@@ -65,6 +65,7 @@ public class AdministratorController {
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
     private LoginController LC = new LoginController();
+    private Event eventToModify = null;
 
     public void deleteUser(ActionEvent event) {
 
@@ -133,12 +134,50 @@ public class AdministratorController {
     }
 
     public void deleteEvent(ActionEvent event) {
+        String idOfEventToDeleteString = ev_a_delete_ev_id_field.getText();
+        Long eventIdDeleted = Long.parseLong(idOfEventToDeleteString);
+
+        Event eventToDelete = DAO.doFindingEventQuery(DAO.lookForExistingEvent(eventIdDeleted));
+
+        if (eventToDelete != null) {
+            DAO.deleteEvent(eventToDelete.getId());
+            ev_a_alert_field.setText("Event deleted successfully.");
+            setEventsTable();
+        } else {
+            ev_a_alert_field.setText("There is no event with such id.");
+        }
+
+
     }
 
     public void loadEventToModify(ActionEvent event) {
+
+        String idOfEventToModifyString = ev_a_mod_ev_id_field.getText();
+        Long eventIdModified = Long.parseLong(idOfEventToModifyString);
+
+        eventToModify = DAO.doFindingEventQuery(DAO.lookForExistingEvent(eventIdModified));
+
+        if (eventToModify != null) {
+            ev_a_mod_name_field.setText(eventToModify.getName());
+            ev_a_mod_agenda_field.setText(eventToModify.getAgenda());
+            ev_a_mod_date_field.setText(eventToModify.getDate());
+
+            ev_a_alert_field.setText("Event loaded successfully.");
+
+        } else {
+            ev_a_alert_field.setText("There is no event with such id.");
+        }
+
+
     }
 
     public void saveModifiedEvent(ActionEvent event) {
+        eventToModify.setName(ev_a_mod_name_field.getText());
+        eventToModify.setAgenda(ev_a_mod_agenda_field.getText());
+        eventToModify.setDate(ev_a_mod_date_field.getText());
+
+        DAO.updateEvent(eventToModify);
+        ev_a_alert_field.setText("Event modified successfully.");
     }
 
     public void acceptEntry(ActionEvent event) {

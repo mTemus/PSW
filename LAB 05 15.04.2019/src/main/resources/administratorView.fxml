@@ -270,7 +270,7 @@
                                                           <Insets right="10.0" />
                                                       </GridPane.margin>
                                                   </TextField>
-                                                  <TextArea fx:id="ev_a_mod_agenda_field" prefHeight="200.0" prefWidth="200.0" promptText="Agenda" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                  <TextArea fx:id="ev_a_mod_agenda_field" prefHeight="200.0" prefWidth="200.0" promptText="Agenda" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                       <GridPane.margin>
                                                           <Insets right="10.0" />
                                                       </GridPane.margin>

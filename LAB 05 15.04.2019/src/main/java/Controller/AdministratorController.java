@@ -1,7 +1,14 @@
 package Controller;
 
+import Operations.DatabaseAdministratorOperations;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Event;
+import model.EventEntry;
+import model.User;
 
 public class AdministratorController {
     public TextField u_a_id_field;
@@ -52,6 +59,13 @@ public class AdministratorController {
     public TableColumn col_food_entries;
     public TableColumn col_entry_status_entries;
 
+    private static ObservableList<User> users = FXCollections.observableArrayList();
+    private static ObservableList<Event> events = FXCollections.observableArrayList();
+    private static ObservableList<EventEntry> entries = FXCollections.observableArrayList();
+
+    DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
+
+
     public void deleteUser(ActionEvent event) {
     }
 
@@ -78,4 +92,26 @@ public class AdministratorController {
 
     public void discardEntry(ActionEvent event) {
     }
+
+    public void initialize() {
+
+//        DAO.findAllUsers();
+
+    }
+
+    public void addDataToUserTable(ObservableList<User> usersList) {
+        col_id_user.setCellValueFactory(new PropertyValueFactory<User, Long>("id"));
+        col_name_user.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        col_surname_user.setCellValueFactory(new PropertyValueFactory<User, String>("surname"));
+        col_login_user.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
+        col_password_user.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
+        col_email_user.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        col_date_user.setCellValueFactory(new PropertyValueFactory<User, String>("date"));
+        tbl_users.setItems(usersList);
+    }
+
+
+
+
+
 }

@@ -1,8 +1,10 @@
 package Operations;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.User;
+
+import java.sql.*;
 
 public class DatabaseAdministratorOperations {
 
@@ -21,6 +23,33 @@ public class DatabaseAdministratorOperations {
         }
 
         return MySQLConnection;
+    }
+
+    public ObservableList<User> findAllUsers() {
+
+        ObservableList<User> users = FXCollections.observableArrayList();
+
+        try {
+            Statement myStatement = MySQLConnection().createStatement();
+            ResultSet myResultSet = myStatement.executeQuery("select * from user");
+
+            while (myResultSet.next()) {
+                User u = new User(myResultSet.getLong("id"),
+                        myResultSet.getString("name"),
+                        myResultSet.getString("surname"),
+                        myResultSet.getString("login"),
+                        myResultSet.getString("password"),
+                        myResultSet.getString("email"),
+                        myResultSet.getString("registrationDate"));
+                users.add(u);
+            }
+            MySQLConnection().close();
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 

@@ -89,7 +89,7 @@ public class DatabaseAdministratorOperations {
         }
     }
 
-    public User findExistingUserToDelete(Integer userID) {
+    public User findExistingUserToDelete(int userID) {
         User tmpUser = null;
         PreparedStatement userPrpStm = null;
 
@@ -120,5 +120,49 @@ public class DatabaseAdministratorOperations {
         }
     }
 
+    public Boolean findExistingEntryToDelete(int userID) {
+        Boolean tmpEntry = null;
+        PreparedStatement entryPrpStm = null;
+
+        try {
+            entryPrpStm = MySQLConnection().prepareStatement("select * from events_entries where user_id = ?");
+            entryPrpStm.setLong(1, userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tmpEntry = doFindingQueryOfEntry(entryPrpStm);
+
+            return tmpEntry;
+    }
+
+    private Boolean doFindingQueryOfEntry(PreparedStatement findStm) {
+        ResultSet entryResultFind;
+
+        try {
+            entryResultFind = findStm.executeQuery();
+            if (entryResultFind.next()) {
+               return true;
+            }
+            MySQLConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return null;
+    }
+
+    public void deleteEntryFromDatabase(long userID) {
+
+        try {
+            String Query = "DELETE FROM events_entries WHERE user_id = " + userID;
+
+            Statement Stm = MySQLConnection().createStatement();
+            Stm.executeUpdate(Query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -11,14 +11,14 @@ import model.Event;
 import model.EventEntry;
 import model.User;
 
+import java.io.IOException;
+
 public class AdministratorController {
     public TextField u_a_id_field;
     public TextField u_a_new_password_field;
     public TextField u_a_new_password_r_field;
     public Button u_a_del_button;
     public Button u_a_change_password_button;
-    public CheckBox u_a_new_password_checkbox;
-    public CheckBox u_a_new_password_r_checkbox;
     public Button administrator_logout_button;
     public TextArea u_a_alert_field;
     public TextArea ev_a_alert_field;
@@ -62,30 +62,47 @@ public class AdministratorController {
 
     private DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
-    StageOperations SO = new StageOperations();
-
+    private StageOperations SO = new StageOperations();
+    private LoginController LC = new LoginController();
 
     public void deleteUser(ActionEvent event) {
-        String user_Id = u_a_id_field.getText();
-        Integer userId = Integer.parseInt(user_Id);
-        User existingUserToDelete = DAO.findExistingUserToDelete(userId);
 
-        if (existingUserToDelete != null) {
-            DAO.deleteUserFromDatabase(userId);
-            u_a_alert_field.setText("User deleted succesfully.");
-            setUsersTable();
-        } else
-            u_a_alert_field.setText("There is no user with this ID. Try again.");
+        if (isIdPreffered()) {
+            String user_Id = u_a_id_field.getText();
+            int userId = Integer.parseInt(user_Id);
+            User existingUserToDelete = DAO.findExistingUserToDelete(userId);
+
+            if (existingUserToDelete != null) {
+                DAO.deleteUserFromDatabase(userId);
+                u_a_alert_field.setText("User deleted succesfully.");
+                setUsersTable();
+
+                if (DAO.findExistingEntryToDelete(userId)) {
+                    DAO.deleteEntryFromDatabase(userId);
+                    u_a_alert_field.setText("User deleted succesfully. User's event entries was also deleted.");
+                    setEntriesTable();
+                }
+
+            } else
+                u_a_alert_field.setText("There is no user with this ID. Try again.");
+        } else u_a_alert_field.setText("Please specify users's id.");
     }
 
-
-    public void showPassword(ActionEvent event) {
+    public void administratorLogout(ActionEvent event) throws IOException {
+        SO.changeSceneToLogin(event);
+        LC.setLoggedUser(null);
     }
 
-    public void showPasswordR(ActionEvent event) {
-    }
+    public void changeUsersPassword(ActionEvent event) {
 
-    public void administratorLogout(ActionEvent event) {
+        if (isIdPreffered()) {
+            if (u_a_new_password_field.equals(u_a_new_password_r_field)) {
+                String newPassword = u_a_new_password_field.getText();
+                //...
+            } else u_a_alert_field.setText("Passwords dont match, please try again.");
+        } else u_a_alert_field.setText("Please specify users's id.");
+
+
     }
 
     public void addEvent(ActionEvent event) {
@@ -155,5 +172,12 @@ public class AdministratorController {
         ObservableList<EventEntry> entries = DAO.findAllEventEntries();
         addDataToEntryTable(entries);
     }
+
+    private boolean isIdPreffered() {
+        if (u_a_id_field.getText() != null)
+            return true;
+        else return false;
+    }
+
 
 }

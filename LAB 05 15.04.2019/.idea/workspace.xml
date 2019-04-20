@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="V0.5.6">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="V0.6.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Operations/DatabaseEventOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Operations/DatabaseEventOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/administratorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/administratorView.fxml" afterDir="false" />
     </list>
     <list id="6661d616-c521-4c50-9234-73ad1a9b3975" name="INNE" comment="">
@@ -81,10 +82,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
+            <state relative-caret-position="461">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Operations/StageOperations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,10 +118,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="164" column="9" lean-forward="true" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#findAllEventEntries#0;class#DatabaseAdministratorOperations#0" />
+                <element signature="method#delete#0;class#DatabaseAdministratorOperations#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="102" column="69" lean-forward="true" selection-start-line="102" selection-start-column="69" selection-end-line="102" selection-end-column="69" />
+            <state relative-caret-position="120">
+              <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,10 +144,11 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/EventEntry.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            <state relative-caret-position="238">
+              <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
             </state>
           </provider>
         </entry>
@@ -117,18 +157,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/administratorView.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="417" column="66" selection-start-line="417" selection-start-column="66" selection-end-line="417" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/eventView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="211">
+              <caret line="51" column="112" lean-forward="true" selection-start-line="51" selection-start-column="112" selection-end-line="51" selection-end-column="112" />
             </state>
           </provider>
         </entry>
@@ -148,6 +178,8 @@
       <find>combo</find>
       <find>VEGAN</find>
       <find>sys</find>
+      <find>u_a_alert_field</find>
+      <find>un</find>
     </findStrings>
     <replaceStrings>
       <replace>DLO</replace>
@@ -183,20 +215,21 @@
         <option value="$PROJECT_DIR$/src/main/resources/loginView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/LoggedUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Event.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/EventController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/EventEntry.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Operations/EmailOperations.java" />
         <option value="$PROJECT_DIR$/src/main/java/Operations/StageOperations.java" />
         <option value="$PROJECT_DIR$/src/main/resources/eventView.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/administratorView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/Operations/DatabaseEventOperations.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Operations/DatabaseLoginOperations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Operations/EmailOperations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java" />
       </list>
     </option>
   </component>
@@ -300,6 +333,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -414,7 +448,7 @@
       <workItem from="1555664886453" duration="5970000" />
       <workItem from="1555676466754" duration="7537000" />
       <workItem from="1555687898062" duration="7944000" />
-      <workItem from="1555748989967" duration="10343000" />
+      <workItem from="1555748989967" duration="15361000" />
     </task>
     <task id="LOCAL-00001" summary="V0.1">
       <created>1555583193604</created>
@@ -598,11 +632,25 @@
       <option name="project" value="LOCAL" />
       <updated>1555762149475</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="V0.6">
+      <created>1555766683716</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1555766683716</updated>
+    </task>
+    <task id="LOCAL-00028" summary="V0.6.1">
+      <created>1555768266362</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1555768266362</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53807000" />
+    <option name="totallyTimeSpent" value="58825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -650,8 +698,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="V0.1.2" />
-    <MESSAGE value="V0.1.3" />
     <MESSAGE value="V0.1.3.2" />
     <MESSAGE value="Laboratory Instructions." />
     <MESSAGE value="V0.2" />
@@ -675,7 +721,9 @@
     <MESSAGE value="V0.5.4" />
     <MESSAGE value="V0.5.5" />
     <MESSAGE value="V0.5.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="V0.5.6" />
+    <MESSAGE value="V0.6" />
+    <MESSAGE value="V0.6.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="V0.6.1" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -697,21 +745,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/LoggedUser.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-545">
-          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="29" column="43" lean-forward="true" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -727,26 +760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/EmailOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -774,26 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="63" column="43" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/StageOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="26" column="81" lean-forward="true" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Event.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -801,16 +794,6 @@
           <folding>
             <element signature="e#341#342#0" expanded="true" />
             <element signature="e#366#367#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseLoginOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="51" column="49" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -825,29 +808,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/administratorView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="417" column="66" selection-start-line="417" selection-start-column="66" selection-end-line="417" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/eventView.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/EmailOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -858,12 +840,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/administratorView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="102" column="69" lean-forward="true" selection-start-line="102" selection-start-column="69" selection-end-line="102" selection-end-column="69" />
+        <state relative-caret-position="211">
+          <caret line="51" column="112" lean-forward="true" selection-start-line="51" selection-start-column="112" selection-end-line="51" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseLoginOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="69" column="5" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/registrationCompleteView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/RegistrationCompleteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/StageOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/AdministratorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Operations/DatabaseAdministratorOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="164" column="9" lean-forward="true" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#findAllEventEntries#0;class#DatabaseAdministratorOperations#0" />
+            <element signature="method#delete#0;class#DatabaseAdministratorOperations#0" />
           </folding>
         </state>
       </provider>

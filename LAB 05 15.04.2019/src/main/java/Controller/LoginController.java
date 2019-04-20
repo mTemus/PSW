@@ -102,27 +102,23 @@ public class LoginController {
     }
 
     public void showPassword(ActionEvent event) {
-        password_text_field_u.managedProperty().bind(password_checkbox.selectedProperty());
-        password_text_field_u.visibleProperty().bind(password_checkbox.selectedProperty());
-        password_text_field.managedProperty().bind(password_checkbox.selectedProperty().not());
-        password_text_field.visibleProperty().bind(password_checkbox.selectedProperty().not());
-        password_text_field_u.textProperty().bindBidirectional(password_text_field.textProperty());
+        bindShowPassword(password_text_field_u, password_checkbox, password_text_field);
     }
 
     public void register_show_password(ActionEvent event) {
-        register_field_password_un.managedProperty().bind(register_password_checkbox.selectedProperty());
-        register_field_password_un.visibleProperty().bind(register_password_checkbox.selectedProperty());
-        register_field_password.managedProperty().bind(register_password_checkbox.selectedProperty().not());
-        register_field_password.visibleProperty().bind(register_password_checkbox.selectedProperty().not());
-        register_field_password_un.textProperty().bindBidirectional(register_field_password.textProperty());
+        bindShowPassword(register_field_password_un, register_password_checkbox, register_field_password);
     }
 
     public void register_show_password_r(ActionEvent event) {
-        register_field_password_r_un.managedProperty().bind(register_password_r_checkbox.selectedProperty());
-        register_field_password_r_un.visibleProperty().bind(register_password_r_checkbox.selectedProperty());
-        register_field_password_r.managedProperty().bind(register_password_r_checkbox.selectedProperty().not());
-        register_field_password_r.visibleProperty().bind(register_password_r_checkbox.selectedProperty().not());
-        register_field_password_r_un.textProperty().bindBidirectional(register_field_password_r.textProperty());
+        bindShowPassword(register_field_password_r_un, register_password_r_checkbox, register_field_password_r);
+    }
+
+    private static void bindShowPassword(TextField unmasked_password, CheckBox password_checkbox, PasswordField masked_password) {
+        unmasked_password.managedProperty().bind(password_checkbox.selectedProperty());
+        unmasked_password.visibleProperty().bind(password_checkbox.selectedProperty());
+        masked_password.managedProperty().bind(password_checkbox.selectedProperty().not());
+        masked_password.visibleProperty().bind(password_checkbox.selectedProperty().not());
+        unmasked_password.textProperty().bindBidirectional(masked_password.textProperty());
     }
 
     private void registrationComplete() {

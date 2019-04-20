@@ -49,17 +49,7 @@
                                 </GridPane.margin>
                             </Text>
                             <Button fx:id="u_a_del_button" mnemonicParsing="false" onAction="#deleteUser" text="Delete user" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                            <Button fx:id="u_a_change_password_button" mnemonicParsing="false" text="Change user password" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                            <CheckBox fx:id="u_a_new_password_checkbox" mnemonicParsing="false" onAction="#showPassword" text="Show" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                <GridPane.margin>
-                                    <Insets bottom="5.0" left="10.0" />
-                                </GridPane.margin>
-                            </CheckBox>
-                            <CheckBox fx:id="u_a_new_password_r_checkbox" mnemonicParsing="false" onAction="#showPasswordR" text="Show" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                                <GridPane.margin>
-                                    <Insets bottom="5.0" left="10.0" />
-                                </GridPane.margin>
-                            </CheckBox>
+                            <Button fx:id="u_a_change_password_button" mnemonicParsing="false" onAction="#changeUsersPassword" text="Change user password" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                             <Button fx:id="administrator_logout_button" mnemonicParsing="false" onAction="#administratorLogout" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                 <GridPane.margin>
                                     <Insets bottom="30.0" />

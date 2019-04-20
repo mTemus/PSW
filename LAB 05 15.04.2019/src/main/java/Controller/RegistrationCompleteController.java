@@ -25,8 +25,9 @@ public class RegistrationCompleteController {
         SO.changeSceneToUser(event);
     }
 
-    public static void userLogout(ActionEvent event) throws IOException {
+    public void userLogout(ActionEvent event) throws IOException {
         EventController.setLoggedUser(null);
         SO.changeSceneToLogin(event);
     }
+
 }

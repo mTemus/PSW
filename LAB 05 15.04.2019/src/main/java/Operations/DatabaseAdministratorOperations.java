@@ -102,35 +102,39 @@ public class DatabaseAdministratorOperations {
         }
         tmpUser = DLO.doFindingQuery(userPrpStm);
 
-        if (tmpUser != null)
-            return tmpUser;
-        else
-            return null;
+        return tmpUser;
     }
 
     public void deleteUserFromDatabase(long userID) {
+        String query = "DELETE FROM user WHERE id = " + userID;
+        executeStatementUpdate(query);
+    }
+
+    private PreparedStatement findExistingEntry(String query) {
+        PreparedStatement entryPrpStm = null;
 
         try {
-            String Query = "DELETE FROM user WHERE id = " + userID;
-
-            Statement Stm = MySQLConnection().createStatement();
-            Stm.executeUpdate(Query);
-
+            entryPrpStm = MySQLConnection().prepareStatement(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return entryPrpStm;
     }
 
     public Boolean findExistingEntryToDelete(int userID) {
         Boolean tmpEntry = null;
-        PreparedStatement entryPrpStm = null;
+        String query = "select * from events_entries where user_id = " + userID + ";";
+        PreparedStatement entryPrpStm = findExistingEntry(query);
+        tmpEntry = doFindingQueryOfEntry(entryPrpStm);
 
-        try {
-            entryPrpStm = MySQLConnection().prepareStatement("select * from events_entries where user_id = ?");
-            entryPrpStm.setLong(1, userID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return tmpEntry;
+    }
+
+    public Boolean findExistingEntryToModify(int entryID) {
+        Boolean tmpEntry = null;
+        String query = "select * from events_entries where entry_id = " + entryID + ";";
+        PreparedStatement entryPrpStm = findExistingEntry(query);
         tmpEntry = doFindingQueryOfEntry(entryPrpStm);
 
         return tmpEntry;
@@ -139,50 +143,40 @@ public class DatabaseAdministratorOperations {
     private Boolean doFindingQueryOfEntry(PreparedStatement findStm) {
         ResultSet entryResultFind;
 
+
         try {
             entryResultFind = findStm.executeQuery();
+
             if (entryResultFind.next()) {
+                MySQLConnection().close();
                 return true;
-            }
-            MySQLConnection().close();
+            } else return false;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
 
-        return null;
+
     }
 
     public void deleteEntryFromDatabase(long userID) {
+        String query = "DELETE FROM events_entries WHERE user_id = " + userID;
 
-        try {
-            String Query = "DELETE FROM events_entries WHERE user_id = " + userID;
-
-            Statement Stm = MySQLConnection().createStatement();
-            Stm.executeUpdate(Query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executeStatementUpdate(query);
     }
 
     public void changeUserPassword(int userId, String newPassword) {
-        try {
-            String Query = "UPDATE user " +
-                    "SET " +
-                    "password = '" + newPassword + "'" +
-                    "WHERE id LIKE '" + userId + "';";
+        String query = "UPDATE user " +
+                "SET " +
+                "password = '" + newPassword + "'" +
+                "WHERE id LIKE '" + userId + "';";
 
-            Statement passwordStm = MySQLConnection().createStatement();
-            passwordStm.executeUpdate(Query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executeStatementUpdate(query);
     }
 
     public void addEventToDatabase(String name, String agenda, String date) {
-        String Query = "INSERT INTO event " +
+        String query = "INSERT INTO event " +
                 "(id_event, " +
                 "event_name, " +
                 "agenda, " +
@@ -193,12 +187,7 @@ public class DatabaseAdministratorOperations {
                 "'" + name + "', " +
                 "'" + agenda + "', " +
                 "'" + date + "');";
-        try {
-            Statement Stm = MySQLConnection().createStatement();
-            Stm.executeUpdate(Query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executeStatementUpdate(query);
     }
 
     public PreparedStatement lookForExistingEvent(Long eventID) {
@@ -235,32 +224,50 @@ public class DatabaseAdministratorOperations {
     }
 
     public void deleteEvent(Long eventID) {
-        try {
-            String Query = "DELETE FROM event WHERE id_event = " + eventID;
-            Statement Stm = MySQLConnection().createStatement();
-            Stm.executeUpdate(Query);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = "DELETE FROM event WHERE id_event = " + eventID;
+        executeStatementUpdate(query);
     }
 
     public void updateEvent(Event modifiedEvent) {
-        try {
-            String Query = "UPDATE event " +
-                    "SET " +
-                    "event_name = '" + modifiedEvent.getName() + "'," +
-                    "agenda = '" + modifiedEvent.getAgenda() + "'," +
-                    "date = '" + modifiedEvent.getDate() + "'" +
-                    "WHERE id_event LIKE '" + modifiedEvent.getId() + "';";
 
-            Statement eventStm = MySQLConnection().createStatement();
-            eventStm.executeUpdate(Query);
+        String query = "UPDATE event " +
+                "SET " +
+                "event_name = '" + modifiedEvent.getName() + "'," +
+                "agenda = '" + modifiedEvent.getAgenda() + "'," +
+                "date = '" + modifiedEvent.getDate() + "'" +
+                "WHERE id_event LIKE '" + modifiedEvent.getId() + "';";
+
+        executeStatementUpdate(query);
+    }
+
+    public void acceptEntry(int entryID) {
+
+        String query = "UPDATE events_entries " +
+                "SET " +
+                "status = 'accepted'" +
+                "WHERE entry_id = '" + entryID + "';";
+        executeStatementUpdate(query);
+    }
+
+    public void discardEntry(int entryID) {
+
+        String query = "UPDATE events_entries " +
+                "SET " +
+                "status = 'canceled'" +
+                "WHERE entry_id = '" + entryID + "';";
+
+        executeStatementUpdate(query);
+    }
+
+    private void executeStatementUpdate(String query) {
+        try {
+            Statement entryStm = MySQLConnection().createStatement();
+            entryStm.executeUpdate(query);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
 }

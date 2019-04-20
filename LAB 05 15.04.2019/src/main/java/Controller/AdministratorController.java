@@ -187,9 +187,28 @@ public class AdministratorController {
     }
 
     public void acceptEntry(ActionEvent event) {
+        String idOfEntryToModifyString = en_a_entry_id_field.getText();
+        int entryIdModified = Integer.parseInt(idOfEntryToModifyString);
+
+        if(DAO.findExistingEntryToModify(entryIdModified)){
+            DAO.acceptEntry(entryIdModified);
+            en_a_alert_field.setText("Entry accepted successfully.");
+            en_a_entry_id_field.setText("");
+            setEntriesTable();
+        } else en_a_alert_field.setText("No entry with such ID, please try again.");
+
     }
 
     public void discardEntry(ActionEvent event) {
+        String idOfEntryToModifyString = en_a_entry_id_field.getText();
+        int entryIdModified = Integer.parseInt(idOfEntryToModifyString);
+
+        if(DAO.findExistingEntryToModify(entryIdModified)){
+            DAO.discardEntry(entryIdModified);
+            en_a_alert_field.setText("Entry canceled successfully.");
+            en_a_entry_id_field.setText("");
+            setEntriesTable();
+        } else en_a_alert_field.setText("No entry with such ID, please try again.");
     }
 
     public void initialize() {

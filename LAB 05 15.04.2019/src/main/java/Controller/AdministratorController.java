@@ -147,12 +147,9 @@ public class AdministratorController {
         } else {
             ev_a_alert_field.setText("There is no event with such id.");
         }
-
-
     }
 
     public void loadEventToModify(ActionEvent event) {
-
         String idOfEventToModifyString = ev_a_mod_ev_id_field.getText();
         Long eventIdModified = Long.parseLong(idOfEventToModifyString);
 
@@ -168,8 +165,6 @@ public class AdministratorController {
         } else {
             ev_a_alert_field.setText("There is no event with such id.");
         }
-
-
     }
 
     public void saveModifiedEvent(ActionEvent event) {
@@ -249,7 +244,6 @@ public class AdministratorController {
         col_entry_status_entries.setCellValueFactory(new PropertyValueFactory<EventEntry, String>("entryStatus"));
         tbl_entries.setItems(entriesList);
     }
-
 
     private void setUsersTable() {
         ObservableList<User> users = DAO.findAllUsers();

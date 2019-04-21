@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class DatabaseEventOperations {
 
-    public Connection MySQLConnection() {
+    private Connection MySQLConnection() {
         Connection MySQLConnection = null;
 
         try {

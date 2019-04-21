@@ -9,6 +9,8 @@ public class EmailOperations {
 
     private String usernameEmail;
     private String passwordEmail;
+    private String message;
+    private String receiver;
 
     public EmailOperations() {
         usernameEmail = "utptest69@gmail.com";

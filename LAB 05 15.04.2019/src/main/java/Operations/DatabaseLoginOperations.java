@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class DatabaseLoginOperations {
 
-    public User tmp_user = null;
+    private User tmp_user = null;
 
     private Connection MySQLConnection() {
         Connection MySQLConnection = null;
@@ -38,8 +38,9 @@ public class DatabaseLoginOperations {
             e.printStackTrace();
         }
 
-        existingUser = doFindingQuery(findingStm);
-
+        if (findingStm != null) {
+            existingUser = doFindingQuery(findingStm);
+        }
         return existingUser;
     }
 
@@ -97,6 +98,5 @@ public class DatabaseLoginOperations {
             e.printStackTrace();
         }
     }
-
 
 }

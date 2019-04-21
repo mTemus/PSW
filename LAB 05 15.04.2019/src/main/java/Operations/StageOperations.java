@@ -18,7 +18,6 @@ public class StageOperations {
         window.setScene(eventScene);
         window.setTitle("Event panel");
         window.show();
-
     }
 
     public void changeSceneToAdministrator(ActionEvent event) throws IOException {

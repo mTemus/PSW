@@ -124,7 +124,6 @@ public class LoginController {
         register_field_password.setText("");
         register_field_password_r.setText("");
         register_field_email.setText("");
-
     }
 
     static User getLoggedUser() {

@@ -13,10 +13,7 @@ public class Main extends Application {
         primaryStage.setTitle("Login view");
         primaryStage.setScene(loginScene);
         primaryStage.show();
-
     }
-
-
     public static void main(String[] args) {
         launch(args);
     }

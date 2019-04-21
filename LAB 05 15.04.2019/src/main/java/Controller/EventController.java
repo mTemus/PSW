@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class EventController {
 
+    public ToggleGroup food_p;
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
     private static User loggedUser = LoginController.getLoggedUser();

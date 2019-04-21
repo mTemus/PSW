@@ -143,7 +143,6 @@ public class DatabaseAdministratorOperations {
     private Boolean doFindingQueryOfEntry(PreparedStatement findStm) {
         ResultSet entryResultFind;
 
-
         try {
             entryResultFind = findStm.executeQuery();
 
@@ -156,8 +155,6 @@ public class DatabaseAdministratorOperations {
             e.printStackTrace();
             return false;
         }
-
-
     }
 
     public void deleteEntryFromDatabase(long userID) {

@@ -92,7 +92,7 @@ public class LoginController {
                 } else
                     register_text_area.setPromptText("User already exists. Please log in.");
             } else
-                register_text_area.setPromptText("Register failed, passwords DLOn't match. Please repeat your password correctly.");
+                register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
         } else
             register_text_area.setPromptText("You are logged in. Please logout first.");
     }

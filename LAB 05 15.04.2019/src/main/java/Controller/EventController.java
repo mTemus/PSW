@@ -57,6 +57,7 @@ public class EventController {
                 if (DEO.registerUserOnEvent(loggedUser, chosenEvent)) {
                     try {
                         SO.changeSceneToRegistrationComplete(event);
+                        // there should be email sending
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

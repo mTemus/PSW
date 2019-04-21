@@ -195,6 +195,7 @@ public class AdministratorController {
             en_a_alert_field.setText("Entry accepted successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
+            // there should be email sending
         } else en_a_alert_field.setText("No entry with such ID, please try again.");
 
     }
@@ -208,6 +209,7 @@ public class AdministratorController {
             en_a_alert_field.setText("Entry canceled successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
+            // there should be email sending
         } else en_a_alert_field.setText("No entry with such ID, please try again.");
     }
 

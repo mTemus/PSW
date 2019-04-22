@@ -38,25 +38,6 @@ public class LoginController {
     public CheckBox register_password_r_checkbox;
     public Button register_button;
     public Button login_button;
-    public Button administrator_logout_button;
-
-    @FXML
-    private TableView<User> tbl_users;
-    @FXML
-    private TableColumn<User, Long> col_id;
-    @FXML
-    private TableColumn<User, String> col_name;
-    @FXML
-    private TableColumn<User, String> col_surname;
-    @FXML
-    private TableColumn<User, String> col_login;
-    @FXML
-    private TableColumn<User, String> col_password;
-    @FXML
-    private TableColumn<User, String> col_email;
-    @FXML
-    private TableColumn<User, String> col_date;
-
 
     private EmailOperations EO = new EmailOperations();
     private StageOperations SO = new StageOperations();
@@ -67,7 +48,6 @@ public class LoginController {
     private static String userJoinDate = null;
     private static boolean someoneIsLogged = false;
 
-    /* ======================================== FX Event Methods ======================================== */
     public void LoginCheckUser(ActionEvent event) throws IOException {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
@@ -159,14 +139,6 @@ public class LoginController {
 
     }
 
-    public int getLoginAttempts() {
-        return loginAttempts;
-    }
-
-    public void setLoginAttempts(int loginAttempts) {
-        this.loginAttempts = loginAttempts;
-    }
-
     User getLoggedUser() {
         return loggedUser;
     }
@@ -175,7 +147,7 @@ public class LoginController {
         LoginController.loggedUser = loggedUser;
     }
 
-    public String getUserJoinDate() {
+    String getUserJoinDate() {
         return userJoinDate;
     }
 
@@ -183,11 +155,11 @@ public class LoginController {
         LoginController.userJoinDate = userJoinDate;
     }
 
-    public boolean isSomeoneIsLogged() {
+    boolean isSomeoneIsLogged() {
         return someoneIsLogged;
     }
 
-    public void setSomeoneIsLogged(boolean someoneIsLogged) {
+    void setSomeoneIsLogged(boolean someoneIsLogged) {
         LoginController.someoneIsLogged = someoneIsLogged;
     }
 

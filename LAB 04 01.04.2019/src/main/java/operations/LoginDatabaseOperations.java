@@ -69,7 +69,7 @@ public class LoginDatabaseOperations {
                 "password, " +
                 "email, " +
                 "permissions, " +
-                "registrationDate) " +
+                "date) " +
 
                 "VALUES " +
                 "(DEFAULT," +

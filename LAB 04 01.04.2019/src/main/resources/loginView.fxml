@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+       <TabPane layoutY="1.0" prefHeight="515.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+              <Tab text="Sing in">
+                 <content>
+                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="723.0">
+                        <children>
+                            <TextField fx:id="password_text_field_u" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" />
+                            <TextField fx:id="login_text_field" layoutX="220.0" layoutY="177.0" prefHeight="31.0" prefWidth="360.0" promptText="Login" />
+                            <TextField fx:id="login_alert_field" editable="false" layoutX="15.0" layoutY="367.0" prefHeight="31.0" prefWidth="770.0" promptText="To login fill login and password fields and click the login button." />
+                            <PasswordField fx:id="password_text_field" layoutX="220.0" layoutY="226.0" prefHeight="31.0" prefWidth="360.0" promptText="Password" />
+                            <CheckBox fx:id="password_checkbox" layoutX="594.0" layoutY="231.0" mnemonicParsing="false" onAction="#showPassword" text="Show password" />
+                            <Button fx:id="login_button" layoutX="340.0" layoutY="287.0" mnemonicParsing="false" onAction="#LoginCheckUser" prefHeight="31.0" prefWidth="120.0" text="Login" />
+                        </children>
+                     </AnchorPane>
+                 </content>
+              </Tab>
+              <Tab text="Register">
+                 <content>
+                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <TextField fx:id="register_field_password_r_un" layoutX="98.0" layoutY="256.0" />
+                            <TextField fx:id="register_field_password_un" layoutX="98.0" layoutY="210.0" />
+                            <TextField fx:id="register_field_name" layoutX="98.0" layoutY="67.0" promptText="Name" />
+                            <TextField fx:id="register_field_surname" layoutX="98.0" layoutY="115.0" promptText="Surname" />
+                            <TextField fx:id="register_field_login" layoutX="98.0" layoutY="162.0" promptText="Login" />
+                            <TextField fx:id="register_field_email" layoutX="98.0" layoutY="302.0" promptText="E-mail address" />
+                            <Button fx:id="register_button" layoutX="134.0" layoutY="362.0" mnemonicParsing="false" onAction="#registerCheckUser" prefHeight="31.0" prefWidth="116.0" text="Register" />
+                            <TextArea fx:id="register_text_area" editable="false" layoutX="400.0" layoutY="67.0" prefHeight="336.0" prefWidth="357.0" promptText="To register, fill in areas with your data and click the register button." />
+                            <CheckBox fx:id="register_password_checkbox" layoutX="296.0" layoutY="215.0" mnemonicParsing="false" onAction="#register_show_password" text="Show" />
+                            <CheckBox fx:id="register_password_r_checkbox" layoutX="296.0" layoutY="261.0" mnemonicParsing="false" onAction="#register_show_password_r" text="Show" />
+                            <PasswordField fx:id="register_field_password" layoutX="98.0" layoutY="210.0" promptText="Password" />
+                            <PasswordField fx:id="register_field_password_r" layoutX="98.0" layoutY="256.0" promptText="Repeat password" />
+                        </children>
+                     </AnchorPane>
+                 </content>
+              </Tab>
+          </tabs>
+       </TabPane>
+   </children>
+</AnchorPane>

@@ -26,14 +26,18 @@ public class UserController {
     private LoginController LC = new LoginController();
     private UserDatabaseOperations UDO = new UserDatabaseOperations();
     private StageOperations SO = new StageOperations();
+    private User userLoggedIn = null;
 
     public void initialize() {
-        uv_field_name.setText(LC.getLoggedUser().getName());
-        uv_field_surname.setText(LC.getLoggedUser().getSurname());
-        uv_field_email.setText(LC.getLoggedUser().getEmail());
+        userLoggedIn = LC.getLoggedUser();
+        setUserView(userLoggedIn);
+    }
+
+    private void setUserView(User user) {
+        uv_field_name.setText(user.getName());
+        uv_field_surname.setText(user.getSurname());
+        uv_field_email.setText(user.getEmail());
         uv_field_join_date.setText(LC.getUserJoinDate());
-        LC.login_text_field.setText("");
-        LC.password_text_field.setText("");
     }
 
     public void userLogout(ActionEvent event) throws IOException {

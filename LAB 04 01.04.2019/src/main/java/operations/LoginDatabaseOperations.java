@@ -45,15 +45,12 @@ public class LoginDatabaseOperations {
                         userResultFind.getString("password"),
                         userResultFind.getString("email"));
                 String permission = userResultFind.getString("permissions");
-//                LC.setUserJoinDate(userResultFind.getString("registrationDate"));
+                LoginController.setUserJoinDate(userResultFind.getString("date"));
 
                 if (permission.matches("administrator")) {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
                 }
 
-            } else {
-//                LC.login_alert_field.setPromptText("Incorrect user or password! Try again.");
-//                LC.setLoginAttempts(LC.getLoginAttempts() + 1);
             }
             DO.MySQLConnection().close();
         } catch (SQLException e) {

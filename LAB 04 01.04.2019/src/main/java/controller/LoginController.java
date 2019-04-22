@@ -71,22 +71,29 @@ public class LoginController {
     public void LoginCheckUser(ActionEvent event) throws IOException {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
-
         loggedUser = LDO.searchForExistingUser(login, password);
 
         if (loginAttempts < 3) {
+
             if (loggedUser != null) {
                 if (loggedUser.getPermissions() == User.Permissions.USER) {
                     login_alert_field.setPromptText("Successfully logged in as a user.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    login_text_field.setText("");
+                    password_text_field.setText("");
                     SO.changeSceneToUser(event);
                 } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator");
                     loginAttempts = 0;
                     someoneIsLogged = true;
+                    login_text_field.setText("");
+                    password_text_field.setText("");
                     SO.changeSceneToAdministrator(event);
                 }
+            } else {
+                login_alert_field.setPromptText("Incorrect user or password! Try again.");
+                loginAttempts++;
             }
         } else {
             login_alert_field.setText("You failed 3 times, logging in is denied.");
@@ -142,7 +149,6 @@ public class LoginController {
     }
 
 
-
     private void registrationComplete() {
         register_field_name.setText("");
         register_field_surname.setText("");
@@ -173,7 +179,7 @@ public class LoginController {
         return userJoinDate;
     }
 
-    public void setUserJoinDate(String userJoinDate) {
+    public static void setUserJoinDate(String userJoinDate) {
         LoginController.userJoinDate = userJoinDate;
     }
 

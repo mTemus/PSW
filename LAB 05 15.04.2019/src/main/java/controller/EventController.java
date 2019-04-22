@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import Operations.DatabaseEventOperations;
-import Operations.StageOperations;
+import operations.DatabaseEventOperations;
+import operations.StageOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

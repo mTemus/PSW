@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
-import Operations.DatabaseAdministratorOperations;
-import Operations.DatabaseEventOperations;
-import Operations.StageOperations;
+import operations.DatabaseAdministratorOperations;
+import operations.DatabaseEventOperations;
+import operations.StageOperations;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;

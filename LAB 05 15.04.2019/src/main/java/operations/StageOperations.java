@@ -1,4 +1,4 @@
-package Operations;
+package operations;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

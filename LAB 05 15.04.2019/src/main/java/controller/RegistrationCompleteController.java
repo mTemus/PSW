@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Operations.StageOperations;
+import operations.StageOperations;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;

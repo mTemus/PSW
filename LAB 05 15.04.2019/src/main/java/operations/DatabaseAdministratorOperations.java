@@ -1,4 +1,4 @@
-package Operations;
+package operations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

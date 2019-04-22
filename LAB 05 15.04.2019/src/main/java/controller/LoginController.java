@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
-import Operations.DatabaseLoginOperations;
-import Operations.EmailOperations;
-import Operations.StageOperations;
+import operations.DatabaseLoginOperations;
+import operations.EmailOperations;
+import operations.StageOperations;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import model.User;

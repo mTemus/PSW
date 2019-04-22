@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="570.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controller.LoginController">
+            fx:controller="controller.LoginController">
     <TabPane prefHeight="570.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Login">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="531.0" prefWidth="800.0">

@@ -1,3 +1,6 @@
+import controller.RGBController;
+import model.RGB;
+
 import java.util.Scanner;
 
 public class Main {

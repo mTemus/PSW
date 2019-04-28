@@ -1,10 +1,12 @@
+package model;
+
 public class RGB {
 
     private int R_value;
     private int G_value;
     private int B_value;
 
-    RGB() {
+    public RGB() {
         setR_value(0);
         setG_value(0);
         setB_value(0);
@@ -18,7 +20,7 @@ public class RGB {
 
     @Override
     public String toString() {
-        return "RGB{" +
+        return "model.RGB{" +
                 "R_value=" + R_value +
                 ", G_value=" + G_value +
                 ", B_value=" + B_value +

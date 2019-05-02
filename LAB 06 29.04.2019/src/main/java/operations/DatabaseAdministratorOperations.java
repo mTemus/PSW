@@ -11,30 +11,15 @@ import java.sql.*;
 public class DatabaseAdministratorOperations {
 
     private DatabaseLoginOperations DLO = new DatabaseLoginOperations();
+    private DatabaseOperations DO = new DatabaseOperations();
 
-    private Connection MySQLConnection() {
-        Connection MySQLConnection = null;
-
-        try {
-            MySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/psw" +
-                            "?useUnicode=true" +
-                            "&useJDBCCompliantTimezoneShift=true" +
-                            "&useLegacyDatetimeCode=false" +
-                            "&serverTimezone=UTC",
-                    "root", "admin");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return MySQLConnection;
-    }
 
     public ObservableList<User> findAllUsers() {
 
         ObservableList<User> users = FXCollections.observableArrayList();
 
         try {
-            Statement userStatement = MySQLConnection().createStatement();
+            Statement userStatement = DO.MySQLConnection().createStatement();
             ResultSet userResultSet = userStatement.executeQuery("select * from user");
 
             while (userResultSet.next()) {
@@ -47,7 +32,7 @@ public class DatabaseAdministratorOperations {
                         userResultSet.getString("date"));
                 users.add(u);
             }
-            MySQLConnection().close();
+            DO.MySQLConnection().close();
             return users;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,7 +44,7 @@ public class DatabaseAdministratorOperations {
         ObservableList<EventEntry> eventEntries = FXCollections.observableArrayList();
 
         try {
-            Statement entryStatement = MySQLConnection().createStatement();
+            Statement entryStatement = DO.MySQLConnection().createStatement();
             ResultSet entryResultSet = entryStatement.executeQuery("SELECT events_entries.entry_id, " +
                     "event.event_name, " +
                     "user.name, " +
@@ -83,11 +68,13 @@ public class DatabaseAdministratorOperations {
                         entryResultSet.getString("status"));
                 eventEntries.add(ee);
             }
+            DO.MySQLConnection().close();
             return eventEntries;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+
     }
 
     public User findExistingUserToDelete(int userID) {
@@ -95,12 +82,14 @@ public class DatabaseAdministratorOperations {
         PreparedStatement userPrpStm = null;
 
         try {
-            userPrpStm = MySQLConnection().prepareStatement("select * from user where id = ?");
+            userPrpStm = DO.MySQLConnection().prepareStatement("select * from user where id = ?");
             userPrpStm.setLong(1, userID);
+            DO.MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         tmpUser = DLO.doFindingQuery(userPrpStm);
+
 
         return tmpUser;
     }
@@ -114,7 +103,8 @@ public class DatabaseAdministratorOperations {
         PreparedStatement entryPrpStm = null;
 
         try {
-            entryPrpStm = MySQLConnection().prepareStatement(query);
+            entryPrpStm = DO.MySQLConnection().prepareStatement(query);
+            DO.MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -146,10 +136,7 @@ public class DatabaseAdministratorOperations {
         try {
             entryResultFind = findStm.executeQuery();
 
-            if (entryResultFind.next()) {
-                MySQLConnection().close();
-                return true;
-            } else return false;
+            return entryResultFind.next();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -191,9 +178,10 @@ public class DatabaseAdministratorOperations {
 
         PreparedStatement findingEventStm = null;
         try {
-            findingEventStm = MySQLConnection().prepareStatement("SELECT * FROM event WHERE id_event LIKE ?");
+            findingEventStm = DO.MySQLConnection().prepareStatement("SELECT * FROM event WHERE id_event LIKE ?");
             findingEventStm.setLong(1, eventID);
 
+            DO.MySQLConnection().close();
             return findingEventStm;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -213,7 +201,6 @@ public class DatabaseAdministratorOperations {
                         eventResultFind.getString("agenda"),
                         eventResultFind.getString("date"));
             }
-            MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -259,9 +246,9 @@ public class DatabaseAdministratorOperations {
 
     private void executeStatementUpdate(String query) {
         try {
-            Statement entryStm = MySQLConnection().createStatement();
+            Statement entryStm = DO.MySQLConnection().createStatement();
             entryStm.executeUpdate(query);
-
+            DO.MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

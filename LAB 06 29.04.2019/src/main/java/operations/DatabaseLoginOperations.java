@@ -6,24 +6,9 @@ import java.sql.*;
 
 public class DatabaseLoginOperations {
 
+    DatabaseOperations DO = new DatabaseOperations();
+
     private User tmp_user = null;
-
-    private Connection MySQLConnection() {
-        Connection MySQLConnection = null;
-
-        try {
-            MySQLConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/psw" +
-                            "?useUnicode=true" +
-                            "&useJDBCCompliantTimezoneShift=true" +
-                            "&useLegacyDatetimeCode=false" +
-                            "&serverTimezone=UTC",
-                    "root", "admin");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return MySQLConnection;
-    }
 
     public User searchForExistingUser(String login, String password) {
 
@@ -31,9 +16,10 @@ public class DatabaseLoginOperations {
 
         PreparedStatement findingStm = null;
         try {
-            findingStm = MySQLConnection().prepareStatement("SELECT * FROM user WHERE login LIKE ? AND password LIKE ?");
+            findingStm = DO.MySQLConnection().prepareStatement("SELECT * FROM user WHERE login LIKE ? AND password LIKE ?");
             findingStm.setString(1, login);
             findingStm.setString(2, password);
+            DO.MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,7 +49,6 @@ public class DatabaseLoginOperations {
                     tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
                 }
             }
-            MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,8 +77,9 @@ public class DatabaseLoginOperations {
                 "'user', " +
                 "(NOW())" + ");";
         try {
-            Statement Stm = MySQLConnection().createStatement();
+            Statement Stm = DO.MySQLConnection().createStatement();
             Stm.executeUpdate(Query);
+            DO.MySQLConnection().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

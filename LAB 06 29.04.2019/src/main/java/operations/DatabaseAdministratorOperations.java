@@ -10,7 +10,7 @@ import java.sql.*;
 
 public class DatabaseAdministratorOperations {
 
-    DatabaseLoginOperations DLO = new DatabaseLoginOperations();
+    private DatabaseLoginOperations DLO = new DatabaseLoginOperations();
 
     private Connection MySQLConnection() {
         Connection MySQLConnection = null;

@@ -1,4 +1,4 @@
 package hibernateModel;
 
-public class Entry {
+public class EventEntry {
 }

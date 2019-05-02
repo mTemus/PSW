@@ -187,7 +187,7 @@ public class AdministratorController {
 
         if(DAO.findExistingEntryToModify(entryIdModified)){
             DAO.acceptEntry(entryIdModified);
-            en_a_alert_field.setText("Entry accepted successfully.");
+            en_a_alert_field.setText("EventEntry accepted successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending
@@ -201,7 +201,7 @@ public class AdministratorController {
 
         if(DAO.findExistingEntryToModify(entryIdModified)){
             DAO.discardEntry(entryIdModified);
-            en_a_alert_field.setText("Entry canceled successfully.");
+            en_a_alert_field.setText("EventEntry canceled successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending

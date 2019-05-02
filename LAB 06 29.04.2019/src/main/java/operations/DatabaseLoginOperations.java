@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class DatabaseLoginOperations {
 
-    DatabaseOperations DO = new DatabaseOperations();
+    private DatabaseOperations DO = new DatabaseOperations();
 
     private User tmp_user = null;
 

@@ -12,34 +12,21 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(generator = "incrementer")
     @GenericGenerator(name = "incrementer", strategy = "increment")
-    private Long id;
+    public Long id;
     @Column(name = "name")
-    private String name;
+    public String name;
     @Column(name = "surname")
-    private String surname;
+    public String surname;
     @Column(name = "login")
-    private String login;
+    public String login;
     @Column(name = "password")
-    private String password;
+    public String password;
     @Column(name = "email")
-    private String email;
+    public String email;
     @Column(name = "date")
-    private String date;
+    public String date;
     @Column(name = "permissions")
-    private String permissions;
-
-    public User(String name, String surname, String login, String password, String email) {
-        this.id = null;
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.date = null;
-        this.permissions = model.User.Permissions.USER.toString();
-        this.foodPreferences = null;
-        this.participationType = null;
-    }
+    public String permissions;
 
     public enum Permissions {
         USER, ADMINISTRATOR
@@ -53,22 +40,8 @@ public class User {
         LISTENER, AUTHOR, SPONSOR, ORGANIZER
     }
 
-    private model.User.FoodPreferences foodPreferences = null;
-    private model.User.ParticipationType participationType = null;
-
-    public User(Long id, String name, String surname, String login, String password, String email, String date) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.date = date;
-        this.permissions = model.User.Permissions.USER.toString();
-        this.foodPreferences = null;
-        this.participationType = null;
-    }
-
+    private FoodPreferences foodPreferences = null;
+    private ParticipationType participationType = null;
 
     public Long getId() {
         return id;
@@ -134,19 +107,19 @@ public class User {
         this.permissions = permissions;
     }
 
-    public model.User.FoodPreferences getFoodPreferences() {
+    public FoodPreferences getFoodPreferences() {
         return foodPreferences;
     }
 
-    public void setFoodPreferences(model.User.FoodPreferences foodPreferences) {
+    public void setFoodPreferences(FoodPreferences foodPreferences) {
         this.foodPreferences = foodPreferences;
     }
 
-    public model.User.ParticipationType getParticipationType() {
+    public ParticipationType getParticipationType() {
         return participationType;
     }
 
-    public void setParticipationType(model.User.ParticipationType participationType) {
+    public void setParticipationType(ParticipationType participationType) {
         this.participationType = participationType;
     }
 }

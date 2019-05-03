@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EntityOperations {
@@ -28,12 +27,12 @@ public class EntityOperations {
         //entityManager.find(Object.class, argument);
         //entityManager.delete(Object);
 
-        String queryToExecute = "";
-        Query query = entityManager.createQuery(queryToExecute);
-
-
-        User user = (User) query.getSingleResult();
-        List<User> userList = query.getResultList();
+//        String queryToExecute = "";
+//        Query query = entityManager.createQuery(queryToExecute);
+//
+//
+//        User user = (User) query.getSingleResult();
+//        List<User> userList = query.getResultList();
 
         return entityManager;
     }

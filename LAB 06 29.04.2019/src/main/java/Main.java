@@ -1,3 +1,4 @@
+import hibernateOperations.DatabaseAdministratorOperations;
 import hibernateOperations.DatabaseLoginOperations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +17,9 @@ public class Main extends Application {
         primaryStage.show();
     }
     public static void main(String[] args) {
-        DatabaseLoginOperations DLO = new DatabaseLoginOperations();
+        DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
 
-        DLO.searchForExistingUser("marwoj", "123");
-
+        DAO.findAllUsers();
 
         launch(args);
     }

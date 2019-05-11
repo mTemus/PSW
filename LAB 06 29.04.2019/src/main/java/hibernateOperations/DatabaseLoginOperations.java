@@ -76,6 +76,7 @@ public class DatabaseLoginOperations {
         return existingUser;
     }
 
+    //od dr Kruczkowskiego
     public void updateUserPassword(String login, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();

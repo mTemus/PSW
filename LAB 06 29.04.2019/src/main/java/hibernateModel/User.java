@@ -1,8 +1,6 @@
 package hibernateModel;
 
-
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -42,7 +40,6 @@ public class User {
     @Column(name = "participationType", nullable = true)
     private ParticipationType participationType = null;
 
-
     public enum Permissions {
         USER, ADMINISTRATOR
     }
@@ -52,6 +49,7 @@ public class User {
     public enum ParticipationType {
         LISTENER, AUTHOR, SPONSOR, ORGANIZER
     }
+
     public Long getId() {
         return id;
     }

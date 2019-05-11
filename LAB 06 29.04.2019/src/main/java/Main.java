@@ -19,7 +19,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
 
-        DAO.findAllTableEventEntries();
+        DAO.findExistingUserToDelete(1);
 
         launch(args);
     }

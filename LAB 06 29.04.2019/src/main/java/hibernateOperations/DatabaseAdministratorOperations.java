@@ -7,6 +7,7 @@ import model.TableEventEntry;
 import operations.DatabaseLoginOperations;
 import operations.DatabaseOperations;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class DatabaseAdministratorOperations {
@@ -31,7 +32,15 @@ public class DatabaseAdministratorOperations {
     public ObservableList<TableEventEntry> findAllTableEventEntries() {
         ObservableList<TableEventEntry> eventEntries = FXCollections.observableArrayList();
 
-        String query = "SELECT NEW model.TableEventEntry(ee.entryId, e.name, u.name, u.surname, ee.participationType, ee.foodPreferences, ee.status) FROM Event e JOIN EventEntry ee ON e.id = ee.eventId JOIN User u ON ee.userId = u.id";
+        String query = "SELECT NEW model.TableEventEntry(" +
+                "ee.entryId, " +
+                "e.name, " +
+                "u.name, " +
+                "u.surname, " +
+                "ee.participationType, " +
+                "ee.foodPreferences, " +
+                "ee.status) " +
+                "FROM Event e JOIN EventEntry ee ON e.id = ee.eventId JOIN User u ON ee.userId = u.id";
 
         TypedQuery<TableEventEntry> typedQuery = EMO.getEntityManager().createQuery(query, TableEventEntry.class);
 
@@ -41,22 +50,27 @@ public class DatabaseAdministratorOperations {
         return eventEntries;
     }
 
-//    public NormalModelUser findExistingUserToDelete(int userID) {
-//        NormalModelUser tmpNormalModelUser = null;
-//        PreparedStatement userPrpStm = null;
-//
-//        try {
-//            userPrpStm = DO.MySQLConnection().prepareStatement("select * from user where id = ?");
-//            userPrpStm.setLong(1, userID);
-//            DO.MySQLConnection().close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        tmpNormalModelUser = DLO.doFindingQuery(userPrpStm);
-//
-//
-//        return tmpNormalModelUser;
-//    }
+    public User findExistingUserToDelete(int userID) {
+        User tmpUser = null;
+        String query = "SELECT u FROM User u WHERE u.id = :uID";
+        Long usrID = new Long(userID);
+
+
+        TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
+        typedQuery.setParameter("uID", usrID);
+
+        try {
+            tmpUser = typedQuery.getSingleResult();
+
+            System.out.println(tmpUser.getName());
+        } catch (NoResultException nre) {
+            nre.printStackTrace();
+        } finally {
+            EMO.closeConnection();
+        }
+
+        return tmpUser;
+    }
 //
 //    public void deleteUserFromDatabase(long userID) {
 //        String query = "DELETE FROM user WHERE id = " + userID;

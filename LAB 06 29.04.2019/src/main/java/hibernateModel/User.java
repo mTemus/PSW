@@ -1,5 +1,6 @@
 package hibernateModel;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,33 +12,34 @@ public class User {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private String date;
 
-    @Column(name = "permissions")
+    @Column(name = "permissions", nullable = false)
     private String permissions;
 
-    @Column(name = "foodPreferences")
+    @Column(name = "foodPreferences", nullable = true)
     private FoodPreferences foodPreferences = null;
 
-    @Column(name = "participationType")
+    @Column(name = "participationType", nullable = true)
     private ParticipationType participationType = null;
 
 

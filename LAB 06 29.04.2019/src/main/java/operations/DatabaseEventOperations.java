@@ -2,8 +2,8 @@ package operations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Event;
-import model.User;
+import model.NormalModelEvent;
+import model.NormalModelUser;
 
 import java.sql.*;
 
@@ -26,27 +26,27 @@ public class DatabaseEventOperations {
         return MySQLConnection;
     }
 
-    public ObservableList<Event> findAllEvents() {
-        ObservableList<Event> events = FXCollections.observableArrayList();
+    public ObservableList<NormalModelEvent> findAllEvents() {
+        ObservableList<NormalModelEvent> normalModelEvents = FXCollections.observableArrayList();
 
         try {
             Statement eventStatement = MySQLConnection().createStatement();
             ResultSet eventResultSet = eventStatement.executeQuery("select * from event");
 
             while (eventResultSet.next()) {
-                Event e = new Event(eventResultSet.getLong("id_event"),
+                NormalModelEvent e = new NormalModelEvent(eventResultSet.getLong("id_event"),
                         eventResultSet.getString("event_name"),
                         eventResultSet.getString("agenda"),
                         eventResultSet.getString("date")
                 );
-                events.add(e);
+                normalModelEvents.add(e);
             }
             MySQLConnection().close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return events;
+        return normalModelEvents;
     }
 
     public ObservableList<String> findAllEventNames() {
@@ -68,7 +68,7 @@ public class DatabaseEventOperations {
         return eventNames;
     }
 
-    public boolean registerUserOnEvent(User user, Event event) {
+    public boolean registerUserOnEvent(NormalModelUser normalModelUser, NormalModelEvent normalModelEvent) {
 
         try {
             String Query = "INSERT INTO events_entries " +
@@ -80,10 +80,10 @@ public class DatabaseEventOperations {
                     "status) " +
                     "VALUES " +
                     "(default, " +
-                    "'" + event.getId() + "', " +
-                    "'" + user.getId() + "', " +
-                    "'" + user.getParticipationType() + "', " +
-                    "'" + user.getFoodPreferences() + "', " +
+                    "'" + normalModelEvent.getId() + "', " +
+                    "'" + normalModelUser.getId() + "', " +
+                    "'" + normalModelUser.getParticipationType() + "', " +
+                    "'" + normalModelUser.getFoodPreferences() + "', " +
                     "default);";
 
             Statement Stm = MySQLConnection().createStatement();

@@ -1,6 +1,6 @@
 package operations;
 
-import model.User;
+import model.NormalModelUser;
 
 import java.sql.*;
 
@@ -8,11 +8,11 @@ public class DatabaseLoginOperations {
 
     private DatabaseOperations DO = new DatabaseOperations();
 
-    private User tmp_user = null;
+    private NormalModelUser tmp_NormalModel_user = null;
 
-    public User searchForExistingUser(String login, String password) {
+    public NormalModelUser searchForExistingUser(String login, String password) {
 
-        User existingUser = null;
+        NormalModelUser existingNormalModelUser = null;
 
         PreparedStatement findingStm = null;
         try {
@@ -25,18 +25,18 @@ public class DatabaseLoginOperations {
         }
 
         if (findingStm != null) {
-            existingUser = doFindingQuery(findingStm);
+            existingNormalModelUser = doFindingQuery(findingStm);
         }
-        return existingUser;
+        return existingNormalModelUser;
     }
 
-    User doFindingQuery(PreparedStatement findStm) {
+    NormalModelUser doFindingQuery(PreparedStatement findStm) {
         ResultSet userResultFind;
 
         try {
             userResultFind = findStm.executeQuery();
             if (userResultFind.next()) {
-                tmp_user = new User(userResultFind.getLong("id"),
+                tmp_NormalModel_user = new NormalModelUser(userResultFind.getLong("id"),
                         userResultFind.getString("name"),
                         userResultFind.getString("surname"),
                         userResultFind.getString("login"),
@@ -46,16 +46,16 @@ public class DatabaseLoginOperations {
                 String permission = userResultFind.getString("permissions");
 
                 if (permission.matches("administrator")) {
-                    tmp_user.setPermissions(User.Permissions.ADMINISTRATOR);
+                    tmp_NormalModel_user.setPermissions(NormalModelUser.Permissions.ADMINISTRATOR);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tmp_user;
+        return tmp_NormalModel_user;
     }
 
-    public void addUserToDatabase(User userToAdd) {
+    public void addUserToDatabase(NormalModelUser normalModelUserToAdd) {
 
         String Query = "INSERT INTO user " +
                 "(id, " +
@@ -69,11 +69,11 @@ public class DatabaseLoginOperations {
 
                 "VALUES " +
                 "(DEFAULT," +
-                "'" + userToAdd.getName() + "', " +
-                "'" + userToAdd.getSurname() + "', " +
-                "'" + userToAdd.getLogin() + "', " +
-                "'" + userToAdd.getPassword() + "', " +
-                "'" + userToAdd.getEmail() + "', " +
+                "'" + normalModelUserToAdd.getName() + "', " +
+                "'" + normalModelUserToAdd.getSurname() + "', " +
+                "'" + normalModelUserToAdd.getLogin() + "', " +
+                "'" + normalModelUserToAdd.getPassword() + "', " +
+                "'" + normalModelUserToAdd.getEmail() + "', " +
                 "'user', " +
                 "(NOW())" + ");";
         try {

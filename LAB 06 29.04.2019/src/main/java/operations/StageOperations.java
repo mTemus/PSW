@@ -16,7 +16,7 @@ public class StageOperations {
         Scene eventScene = new Scene(EventViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(eventScene);
-        window.setTitle("Event panel");
+        window.setTitle("NormalModelEvent panel");
         window.show();
     }
 

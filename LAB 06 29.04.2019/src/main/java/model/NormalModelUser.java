@@ -1,6 +1,6 @@
 package model;
 
-public class User {
+public class NormalModelUser {
 
     private Long id;
     private String name;
@@ -10,7 +10,7 @@ public class User {
     private String email;
     private String date;
 
-    public User(String name, String surname, String login, String password, String email) {
+    public NormalModelUser(String name, String surname, String login, String password, String email) {
         this.id = null;
         this.name = name;
         this.surname = surname;
@@ -39,7 +39,7 @@ public class User {
     private FoodPreferences foodPreferences = null;
     private ParticipationType participationType = null;
 
-    public User(Long id, String name, String surname, String login, String password, String email, String date) {
+    public NormalModelUser(Long id, String name, String surname, String login, String password, String email, String date) {
         this.id = id;
         this.name = name;
         this.surname = surname;

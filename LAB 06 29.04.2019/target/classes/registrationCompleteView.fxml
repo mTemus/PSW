@@ -41,7 +41,7 @@
                 <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <TextArea fx:id="registration_text_area" editable="false" prefHeight="154.0" prefWidth="404.0"
-                      text="Registered successfully on (event name), your entry status is: &quot;Waiting&quot;, we will send you an email, when it will be accepted or denied.&#10;"
+                      text="Registered successfully on (normalModelEvent name), your entry status is: &quot;Waiting&quot;, we will send you an email, when it will be accepted or denied.&#10;"
                       wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         </GridPane>
     </GridPane>

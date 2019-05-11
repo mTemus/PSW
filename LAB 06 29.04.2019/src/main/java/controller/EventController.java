@@ -1,5 +1,7 @@
 package controller;
 
+import model.NormalModelEvent;
+import model.NormalModelUser;
 import operations.DatabaseEventOperations;
 import operations.StageOperations;
 import javafx.collections.FXCollections;
@@ -8,8 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.Event;
-import model.User;
 
 import java.io.IOException;
 
@@ -18,10 +18,10 @@ public class EventController {
     public ToggleGroup food_p;
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
-    private static User loggedUser = LoginController.getLoggedUser();
-    private static Event chosenEvent = null;
+    private static NormalModelUser loggedNormalModelUser = LoginController.getLoggedNormalModelUser();
+    private static NormalModelEvent chosenNormalModelEvent = null;
 
-    private static ObservableList<Event> events = FXCollections.observableArrayList();
+    private static ObservableList<NormalModelEvent> normalModelEvents = FXCollections.observableArrayList();
 
     public Text event_text_required_participation;
     public Text event_required_event;
@@ -41,7 +41,7 @@ public class EventController {
     public Button register_on_event_button;
 
     public void initialize() {
-        loggedUser = LoginController.getLoggedUser();
+        loggedNormalModelUser = LoginController.getLoggedNormalModelUser();
         setComboBox();
     }
 
@@ -54,8 +54,8 @@ public class EventController {
             checkAndSetFoodPreferences();
             event_error_area.setText("");
 
-            if (DEO.checkIfEntryExists(loggedUser.getId(), chosenEvent.getId()) == null) {
-                if (DEO.registerUserOnEvent(loggedUser, chosenEvent)) {
+            if (DEO.checkIfEntryExists(loggedNormalModelUser.getId(), chosenNormalModelEvent.getId()) == null) {
+                if (DEO.registerUserOnEvent(loggedNormalModelUser, chosenNormalModelEvent)) {
                     try {
                         SO.changeSceneToRegistrationComplete(event);
                         // there should be email sending
@@ -66,7 +66,7 @@ public class EventController {
                     event_error_area.setText("Something went wrong, please contact the administrator.");
                 }
             } else {
-                String status = DEO.checkIfEntryExists(loggedUser.getId(), chosenEvent.getId());
+                String status = DEO.checkIfEntryExists(loggedNormalModelUser.getId(), chosenNormalModelEvent.getId());
                 event_error_area.setText("You have already registered on this event! Your entry status is: " + status);
             }
 
@@ -80,22 +80,22 @@ public class EventController {
     }
 
     private void setComboBox() {
-        events = DEO.findAllEvents();
+        normalModelEvents = DEO.findAllEvents();
         ObservableList<String> eventsNamesCombobox = DEO.findAllEventNames();
         event_combobox.getItems().addAll(eventsNamesCombobox);
     }
 
     public void checkCombobox(ActionEvent event) {
         String eventName = (String) event_combobox.getValue();
-        setEventAreas(events, eventName);
+        setEventAreas(normalModelEvents, eventName);
     }
 
-    private void setEventAreas(ObservableList<Event> events, String eventName) {
-        for (Event e : events) {
+    private void setEventAreas(ObservableList<NormalModelEvent> normalModelEvents, String eventName) {
+        for (NormalModelEvent e : normalModelEvents) {
             if (eventName.equals(e.getName())) {
                 event_agenda_field.setText(e.getAgenda());
                 event_date_field.setText(e.getDate());
-                chosenEvent = e;
+                chosenNormalModelEvent = e;
                 break;
             }
         }
@@ -103,22 +103,22 @@ public class EventController {
 
     private void checkAndSetParticipation() {
         if (participation_radio_author.isSelected())
-            loggedUser.setParticipationType(User.ParticipationType.AUTHOR);
+            loggedNormalModelUser.setParticipationType(NormalModelUser.ParticipationType.AUTHOR);
         else if (participation_radio_listener.isSelected())
-            loggedUser.setParticipationType(User.ParticipationType.LISTENER);
+            loggedNormalModelUser.setParticipationType(NormalModelUser.ParticipationType.LISTENER);
         else if (participation_radio_organizer.isSelected())
-            loggedUser.setParticipationType(User.ParticipationType.ORGANIZER);
+            loggedNormalModelUser.setParticipationType(NormalModelUser.ParticipationType.ORGANIZER);
         else if (participation_radio_sponsor.isSelected())
-            loggedUser.setParticipationType(User.ParticipationType.SPONSOR);
+            loggedNormalModelUser.setParticipationType(NormalModelUser.ParticipationType.SPONSOR);
     }
 
     private void checkAndSetFoodPreferences() {
         if (food_radio_noPreferences.isSelected())
-            loggedUser.setFoodPreferences(User.FoodPreferences.NO_PREFERENCES);
+            loggedNormalModelUser.setFoodPreferences(NormalModelUser.FoodPreferences.NO_PREFERENCES);
         else if (food_radio_vegetarian.isSelected())
-            loggedUser.setFoodPreferences(User.FoodPreferences.VEGETARIAN);
+            loggedNormalModelUser.setFoodPreferences(NormalModelUser.FoodPreferences.VEGETARIAN);
         else if (food_radio_glutenFree.isSelected())
-            loggedUser.setFoodPreferences(User.FoodPreferences.GLUTEN_FREE);
+            loggedNormalModelUser.setFoodPreferences(NormalModelUser.FoodPreferences.GLUTEN_FREE);
     }
 
     private boolean checkChosen() {
@@ -150,16 +150,16 @@ public class EventController {
         return question;
     }
 
-    static void setLoggedUser(User loggedUser) {
-        EventController.loggedUser = loggedUser;
+    static void setLoggedNormalModelUser(NormalModelUser loggedNormalModelUser) {
+        EventController.loggedNormalModelUser = loggedNormalModelUser;
     }
 
-    static void setChosenEvent(Event chosenEvent) {
-        EventController.chosenEvent = chosenEvent;
+    static void setChosenNormalModelEvent(NormalModelEvent chosenNormalModelEvent) {
+        EventController.chosenNormalModelEvent = chosenNormalModelEvent;
     }
 
-    public static Event getChosenEvent() {
-        return chosenEvent;
+    public static NormalModelEvent getChosenNormalModelEvent() {
+        return chosenNormalModelEvent;
     }
 
 }

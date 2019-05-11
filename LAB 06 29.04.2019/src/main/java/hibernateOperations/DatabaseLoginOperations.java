@@ -6,33 +6,46 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Arrays;
-
 public class DatabaseLoginOperations {
     private User tmp_user = null;
-    private EntityOperations EO = new EntityOperations();
+
 
     public User searchForExistingUser(String userLogin, String userPassword) {
         User existingUser = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // Check MySQL database version
-            String sql = "select version()";
+//            String sql = "SELECT * FROM user WHERE login LIKE " + "'" + userLogin + "'" + " AND password LIKE " + "'" + userPassword + "'";
 
-            String result = (String) session.createNativeQuery(sql).getSingleResult();
-            System.out.println("MySql Database Version is:::");
-            System.out.println(result);
+//            String result = (String) session.createNativeQuery(sql).getSingleResult();
+//            System.out.println(result);
+
+
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT usr FROM User ");
+//            query.setString("uLogin", userLogin);
+//            query.setString("uPassword", userPassword);
+
+
+            session.getTransaction().commit();
+
+            System.out.println(query.toString());
+
+            User uu = (User) query.uniqueResult();
+//            User u = (User) query.getResultList();
+
+
+            System.out.println(uu.getName());
+            System.out.println(uu.getSurname());
+            System.out.println("--------------");
+//            System.out.println(u.getName());
+//            System.out.println(u.getSurname());
+
         } catch (HibernateException e) {
             e.printStackTrace();
         }
 
 
-
-
-
-//        Query query = EO.myHibernateSession().createQuery("SELECT usr FROM User usr WHERE usr.login =: userLogin AND password =: userPassword");
-//        query.setString(userLogin, userLogin);
-//        query.setString(userPassword, userPassword);
 //
 //
 //        System.out.println(Arrays.toString(query.getNamedParameters()));
@@ -63,13 +76,13 @@ public class DatabaseLoginOperations {
         return existingUser;
     }
 
-    public void updateUserPassword(String login, String password){
+    public void updateUserPassword(String login, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
         Query query = session.createQuery("UPDATE User u SET u.password=:password WHERE u.login=:login");
-        query.setString("password",password);
-        query.setString("login",login);
+        query.setString("password", password);
+        query.setString("login", login);
         query.executeUpdate();
         transaction.commit();
         session.close();

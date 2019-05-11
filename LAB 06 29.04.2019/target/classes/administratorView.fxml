@@ -45,10 +45,10 @@
                     </GridPane.margin>
                 </Text>
                 <Button fx:id="u_a_del_button" mnemonicParsing="false" onAction="#deleteUser"
-                        text="Delete user" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        text="Delete normalModelUser" GridPane.columnIndex="1" GridPane.halignment="CENTER"
                         GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
                 <Button fx:id="u_a_change_password_button" mnemonicParsing="false"
-                        onAction="#changeUsersPassword" text="Change user password" textAlignment="CENTER"
+                        onAction="#changeUsersPassword" text="Change normalModelUser password" textAlignment="CENTER"
                         wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER"
                         GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
                 <Button fx:id="administrator_logout_button" mnemonicParsing="false"
@@ -107,7 +107,7 @@
                                             vgrow="SOMETIMES"/>
                             <RowConstraints minHeight="10.0" prefHeight="248.0" vgrow="SOMETIMES"/>
                         </rowConstraints>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add event" textAlignment="CENTER"
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add normalModelEvent" textAlignment="CENTER"
                               GridPane.halignment="CENTER">
                             <font>
                                 <Font size="18.0"/>
@@ -155,7 +155,7 @@
                             <TextField fx:id="ev_a_add_date_field" promptText="YYYY-MM-DD"
                                        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                             <Button fx:id="ev_a_add_event_button" mnemonicParsing="false"
-                                    onAction="#addEvent" text="Add event" GridPane.columnIndex="1"
+                                    onAction="#addEvent" text="Add normalModelEvent" GridPane.columnIndex="1"
                                     GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
                         </GridPane>
                     </GridPane>
@@ -170,7 +170,7 @@
                                             vgrow="SOMETIMES"/>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         </rowConstraints>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete event"
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Delete normalModelEvent"
                               GridPane.halignment="CENTER">
                             <font>
                                 <Font size="18.0"/>
@@ -207,7 +207,7 @@
                                 </TextField>
                             </GridPane>
                             <Button fx:id="ev_a_delete_event_button" mnemonicParsing="false"
-                                    onAction="#deleteEvent" text="Delete event"
+                                    onAction="#deleteEvent" text="Delete normalModelEvent"
                                     GridPane.halignment="CENTER" GridPane.rowIndex="1"
                                     GridPane.valignment="TOP">
                                 <GridPane.margin>
@@ -227,7 +227,7 @@
                                             vgrow="SOMETIMES"/>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         </rowConstraints>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify event"
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modify normalModelEvent"
                               textAlignment="CENTER" GridPane.halignment="CENTER">
                             <font>
                                 <Font size="18.0"/>
@@ -262,7 +262,7 @@
                                     </GridPane.margin>
                                 </TextField>
                                 <Button fx:id="ev_a_mod_load_event_button" mnemonicParsing="false"
-                                        onAction="#loadEventToModify" text="Load event"
+                                        onAction="#loadEventToModify" text="Load normalModelEvent"
                                         GridPane.columnIndex="1"/>
                             </GridPane>
                             <GridPane GridPane.rowIndex="1">
@@ -322,7 +322,7 @@
                                 </TextField>
                             </GridPane>
                             <Button fx:id="ev_a_mod_save_event_button" mnemonicParsing="false"
-                                    onAction="#saveModifiedEvent" text="Save event"
+                                    onAction="#saveModifiedEvent" text="Save normalModelEvent"
                                     GridPane.halignment="CENTER" GridPane.rowIndex="2"
                                     GridPane.valignment="CENTER"/>
                         </GridPane>

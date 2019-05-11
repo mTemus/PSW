@@ -1,13 +1,13 @@
 package model;
 
-public class Event {
+public class NormalModelEvent {
 
     private Long id;
     private String name;
     private String agenda;
     private String date;
 
-    public Event(Long id, String name, String agenda, String date) {
+    public NormalModelEvent(Long id, String name, String agenda, String date) {
         this.id = id;
         this.name = name;
         this.agenda = agenda;

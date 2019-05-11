@@ -2,9 +2,9 @@ package operations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Event;
-import model.EventEntry;
-import model.User;
+import model.NormalModelEvent;
+import model.NormalModelEventEntry;
+import model.NormalModelUser;
 
 import java.sql.*;
 
@@ -14,34 +14,34 @@ public class DatabaseAdministratorOperations {
     private DatabaseOperations DO = new DatabaseOperations();
 
 
-    public ObservableList<User> findAllUsers() {
+    public ObservableList<NormalModelUser> findAllUsers() {
 
-        ObservableList<User> users = FXCollections.observableArrayList();
+        ObservableList<NormalModelUser> normalModelUsers = FXCollections.observableArrayList();
 
         try {
             Statement userStatement = DO.MySQLConnection().createStatement();
             ResultSet userResultSet = userStatement.executeQuery("select * from user");
 
             while (userResultSet.next()) {
-                User u = new User(userResultSet.getLong("id"),
+                NormalModelUser u = new NormalModelUser(userResultSet.getLong("id"),
                         userResultSet.getString("name"),
                         userResultSet.getString("surname"),
                         userResultSet.getString("login"),
                         userResultSet.getString("password"),
                         userResultSet.getString("email"),
                         userResultSet.getString("date"));
-                users.add(u);
+                normalModelUsers.add(u);
             }
             DO.MySQLConnection().close();
-            return users;
+            return normalModelUsers;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public ObservableList<EventEntry> findAllEventEntries() {
-        ObservableList<EventEntry> eventEntries = FXCollections.observableArrayList();
+    public ObservableList<NormalModelEventEntry> findAllEventEntries() {
+        ObservableList<NormalModelEventEntry> eventEntries = FXCollections.observableArrayList();
 
         try {
             Statement entryStatement = DO.MySQLConnection().createStatement();
@@ -59,7 +59,7 @@ public class DatabaseAdministratorOperations {
                     "ON events_entries.user_id = user.id;");
 
             while (entryResultSet.next()) {
-                EventEntry ee = new EventEntry(entryResultSet.getLong("entry_id"),
+                NormalModelEventEntry ee = new NormalModelEventEntry(entryResultSet.getLong("entry_id"),
                         entryResultSet.getString("event_name"),
                         entryResultSet.getString("name"),
                         entryResultSet.getString("surname"),
@@ -77,8 +77,8 @@ public class DatabaseAdministratorOperations {
 
     }
 
-    public User findExistingUserToDelete(int userID) {
-        User tmpUser = null;
+    public NormalModelUser findExistingUserToDelete(int userID) {
+        NormalModelUser tmpNormalModelUser = null;
         PreparedStatement userPrpStm = null;
 
         try {
@@ -88,10 +88,10 @@ public class DatabaseAdministratorOperations {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tmpUser = DLO.doFindingQuery(userPrpStm);
+        tmpNormalModelUser = DLO.doFindingQuery(userPrpStm);
 
 
-        return tmpUser;
+        return tmpNormalModelUser;
     }
 
     public void deleteUserFromDatabase(long userID) {
@@ -189,14 +189,14 @@ public class DatabaseAdministratorOperations {
         }
     }
 
-    public Event doFindingEventQuery(PreparedStatement findStm) {
+    public NormalModelEvent doFindingEventQuery(PreparedStatement findStm) {
         ResultSet eventResultFind;
-        Event tmp_event = null;
+        NormalModelEvent tmp_NormalModel_event = null;
 
         try {
             eventResultFind = findStm.executeQuery();
             if (eventResultFind.next()) {
-                tmp_event = new Event(eventResultFind.getLong("id_event"),
+                tmp_NormalModel_event = new NormalModelEvent(eventResultFind.getLong("id_event"),
                         eventResultFind.getString("event_name"),
                         eventResultFind.getString("agenda"),
                         eventResultFind.getString("date"));
@@ -204,7 +204,7 @@ public class DatabaseAdministratorOperations {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tmp_event;
+        return tmp_NormalModel_event;
     }
 
     public void deleteEvent(Long eventID) {
@@ -213,14 +213,14 @@ public class DatabaseAdministratorOperations {
         executeStatementUpdate(query);
     }
 
-    public void updateEvent(Event modifiedEvent) {
+    public void updateEvent(NormalModelEvent modifiedNormalModelEvent) {
 
         String query = "UPDATE event " +
                 "SET " +
-                "event_name = '" + modifiedEvent.getName() + "'," +
-                "agenda = '" + modifiedEvent.getAgenda() + "'," +
-                "date = '" + modifiedEvent.getDate() + "'" +
-                "WHERE id_event LIKE '" + modifiedEvent.getId() + "';";
+                "event_name = '" + modifiedNormalModelEvent.getName() + "'," +
+                "agenda = '" + modifiedNormalModelEvent.getAgenda() + "'," +
+                "date = '" + modifiedNormalModelEvent.getDate() + "'" +
+                "WHERE id_event LIKE '" + modifiedNormalModelEvent.getId() + "';";
 
         executeStatementUpdate(query);
     }

@@ -3,17 +3,11 @@ package hibernateOperations;
 import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.NormalModelEvent;
-import model.NormalModelEventEntry;
-import model.NormalModelUser;
+import model.TableEventEntry;
 import operations.DatabaseLoginOperations;
 import operations.DatabaseOperations;
 
 import javax.persistence.TypedQuery;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DatabaseAdministratorOperations {
 
@@ -27,53 +21,26 @@ public class DatabaseAdministratorOperations {
         String query = "SELECT u FROM User u";
 
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
-
         users.addAll(typedQuery.getResultList());
 
-        for (User u : users) {
-            System.out.println(u.getName() + " " + u.getSurname());
-        }
 
+        EMO.closeConnection();
         return users;
     }
-//
-//    public ObservableList<NormalModelEventEntry> findAllEventEntries() {
-//        ObservableList<NormalModelEventEntry> eventEntries = FXCollections.observableArrayList();
-//
-//        try {
-//            Statement entryStatement = DO.MySQLConnection().createStatement();
-//            ResultSet entryResultSet = entryStatement.executeQuery("SELECT events_entries.entry_id, " +
-//                    "event.event_name, " +
-//                    "user.name, " +
-//                    "user.surname, " +
-//                    "events_entries.participation_type, " +
-//                    "events_entries.food_preferences, " +
-//                    "events_entries.status\n" +
-//                    "FROM event \n" +
-//                    "JOIN events_entries \n" +
-//                    "ON event.id_event = events_entries.event_id\n" +
-//                    "JOIN user \n" +
-//                    "ON events_entries.user_id = user.id;");
-//
-//            while (entryResultSet.next()) {
-//                NormalModelEventEntry ee = new NormalModelEventEntry(entryResultSet.getLong("entry_id"),
-//                        entryResultSet.getString("event_name"),
-//                        entryResultSet.getString("name"),
-//                        entryResultSet.getString("surname"),
-//                        entryResultSet.getString("participation_type"),
-//                        entryResultSet.getString("food_preferences"),
-//                        entryResultSet.getString("status"));
-//                eventEntries.add(ee);
-//            }
-//            DO.MySQLConnection().close();
-//            return eventEntries;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
-//
+
+    public ObservableList<TableEventEntry> findAllTableEventEntries() {
+        ObservableList<TableEventEntry> eventEntries = FXCollections.observableArrayList();
+
+        String query = "SELECT NEW model.TableEventEntry(ee.entryId, e.name, u.name, u.surname, ee.participationType, ee.foodPreferences, ee.status) FROM Event e JOIN EventEntry ee ON e.id = ee.eventId JOIN User u ON ee.userId = u.id";
+
+        TypedQuery<TableEventEntry> typedQuery = EMO.getEntityManager().createQuery(query, TableEventEntry.class);
+
+        eventEntries.addAll(typedQuery.getResultList());
+        EMO.closeConnection();
+
+        return eventEntries;
+    }
+
 //    public NormalModelUser findExistingUserToDelete(int userID) {
 //        NormalModelUser tmpNormalModelUser = null;
 //        PreparedStatement userPrpStm = null;

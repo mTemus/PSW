@@ -1,6 +1,6 @@
 package model;
 
-public class NormalModelEventEntry {
+public class TableEventEntry {
 
     private Long id;
     private String eventName;
@@ -10,7 +10,7 @@ public class NormalModelEventEntry {
     private String foodPreferences;
     private String entryStatus;
 
-    public NormalModelEventEntry(Long id, String eventName, String userName, String userSurname, String participationType, String foodPreferences, String entryStatus) {
+    public TableEventEntry(Long id, String eventName, String userName, String userSurname, String participationType, String foodPreferences, String entryStatus) {
         this.id = id;
         this.eventName = eventName;
         this.userName = userName;

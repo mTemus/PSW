@@ -1,7 +1,7 @@
 package controller;
 
 import model.NormalModelEvent;
-import model.NormalModelEventEntry;
+import model.TableEventEntry;
 import model.NormalModelUser;
 import operations.DatabaseAdministratorOperations;
 import operations.DatabaseEventOperations;
@@ -187,7 +187,7 @@ public class AdministratorController {
 
         if(DAO.findExistingEntryToModify(entryIdModified)){
             DAO.acceptEntry(entryIdModified);
-            en_a_alert_field.setText("NormalModelEventEntry accepted successfully.");
+            en_a_alert_field.setText("TableEventEntry accepted successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending
@@ -201,7 +201,7 @@ public class AdministratorController {
 
         if(DAO.findExistingEntryToModify(entryIdModified)){
             DAO.discardEntry(entryIdModified);
-            en_a_alert_field.setText("NormalModelEventEntry canceled successfully.");
+            en_a_alert_field.setText("TableEventEntry canceled successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending
@@ -234,14 +234,14 @@ public class AdministratorController {
         tbl_events.setItems(eventsList);
     }
 
-    private void addDataToEntryTable(ObservableList<NormalModelEventEntry> entriesList) {
-        col_id_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, Long>("id"));
-        col_event_name_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("eventName"));
-        col_name_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("userName"));
-        col_surname_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("userSurname"));
-        col_participation_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("participationType"));
-        col_food_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("foodPreferences"));
-        col_entry_status_entries.setCellValueFactory(new PropertyValueFactory<NormalModelEventEntry, String>("entryStatus"));
+    private void addDataToEntryTable(ObservableList<TableEventEntry> entriesList) {
+        col_id_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, Long>("id"));
+        col_event_name_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("eventName"));
+        col_name_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("userName"));
+        col_surname_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("userSurname"));
+        col_participation_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("participationType"));
+        col_food_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("foodPreferences"));
+        col_entry_status_entries.setCellValueFactory(new PropertyValueFactory<TableEventEntry, String>("entryStatus"));
         tbl_entries.setItems(entriesList);
     }
 
@@ -256,7 +256,7 @@ public class AdministratorController {
     }
 
     private void setEntriesTable() {
-        ObservableList<NormalModelEventEntry> entries = DAO.findAllEventEntries();
+        ObservableList<TableEventEntry> entries = DAO.findAllEventEntries();
         addDataToEntryTable(entries);
     }
 

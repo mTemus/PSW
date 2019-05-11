@@ -2,8 +2,8 @@ package operations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.TableEventEntry;
 import model.NormalModelEvent;
-import model.NormalModelEventEntry;
 import model.NormalModelUser;
 
 import java.sql.*;
@@ -40,8 +40,8 @@ public class DatabaseAdministratorOperations {
         }
     }
 
-    public ObservableList<NormalModelEventEntry> findAllEventEntries() {
-        ObservableList<NormalModelEventEntry> eventEntries = FXCollections.observableArrayList();
+    public ObservableList<TableEventEntry> findAllEventEntries() {
+        ObservableList<TableEventEntry> eventEntries = FXCollections.observableArrayList();
 
         try {
             Statement entryStatement = DO.MySQLConnection().createStatement();
@@ -59,7 +59,7 @@ public class DatabaseAdministratorOperations {
                     "ON events_entries.user_id = user.id;");
 
             while (entryResultSet.next()) {
-                NormalModelEventEntry ee = new NormalModelEventEntry(entryResultSet.getLong("entry_id"),
+                TableEventEntry ee = new TableEventEntry(entryResultSet.getLong("entry_id"),
                         entryResultSet.getString("event_name"),
                         entryResultSet.getString("name"),
                         entryResultSet.getString("surname"),

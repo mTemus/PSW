@@ -1,21 +1,20 @@
 package hibernateOperations;
 
-import hibernateModel.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class EntityOperations {
 
 
-    public EntityManager myEntityManager() {
-        EntityManagerFactory entityFactory = Persistence.createEntityManagerFactory("org.hibernate.event_server.jpa");
-        EntityManager entityManager = entityFactory.createEntityManager();
+    public Session myHibernateSession() {
+//        EntityManagerFactory entityFactory = Persistence.createEntityManagerFactory("org.hibernate.event_server.jpa");
+//        EntityManager entityManager = entityFactory.createEntityManager();
 
-        entityManager.getTransaction().begin();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+
 
 //        entityManager.close();
 //        entityFactory.close();
@@ -34,6 +33,6 @@ public class EntityOperations {
 //        User user = (User) query.getSingleResult();
 //        List<User> userList = query.getResultList();
 
-        return entityManager;
+        return session;
     }
 }

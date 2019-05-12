@@ -183,7 +183,7 @@ public class DatabaseAdministratorOperations {
         String query = "UPDATE Event e SET e.name = :eName, e.agenda = :eAgenda, e.date = :eDate WHERE e.id = :eID";
 
         Query updateQuery = EMO.getEntityManager().createQuery(query);
-        updateQuery.setParameter("eName",modifiedEvent.getName());
+        updateQuery.setParameter("eName", modifiedEvent.getName());
         updateQuery.setParameter("eAgenda", modifiedEvent.getAgenda());
         updateQuery.setParameter("eDate", modifiedEvent.getDate());
         updateQuery.setParameter("eID", modifiedEvent.getId());
@@ -194,9 +194,9 @@ public class DatabaseAdministratorOperations {
         EMO.closeConnection();
     }
 
-    public void acceptEntry(Long entryID) {
-        String query = "UPDATE EventEntry ee SET ee.status = 'accepted' WHERE ee.entryId = :eID";
 
+    private void modifyEntryStatus(String status, Long entryID) {
+        String query = "UPDATE EventEntry ee SET ee.status = " + status + " WHERE ee.entryId = :eID";
         Query updateQuery = EMO.getEntityManager().createQuery(query);
         updateQuery.setParameter("eID", entryID);
         EMO.getEntityManager().getTransaction().begin();
@@ -206,16 +206,16 @@ public class DatabaseAdministratorOperations {
         EMO.closeConnection();
     }
 
-    public void discardEntry(int entryID) {
-        String query = "UPDATE EventEntry ee SET ee.status = 'canceled' WHERE ee.entryId = :eID";
+    public void acceptEntry(Long entryID) {
+        String status = "'accepted'";
 
-        Query updateQuery = EMO.getEntityManager().createQuery(query);
-        updateQuery.setParameter("eID", entryID);
-        EMO.getEntityManager().getTransaction().begin();
-        updateQuery.executeUpdate();
-        EMO.getEntityManager().getTransaction().commit();
+        modifyEntryStatus(status, entryID);
+    }
 
-        EMO.closeConnection();
+    public void discardEntry(Long entryID) {
+        String status = "'canceled'";
+
+        modifyEntryStatus(status, entryID);
     }
 //
 //    private void executeStatementUpdate(String query) {

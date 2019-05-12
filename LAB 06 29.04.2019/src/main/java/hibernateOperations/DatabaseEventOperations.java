@@ -52,24 +52,19 @@ public class DatabaseEventOperations {
 
     public String checkIfEntryExists(Long userID, Long eventID) {
         String status = null;
-        ResultSet entryRS;
+        EventEntry tmpEntry = null;
 
-        PreparedStatement findingEntryStm = null;
-        try {
-            findingEntryStm = MySQLConnection().prepareStatement("SELECT * FROM events_entries WHERE event_id LIKE ? AND user_id LIKE ?");
-            findingEntryStm.setLong(1, eventID);
-            findingEntryStm.setLong(2, userID);
+        String query = "SELECT ee FROM EventEntry ee WHERE ee.userID = :uID AND ee.eventID = :eID";
+        TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
+        typedQuery.setParameter("uID", userID);
+        typedQuery.setParameter("eID", eventID);
 
-            entryRS = findingEntryStm.executeQuery();
+        tmpEntry = typedQuery.getSingleResult();
 
-            if (entryRS.next()) {
-                status = entryRS.getString("status");
-                return status;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        if (tmpEntry != null)
+            status = tmpEntry.getStatus();
+
+        EMO.closeConnection();
         return status;
     }
 }

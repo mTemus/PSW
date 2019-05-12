@@ -17,7 +17,8 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         DatabaseEventOperations DEO = new DatabaseEventOperations();
-        DEO.findAllEventNames();
+        System.out.println(DEO.checkIfEntryExists(1L, 2L));
+        System.out.println(DEO.checkIfEntryExists(2L, 1L));
 
         launch(args);
     }

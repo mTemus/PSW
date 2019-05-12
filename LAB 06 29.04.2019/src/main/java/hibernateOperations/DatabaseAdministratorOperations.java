@@ -181,18 +181,22 @@ public class DatabaseAdministratorOperations {
         EMO.getEntityManager().remove(tmpEvent);
         EMO.closeConnection();
     }
-//
-//    public void updateEvent(NormalModelEvent modifiedNormalModelEvent) {
-//
-//        String query = "UPDATE event " +
-//                "SET " +
-//                "event_name = '" + modifiedNormalModelEvent.getName() + "'," +
-//                "agenda = '" + modifiedNormalModelEvent.getAgenda() + "'," +
-//                "date = '" + modifiedNormalModelEvent.getDate() + "'" +
-//                "WHERE id_event LIKE '" + modifiedNormalModelEvent.getId() + "';";
-//
-//        executeStatementUpdate(query);
-//    }
+
+    public void updateEvent(Event modifiedEvent) {
+
+        String query = "UPDATE Event e SET e.name = :eName, e.agenda = :eAgenda, e.date = :eDate WHERE e.id = :eID";
+
+        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        updateQuery.setParameter("eName",modifiedEvent.getName());
+        updateQuery.setParameter("eAgenda", modifiedEvent.getAgenda());
+        updateQuery.setParameter("eDate", modifiedEvent.getDate());
+        updateQuery.setParameter("eID", modifiedEvent.getId());
+        EMO.getEntityManager().getTransaction().begin();
+        updateQuery.executeUpdate();
+        EMO.getEntityManager().getTransaction().commit();
+
+        EMO.closeConnection();
+    }
 //
 //    public void acceptEntry(int entryID) {
 //

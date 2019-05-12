@@ -38,6 +38,7 @@ public class DatabaseEventOperations {
            tmpEntry.setUserId(user.getId());
            tmpEntry.setFoodPreferences(user.getFoodPreferences().toString());
            tmpEntry.setParticipationType(user.getParticipationType().toString());
+           tmpEntry.setStatus("waiting");
 
            EMO.getEntityManager().persist(tmpEntry);
            EMO.closeConnection();

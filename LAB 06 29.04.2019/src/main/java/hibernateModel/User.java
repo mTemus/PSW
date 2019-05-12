@@ -32,7 +32,7 @@ public class User {
     private String date;
 
     @Column(name = "permissions", nullable = false)
-    private Permissions permissions;
+    private String permissions = "USER";
 
     @Column(name = "foodPreferences", nullable = true)
     private FoodPreferences foodPreferences = null;
@@ -40,9 +40,6 @@ public class User {
     @Column(name = "participationType", nullable = true)
     private ParticipationType participationType = null;
 
-    public enum Permissions {
-        USER, ADMINISTRATOR
-    }
     public enum FoodPreferences {
         VEGETARIAN, GLUTEN_FREE, NO_PREFERENCES
     }
@@ -71,7 +68,7 @@ public class User {
     public String getDate() {
         return date;
     }
-    public Permissions getPermissions() {
+    public String getPermissions() {
         return permissions;
     }
     public FoodPreferences getFoodPreferences() {
@@ -101,7 +98,7 @@ public class User {
     public void setDate(String date) {
         this.date = date;
     }
-    public void setPermissions(Permissions permissions) {
+    public void setPermissions(String permissions) {
         this.permissions = permissions;
     }
     public void setFoodPreferences(FoodPreferences foodPreferences) {

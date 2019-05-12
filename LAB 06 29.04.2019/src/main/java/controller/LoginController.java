@@ -46,14 +46,14 @@ public class LoginController {
 
         if (loginAttempts < 3) {
             if (loggedUser != null) {
-                if (loggedUser.getPermissions() == User.Permissions.USER) {
+                if (loggedUser.getPermissions().equals("USER")) {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
                     SO.changeSceneToUser(event);
 
 
-                } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
+                } else if (loggedUser.getPermissions().equals("ADMINISTRATOR")) {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator.");
                     loginAttempts = 0;
                     someoneIsLogged = true;

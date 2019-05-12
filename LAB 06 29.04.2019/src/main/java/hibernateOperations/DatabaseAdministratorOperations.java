@@ -24,8 +24,6 @@ public class DatabaseAdministratorOperations {
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
         users.addAll(typedQuery.getResultList());
 
-
-        EMO.closeConnection();
         return users;
     }
 
@@ -45,7 +43,6 @@ public class DatabaseAdministratorOperations {
         TypedQuery<TableEventEntry> typedQuery = EMO.getEntityManager().createQuery(query, TableEventEntry.class);
 
         eventEntries.addAll(typedQuery.getResultList());
-        EMO.closeConnection();
 
         return eventEntries;
     }
@@ -64,7 +61,7 @@ public class DatabaseAdministratorOperations {
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
-            EMO.closeConnection();
+
         }
 
         return tmpUser;
@@ -74,7 +71,7 @@ public class DatabaseAdministratorOperations {
         User userToDelete = findExistingUserToDelete(userID);
 
         EMO.getEntityManager().remove(userToDelete);
-        EMO.closeConnection();
+
     }
 
     public EventEntry findExistingEntry(Long entryID) {
@@ -90,7 +87,7 @@ public class DatabaseAdministratorOperations {
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
-            EMO.closeConnection();
+
         }
 
 
@@ -109,7 +106,7 @@ public class DatabaseAdministratorOperations {
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
-            EMO.closeConnection();
+
         }
         return existingEntry;
     }
@@ -124,7 +121,7 @@ public class DatabaseAdministratorOperations {
     public void deleteEntryFromDatabase(long userID) {
         EventEntry deletedEntry = findExistingEntryToDelete(userID);
         EMO.getEntityManager().remove(deletedEntry);
-        EMO.closeConnection();
+
     }
 
     public void changeUserPassword(Long userId, String newPassword) {
@@ -137,7 +134,7 @@ public class DatabaseAdministratorOperations {
         updateQuery.executeUpdate();
         EMO.getEntityManager().getTransaction().commit();
 
-        EMO.closeConnection();
+
     }
 
     public void addEventToDatabase(String name, String agenda, String date) {
@@ -147,7 +144,7 @@ public class DatabaseAdministratorOperations {
         tmpEvent.setDate(date);
 
         EMO.getEntityManager().persist(tmpEvent);
-        EMO.closeConnection();
+
     }
 
     public Event lookForExistingEvent(Long eventID) {
@@ -163,7 +160,7 @@ public class DatabaseAdministratorOperations {
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
-            EMO.closeConnection();
+
         }
         return tmpEvent;
     }
@@ -172,7 +169,7 @@ public class DatabaseAdministratorOperations {
     public void deleteEvent(Long eventID) {
         Event tmpEvent = lookForExistingEvent(eventID);
         EMO.getEntityManager().remove(tmpEvent);
-        EMO.closeConnection();
+
     }
 
     public void updateEvent(Event modifiedEvent) {
@@ -187,7 +184,7 @@ public class DatabaseAdministratorOperations {
         updateQuery.executeUpdate();
         EMO.getEntityManager().getTransaction().commit();
 
-        EMO.closeConnection();
+
     }
 
     public void acceptEntry(Long entryID) {
@@ -210,7 +207,7 @@ public class DatabaseAdministratorOperations {
         updateQuery.executeUpdate();
         EMO.getEntityManager().getTransaction().commit();
 
-        EMO.closeConnection();
+
     }
 
 

@@ -44,16 +44,18 @@ public class LoginController {
 
         loggedUser = DLO.searchForExistingUser(login, password);
 
+
+
         if (loginAttempts < 3) {
             if (loggedUser != null) {
-                if (loggedUser.getPermissions().equals("USER")) {
+                if (loggedUser.getPermissions().equals("user")) {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
                     SO.changeSceneToUser(event);
 
 
-                } else if (loggedUser.getPermissions().equals("ADMINISTRATOR")) {
+                } else if (loggedUser.getPermissions().equals("administrator")) {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator.");
                     loginAttempts = 0;
                     someoneIsLogged = true;

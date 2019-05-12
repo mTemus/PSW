@@ -169,9 +169,6 @@ public class DatabaseAdministratorOperations {
         } finally {
             EMO.closeConnection();
         }
-
-
-        System.out.println(tmpEvent.getName());
         return tmpEvent;
     }
 
@@ -183,7 +180,6 @@ public class DatabaseAdministratorOperations {
     }
 
     public void updateEvent(Event modifiedEvent) {
-
         String query = "UPDATE Event e SET e.name = :eName, e.agenda = :eAgenda, e.date = :eDate WHERE e.id = :eID";
 
         Query updateQuery = EMO.getEntityManager().createQuery(query);
@@ -197,15 +193,18 @@ public class DatabaseAdministratorOperations {
 
         EMO.closeConnection();
     }
-//
-//    public void acceptEntry(int entryID) {
-//
-//        String query = "UPDATE events_entries " +
-//                "SET " +
-//                "status = 'accepted'" +
-//                "WHERE entry_id = '" + entryID + "';";
-//        executeStatementUpdate(query);
-//    }
+
+    public void acceptEntry(Long entryID) {
+        String query = "UPDATE EventEntry ee SET ee.status = 'accepted' WHERE e.id = :eID";
+
+        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        updateQuery.setParameter("eID", entryID);
+        EMO.getEntityManager().getTransaction().begin();
+        updateQuery.executeUpdate();
+        EMO.getEntityManager().getTransaction().commit();
+
+        EMO.closeConnection();
+    }
 //
 //    public void discardEntry(int entryID) {
 //

@@ -201,7 +201,7 @@ public class AdministratorController {
 
         if(DAO.findExistingEntryToModify(entryIdModified) != null){
             DAO.discardEntry(entryIdModified);
-            en_a_alert_field.setText("TableEventEntry canceled successfully.");
+            en_a_alert_field.setText("Event entry canceled successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending

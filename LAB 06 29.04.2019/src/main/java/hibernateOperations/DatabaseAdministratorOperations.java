@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import model.TableEventEntry;
 import operations.DatabaseLoginOperations;
 import operations.DatabaseOperations;
+import org.hibernate.Session;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class DatabaseAdministratorOperations {
@@ -134,11 +136,13 @@ public class DatabaseAdministratorOperations {
         String query = "UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID";
 
 
-        TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
-        typedQuery.setParameter("uID", userId);
-        typedQuery.setParameter("uNewPassword", newPassword);
+        Query updateQuery = EMO.getEntityManager().createQuery("UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID");
+        updateQuery.setParameter("uNewPassword", newPassword);
+        updateQuery.setParameter("uID", userId);
+        EMO.getEntityManager().getTransaction().begin();
+        updateQuery.executeUpdate();
+        EMO.getEntityManager().getTransaction().commit();
 
-        typedQuery.executeUpdate();
         EMO.closeConnection();
 
     }

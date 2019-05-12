@@ -15,11 +15,8 @@ public class Main extends Application {
         primaryStage.setScene(loginScene);
         primaryStage.show();
     }
-    public static void main(String[] args) {
-        DatabaseEventOperations DEO = new DatabaseEventOperations();
-        System.out.println(DEO.checkIfEntryExists(1L, 2L));
-        System.out.println(DEO.checkIfEntryExists(2L, 1L));
 
+    public static void main(String[] args) {
         launch(args);
     }
 }

@@ -6,6 +6,7 @@ import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class DatabaseEventOperations {
@@ -50,21 +51,21 @@ public class DatabaseEventOperations {
         }
     }
 
-    public String checkIfEntryExists(Long userID, Long eventID) {
-        String status = null;
-        EventEntry tmpEntry = null;
+    public String checkIfEntryExists(Long eventID, Long userID) {
+        EventEntry tmpEntry;
 
-        String query = "SELECT ee FROM EventEntry ee WHERE ee.userID = :uID AND ee.eventID = :eID";
+        String query = "SELECT ee FROM EventEntry ee WHERE ee.userId = :uID AND ee.eventId = :eID";
         TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
         typedQuery.setParameter("uID", userID);
         typedQuery.setParameter("eID", eventID);
 
-        tmpEntry = typedQuery.getSingleResult();
+        try {
+            tmpEntry = typedQuery.getSingleResult();
+            return tmpEntry.getStatus();
 
-        if (tmpEntry != null)
-            status = tmpEntry.getStatus();
+        } catch (NoResultException nre) {
 
-        EMO.closeConnection();
-        return status;
+            return null;
+        }
     }
 }

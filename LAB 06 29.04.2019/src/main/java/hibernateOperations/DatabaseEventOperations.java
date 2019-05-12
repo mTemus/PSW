@@ -20,16 +20,10 @@ public class DatabaseEventOperations {
 
     public ObservableList<String> findAllEventNames() {
         ObservableList<String> eventNames = FXCollections.observableArrayList();
-        ObservableList<Event> events = FXCollections.observableArrayList();
-
-        events = findAllEvents();
+        ObservableList<Event> events= findAllEvents();
 
         for (Event e: events) {
             eventNames.add(e.getName());
-        }
-
-        for (String s: eventNames) {
-            System.out.println(s);
         }
 
         return eventNames;

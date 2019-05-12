@@ -1,6 +1,4 @@
-import hibernateOperations.DatabaseAdministratorOperations;
 import hibernateOperations.DatabaseEventOperations;
-import hibernateOperations.DatabaseLoginOperations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +17,7 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         DatabaseEventOperations DEO = new DatabaseEventOperations();
-        DEO.findAllEvents();
+        DEO.findAllEventNames();
 
         launch(args);
     }

@@ -246,6 +246,7 @@ public class AdministratorController {
     }
 
     private void setUsersTable() {
+        tbl_users.setItems(null);
         ObservableList<User> users = DAO.findAllUsers();
         addDataToUserTable(users);
     }

@@ -7,9 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.TableEventEntry;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 public class DatabaseAdministratorOperations {
 
@@ -23,6 +21,7 @@ public class DatabaseAdministratorOperations {
 
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
         users.addAll(typedQuery.getResultList());
+
 
         return users;
     }
@@ -43,14 +42,12 @@ public class DatabaseAdministratorOperations {
         TypedQuery<TableEventEntry> typedQuery = EMO.getEntityManager().createQuery(query, TableEventEntry.class);
 
         eventEntries.addAll(typedQuery.getResultList());
-
         return eventEntries;
     }
 
     public User findExistingUserToDelete(long userID) {
         User tmpUser = null;
         String query = "SELECT u FROM User u WHERE u.id = :uID";
-
 
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
         typedQuery.setParameter("uID", userID);
@@ -68,10 +65,16 @@ public class DatabaseAdministratorOperations {
     }
 
     public void deleteUserFromDatabase(long userID) {
-        User userToDelete = findExistingUserToDelete(userID);
+        EntityManager EM = EMO.getEntityManager();
 
-        EMO.getEntityManager().remove(userToDelete);
+        String query = "DELETE User u WHERE u.id = :uID";
 
+        Query updateQuery = EM.createQuery(query);
+        updateQuery.setParameter("uID", userID);
+        EM.getTransaction().begin();
+        updateQuery.executeUpdate();
+        EM.getTransaction().commit();
+        EM.close();
     }
 
     public EventEntry findExistingEntry(Long entryID) {
@@ -95,7 +98,7 @@ public class DatabaseAdministratorOperations {
     }
 
     public EventEntry findExistingEntryToDelete(Long userID) {
-        EventEntry existingEntry = null;
+        EventEntry existingEntry;
         String query = "SELECT ee FROM EventEntry ee WHERE ee.userId = :uID";
 
         TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
@@ -104,7 +107,7 @@ public class DatabaseAdministratorOperations {
         try {
             existingEntry = typedQuery.getSingleResult();
         } catch (NoResultException nre) {
-            nre.printStackTrace();
+            existingEntry = null;
         } finally {
 
         }
@@ -125,15 +128,17 @@ public class DatabaseAdministratorOperations {
     }
 
     public void changeUserPassword(Long userId, String newPassword) {
+        EntityManager EM = EMO.getEntityManagerFactory().createEntityManager();
+
         String query = "UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID";
 
-        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        Query updateQuery = EM.createQuery(query);
         updateQuery.setParameter("uNewPassword", newPassword);
         updateQuery.setParameter("uID", userId);
-        EMO.getEntityManager().getTransaction().begin();
+        EM.getTransaction().begin();
         updateQuery.executeUpdate();
-        EMO.getEntityManager().getTransaction().commit();
-
+        EM.getTransaction().commit();
+        EM.close();
 
     }
 

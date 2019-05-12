@@ -32,7 +32,7 @@ public class User {
     private String date;
 
     @Column(name = "permissions", nullable = false)
-    private String permissions = "USER";
+    private String permissions = "user";
 
     @Column(name = "foodPreferences", nullable = true)
     private FoodPreferences foodPreferences = null;

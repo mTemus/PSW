@@ -145,26 +145,30 @@ public class DatabaseAdministratorOperations {
     }
 
     public void addEventToDatabase(String name, String agenda, String date) {
-       Event tmpEvent = new Event(null, name, agenda, date);
-       EMO.getEntityManager().persist(tmpEvent);
-       EMO.closeConnection();
+        Event tmpEvent = new Event(null, name, agenda, date);
+        EMO.getEntityManager().persist(tmpEvent);
+        EMO.closeConnection();
     }
-//
-//    public PreparedStatement lookForExistingEvent(Long eventID) {
-//
-//        PreparedStatement findingEventStm = null;
-//        try {
-//            findingEventStm = DO.MySQLConnection().prepareStatement("SELECT * FROM event WHERE id_event LIKE ?");
-//            findingEventStm.setLong(1, eventID);
-//
-//            DO.MySQLConnection().close();
-//            return findingEventStm;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-//
+
+    public Event lookForExistingEvent(Long eventID) {
+        Event tmpEvent = null;
+        String query = "SELECT e FROM Event e WHERE e.id = :eID";
+
+        TypedQuery<Event> typedQuery = EMO.getEntityManager().createQuery(query, Event.class);
+        typedQuery.setParameter("eID", eventID);
+
+        try {
+            tmpEvent = typedQuery.getSingleResult();
+
+        } catch (NoResultException nre) {
+            nre.printStackTrace();
+        } finally {
+            EMO.closeConnection();
+        }
+
+        return tmpEvent;
+    }
+
 //    public NormalModelEvent doFindingEventQuery(PreparedStatement findStm) {
 //        ResultSet eventResultFind;
 //        NormalModelEvent tmp_NormalModel_event = null;

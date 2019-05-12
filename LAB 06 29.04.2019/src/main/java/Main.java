@@ -1,4 +1,5 @@
 import hibernateOperations.DatabaseAdministratorOperations;
+import hibernateOperations.DatabaseEventOperations;
 import hibernateOperations.DatabaseLoginOperations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +18,8 @@ public class Main extends Application {
         primaryStage.show();
     }
     public static void main(String[] args) {
-        DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
-
-        DAO.acceptEntry(5L);
+        DatabaseEventOperations DEO = new DatabaseEventOperations();
+        DEO.findAllEvents();
 
         launch(args);
     }

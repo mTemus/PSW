@@ -195,7 +195,7 @@ public class DatabaseAdministratorOperations {
     }
 
     public void acceptEntry(Long entryID) {
-        String query = "UPDATE EventEntry ee SET ee.status = 'accepted' WHERE e.id = :eID";
+        String query = "UPDATE EventEntry ee SET ee.status = 'accepted' WHERE ee.entryId = :eID";
 
         Query updateQuery = EMO.getEntityManager().createQuery(query);
         updateQuery.setParameter("eID", entryID);

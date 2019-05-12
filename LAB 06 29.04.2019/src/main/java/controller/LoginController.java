@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class LoginController {
 
@@ -90,6 +91,7 @@ public class LoginController {
                     tmp_user.setLogin(login);
                     tmp_user.setPassword(password);
                     tmp_user.setEmail(email);
+                    tmp_user.setDate(LocalDate.now().toString());
 
                     DLO.addUserToDatabase(tmp_user);
                     register_text_area.setPromptText("Registration of User " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");

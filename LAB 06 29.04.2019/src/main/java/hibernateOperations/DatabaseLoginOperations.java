@@ -10,7 +10,7 @@ public class DatabaseLoginOperations {
     private EntityManagerOperations EMO = new EntityManagerOperations();
 
     public User searchForExistingUser(String userLogin, String userPassword) {
-        User existingUser = null;
+        User existingUser;
         String query = "SELECT u FROM User u WHERE u.login = :uLogin AND u.password = :uPassword";
 
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
@@ -20,16 +20,19 @@ public class DatabaseLoginOperations {
         try {
             existingUser = typedQuery.getSingleResult();
         } catch (NoResultException nre) {
-            nre.printStackTrace();
+            return null;
         }
 
         return existingUser;
     }
 
     public void addUserToDatabase(User userToAdd) {
-        EntityManager entityManager = EMO.getEntityManagerFactory().createEntityManager();
-        entityManager.persist(userToAdd);
+        EntityManager em = EMO.getEntityManager();
 
+        em.getTransaction().begin();
+        em.persist(userToAdd);
+        em.getTransaction().commit();
+        em.close();
     }
 
 }

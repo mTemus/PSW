@@ -1,5 +1,9 @@
 package controller;
 
+import hibernateModel.Event;
+import hibernateModel.User;
+import hibernateOperations.DatabaseAdministratorOperations;
+import hibernateOperations.DatabaseEventOperations;
 import model.TableEventEntry;
 import operations.StageOperations;
 import javafx.collections.ObservableList;
@@ -61,24 +65,24 @@ public class AdministratorController {
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
     private LoginController LC = new LoginController();
-    private NormalModelEvent normalModelEventToModify = null;
+    private Event EventToModify = null;
 
     public void deleteUser(ActionEvent event) {
 
         if (isIdSetted()) {
             String user_Id = u_a_id_field.getText();
-            int userId = Integer.parseInt(user_Id);
-            NormalModelUser existingNormalModelUserToDelete = DAO.findExistingUserToDelete(userId);
+            long userId = Long.parseLong(user_Id);
+            User existingUserToDelete = DAO.findExistingUserToDelete(userId);
 
-            if (existingNormalModelUserToDelete != null) {
+            if (existingUserToDelete != null) {
                 DAO.deleteUserFromDatabase(userId);
-                u_a_alert_field.setText("NormalModelUser deleted succesfully.");
+                u_a_alert_field.setText("User deleted succesfully.");
                 setUsersTable();
                 u_a_id_field.setText("");
 
-                if (DAO.findExistingEntryToDelete(userId)) {
+                if (DAO.findExistingEntryToDelete(userId) != null) {
                     DAO.deleteEntryFromDatabase(userId);
-                    u_a_alert_field.setText("NormalModelUser deleted succesfully. NormalModelUser's event entries was also deleted.");
+                    u_a_alert_field.setText("User deleted succesfully. User's event entries was also deleted.");
                     setEntriesTable();
                 }
 
@@ -95,18 +99,18 @@ public class AdministratorController {
     public void changeUsersPassword(ActionEvent event) {
         if (isIdSetted()) {
             String user_Id = u_a_id_field.getText();
-            int userId = Integer.parseInt(user_Id);
+            long userId = Long.parseLong(user_Id);
 
             if (u_a_new_password_field.getText().equals(u_a_new_password_r_field.getText())) {
                 String newPassword = u_a_new_password_field.getText();
-                NormalModelUser existingNormalModelUserToPasswordChange = DAO.findExistingUserToDelete(userId);
+                User existingUserToPasswordChange = DAO.findExistingUserToDelete(userId);
 
-                if (existingNormalModelUserToPasswordChange != null) {
+                if (existingUserToPasswordChange != null) {
                     DAO.changeUserPassword(userId, newPassword);
                     u_a_alert_field.setText("Password changed successfully.");
                     u_a_id_field.setText("");
                     setUsersTable();
-                } else u_a_alert_field.setText("NormalModelUser with this id don't exists.");
+                } else u_a_alert_field.setText("User with this id don't exists.");
             } else u_a_alert_field.setText("Passwords dont match, please try again.");
         } else u_a_alert_field.setText("Please specify users's id.");
     }
@@ -123,7 +127,7 @@ public class AdministratorController {
             String eventDate = ev_a_add_date_field.getText();
 
             DAO.addEventToDatabase(eventName, eventAgenda, eventDate);
-            ev_a_alert_field.setText("NormalModelEvent added successfully.");
+            ev_a_alert_field.setText("Event added successfully.");
             setEventsTable();
         }
 
@@ -133,11 +137,11 @@ public class AdministratorController {
         String idOfEventToDeleteString = ev_a_delete_ev_id_field.getText();
         Long eventIdDeleted = Long.parseLong(idOfEventToDeleteString);
 
-        NormalModelEvent normalModelEventToDelete = DAO.doFindingEventQuery(DAO.lookForExistingEvent(eventIdDeleted));
+        Event EventToDelete = DAO.lookForExistingEvent(eventIdDeleted);
 
-        if (normalModelEventToDelete != null) {
-            DAO.deleteEvent(normalModelEventToDelete.getId());
-            ev_a_alert_field.setText("NormalModelEvent deleted successfully.");
+        if (EventToDelete != null) {
+            DAO.deleteEvent(EventToDelete.getId());
+            ev_a_alert_field.setText("Event deleted successfully.");
             ev_a_delete_ev_id_field.setText("");
             setEventsTable();
         } else {
@@ -149,14 +153,14 @@ public class AdministratorController {
         String idOfEventToModifyString = ev_a_mod_ev_id_field.getText();
         Long eventIdModified = Long.parseLong(idOfEventToModifyString);
 
-        normalModelEventToModify = DAO.doFindingEventQuery(DAO.lookForExistingEvent(eventIdModified));
+        EventToModify = DAO.lookForExistingEvent(eventIdModified);
 
-        if (normalModelEventToModify != null) {
-            ev_a_mod_name_field.setText(normalModelEventToModify.getName());
-            ev_a_mod_agenda_field.setText(normalModelEventToModify.getAgenda());
-            ev_a_mod_date_field.setText(normalModelEventToModify.getDate());
+        if (EventToModify != null) {
+            ev_a_mod_name_field.setText(EventToModify.getName());
+            ev_a_mod_agenda_field.setText(EventToModify.getAgenda());
+            ev_a_mod_date_field.setText(EventToModify.getDate());
 
-            ev_a_alert_field.setText("NormalModelEvent loaded successfully.");
+            ev_a_alert_field.setText("Event loaded successfully.");
 
         } else {
             ev_a_alert_field.setText("There is no event with such id.");
@@ -164,12 +168,12 @@ public class AdministratorController {
     }
 
     public void saveModifiedEvent(ActionEvent event) {
-        normalModelEventToModify.setName(ev_a_mod_name_field.getText());
-        normalModelEventToModify.setAgenda(ev_a_mod_agenda_field.getText());
-        normalModelEventToModify.setDate(ev_a_mod_date_field.getText());
+        EventToModify.setName(ev_a_mod_name_field.getText());
+        EventToModify.setAgenda(ev_a_mod_agenda_field.getText());
+        EventToModify.setDate(ev_a_mod_date_field.getText());
 
-        DAO.updateEvent(normalModelEventToModify);
-        ev_a_alert_field.setText("NormalModelEvent modified successfully.");
+        DAO.updateEvent(EventToModify);
+        ev_a_alert_field.setText("Event modified successfully.");
         ev_a_mod_name_field.setText("");
         ev_a_mod_agenda_field.setText("");
         ev_a_mod_date_field.setText("");
@@ -179,11 +183,11 @@ public class AdministratorController {
 
     public void acceptEntry(ActionEvent event) {
         String idOfEntryToModifyString = en_a_entry_id_field.getText();
-        int entryIdModified = Integer.parseInt(idOfEntryToModifyString);
+        Long entryIdModified = Long.parseLong(idOfEntryToModifyString);
 
-        if(DAO.findExistingEntryToModify(entryIdModified)){
+        if(DAO.findExistingEntryToModify(entryIdModified) != null){
             DAO.acceptEntry(entryIdModified);
-            en_a_alert_field.setText("TableEventEntry accepted successfully.");
+            en_a_alert_field.setText("Event entry accepted successfully.");
             en_a_entry_id_field.setText("");
             setEntriesTable();
             // there should be email sending
@@ -193,9 +197,9 @@ public class AdministratorController {
 
     public void discardEntry(ActionEvent event) {
         String idOfEntryToModifyString = en_a_entry_id_field.getText();
-        int entryIdModified = Integer.parseInt(idOfEntryToModifyString);
+        long entryIdModified = Long.parseLong(idOfEntryToModifyString);
 
-        if(DAO.findExistingEntryToModify(entryIdModified)){
+        if(DAO.findExistingEntryToModify(entryIdModified) != null){
             DAO.discardEntry(entryIdModified);
             en_a_alert_field.setText("TableEventEntry canceled successfully.");
             en_a_entry_id_field.setText("");
@@ -211,22 +215,22 @@ public class AdministratorController {
         setEntriesTable();
     }
 
-    private void addDataToUserTable(ObservableList<NormalModelUser> usersList) {
-        col_id_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, Long>("id"));
-        col_name_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("name"));
-        col_surname_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("surname"));
-        col_login_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("login"));
-        col_password_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("password"));
-        col_email_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("email"));
-        col_date_user.setCellValueFactory(new PropertyValueFactory<NormalModelUser, String>("date"));
+    private void addDataToUserTable(ObservableList<User> usersList) {
+        col_id_user.setCellValueFactory(new PropertyValueFactory<User, Long>("id"));
+        col_name_user.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        col_surname_user.setCellValueFactory(new PropertyValueFactory<User, String>("surname"));
+        col_login_user.setCellValueFactory(new PropertyValueFactory<User, String>("login"));
+        col_password_user.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
+        col_email_user.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        col_date_user.setCellValueFactory(new PropertyValueFactory<User, String>("date"));
         tbl_users.setItems(usersList);
     }
 
-    private void addDataToEventTable(ObservableList<NormalModelEvent> eventsList) {
-        col_id_event.setCellValueFactory(new PropertyValueFactory<NormalModelEvent, Long>("id"));
-        col_name_event.setCellValueFactory(new PropertyValueFactory<NormalModelEvent, String>("name"));
-        col_agenda_event.setCellValueFactory(new PropertyValueFactory<NormalModelEvent, String>("agenda"));
-        col_date_event.setCellValueFactory(new PropertyValueFactory<NormalModelEvent, String>("date"));
+    private void addDataToEventTable(ObservableList<Event> eventsList) {
+        col_id_event.setCellValueFactory(new PropertyValueFactory<Event, Long>("id"));
+        col_name_event.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        col_agenda_event.setCellValueFactory(new PropertyValueFactory<Event, String>("agenda"));
+        col_date_event.setCellValueFactory(new PropertyValueFactory<Event, String>("date"));
         tbl_events.setItems(eventsList);
     }
 
@@ -242,17 +246,17 @@ public class AdministratorController {
     }
 
     private void setUsersTable() {
-        ObservableList<NormalModelUser> normalModelUsers = DAO.findAllUsers();
-        addDataToUserTable(normalModelUsers);
+        ObservableList<User> users = DAO.findAllUsers();
+        addDataToUserTable(users);
     }
 
     private void setEventsTable() {
-        ObservableList<NormalModelEvent> normalModelEvents = DEO.findAllEvents();
-        addDataToEventTable(normalModelEvents);
+        ObservableList<Event> events = DEO.findAllEvents();
+        addDataToEventTable(events);
     }
 
     private void setEntriesTable() {
-        ObservableList<TableEventEntry> entries = DAO.findAllEventEntries();
+        ObservableList<TableEventEntry> entries = DAO.findAllTableEventEntries();
         addDataToEntryTable(entries);
     }
 

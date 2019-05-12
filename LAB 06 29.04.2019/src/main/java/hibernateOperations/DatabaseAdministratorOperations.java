@@ -15,7 +15,6 @@ public class DatabaseAdministratorOperations {
 
     private EntityManagerOperations EMO = new EntityManagerOperations();
     private DatabaseLoginOperations DLO = new DatabaseLoginOperations();
-    private DatabaseOperations DO = new DatabaseOperations();
 
 
     public ObservableList<User> findAllUsers() {

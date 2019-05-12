@@ -17,7 +17,6 @@ public class DatabaseEventOperations {
         String query = "SELECT e FROM Event e";
         TypedQuery<Event> typedQuery = EMO.getEntityManager().createQuery(query, Event.class);
         events.addAll(typedQuery.getResultList());
-        EMO.closeConnection();
         return events;
     }
 
@@ -42,7 +41,6 @@ public class DatabaseEventOperations {
             tmpEntry.setStatus("waiting");
 
             EMO.getEntityManager().persist(tmpEntry);
-            EMO.closeConnection();
 
             return true;
         } catch (Exception e) {

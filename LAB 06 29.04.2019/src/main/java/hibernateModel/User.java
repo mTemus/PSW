@@ -32,7 +32,7 @@ public class User {
     private String date;
 
     @Column(name = "permissions", nullable = false)
-    private String permissions;
+    private Permissions permissions;
 
     @Column(name = "foodPreferences", nullable = true)
     private FoodPreferences foodPreferences = null;
@@ -71,7 +71,7 @@ public class User {
     public String getDate() {
         return date;
     }
-    public String getPermissions() {
+    public Permissions getPermissions() {
         return permissions;
     }
     public FoodPreferences getFoodPreferences() {
@@ -101,7 +101,7 @@ public class User {
     public void setDate(String date) {
         this.date = date;
     }
-    public void setPermissions(String permissions) {
+    public void setPermissions(Permissions permissions) {
         this.permissions = permissions;
     }
     public void setFoodPreferences(FoodPreferences foodPreferences) {

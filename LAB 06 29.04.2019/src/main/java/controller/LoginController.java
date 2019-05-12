@@ -1,5 +1,7 @@
 package controller;
 
+import hibernateModel.User;
+import hibernateOperations.DatabaseLoginOperations;
 import operations.EmailOperations;
 import operations.StageOperations;
 import javafx.event.ActionEvent;
@@ -10,7 +12,7 @@ import java.io.IOException;
 public class LoginController {
 
     private int loginAttempts = 0;
-    private static NormalModelUser loggedNormalModelUser;
+    private static User loggedUser;
     private boolean someoneIsLogged = false;
 
     public TextField password_text_field_u;
@@ -40,18 +42,18 @@ public class LoginController {
         String login = login_text_field.getText();
         String password = password_text_field.getText();
 
-        loggedNormalModelUser = DLO.searchForExistingUser(login, password);
+        loggedUser = DLO.searchForExistingUser(login, password);
 
         if (loginAttempts < 3) {
-            if (loggedNormalModelUser != null) {
-                if (loggedNormalModelUser.getPermissions() == NormalModelUser.Permissions.USER) {
+            if (loggedUser != null) {
+                if (loggedUser.getPermissions() == User.Permissions.USER) {
                     login_alert_field.setPromptText("Successfully logged in.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
                     SO.changeSceneToUser(event);
 
 
-                } else if (loggedNormalModelUser.getPermissions() == NormalModelUser.Permissions.ADMINISTRATOR) {
+                } else if (loggedUser.getPermissions() == User.Permissions.ADMINISTRATOR) {
                     login_alert_field.setPromptText("Successfully logged in as an Administrator.");
                     loginAttempts = 0;
                     someoneIsLogged = true;
@@ -75,20 +77,26 @@ public class LoginController {
         String password_r = register_field_password_r.getText();
         String email = register_field_email.getText();
 
-        NormalModelUser tmp_NormalModel_user = DLO.searchForExistingUser(login, password);
+        User tmp_user = DLO.searchForExistingUser(login, password);
 
         if (!someoneIsLogged) {
             if (password.contentEquals(password_r)) {
-                if (tmp_NormalModel_user == null) {
-                    tmp_NormalModel_user = new NormalModelUser(name, surname, login, password, email);
-                    DLO.addUserToDatabase(tmp_NormalModel_user);
-                    register_text_area.setPromptText("Registration of NormalModelUser " + tmp_NormalModel_user.getName() + " " + tmp_NormalModel_user.getSurname() + " went successfully, you can log in now.");
+                if (tmp_user == null) {
+                    tmp_user = new User();
+                    tmp_user.setName(name);
+                    tmp_user.setSurname(surname);
+                    tmp_user.setLogin(login);
+                    tmp_user.setPassword(password);
+                    tmp_user.setEmail(email);
+
+                    DLO.addUserToDatabase(tmp_user);
+                    register_text_area.setPromptText("Registration of User " + tmp_user.getName() + " " + tmp_user.getSurname() + " went successfully, you can log in now.");
                     registrationComplete();
 
-                    EO.sendEmailAfterRegistering(tmp_NormalModel_user.getEmail(), tmp_NormalModel_user.getName(), tmp_NormalModel_user.getSurname());
+                    EO.sendEmailAfterRegistering(tmp_user.getEmail(), tmp_user.getName(), tmp_user.getSurname());
 
                 } else
-                    register_text_area.setPromptText("NormalModelUser already exists. Please log in.");
+                    register_text_area.setPromptText("User already exists. Please log in.");
             } else
                 register_text_area.setPromptText("Register failed, passwords don't match. Please repeat your password correctly.");
         } else
@@ -124,11 +132,11 @@ public class LoginController {
         register_field_email.setText("");
     }
 
-    static NormalModelUser getLoggedNormalModelUser() {
-        return loggedNormalModelUser;
+    static User getLoggedUser() {
+        return loggedUser;
     }
 
-    void setLoggedUser(NormalModelUser loggedNormalModelUser) {
-        LoginController.loggedNormalModelUser = loggedNormalModelUser;
+    void setLoggedUser(User loggedUser) {
+        LoginController.loggedUser = loggedUser;
     }
 }

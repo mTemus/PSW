@@ -1,5 +1,8 @@
 package controller;
 
+import hibernateModel.Event;
+import hibernateModel.User;
+import hibernateOperations.DatabaseEventOperations;
 import operations.StageOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +18,10 @@ public class EventController {
     public ToggleGroup food_p;
     private DatabaseEventOperations DEO = new DatabaseEventOperations();
     private StageOperations SO = new StageOperations();
-    private static NormalModelUser loggedNormalModelUser = LoginController.getLoggedNormalModelUser();
-    private static NormalModelEvent chosenNormalModelEvent = null;
+    private static User loggedNormalModelUser = LoginController.getLoggedUser();
+    private static Event chosenNormalModelEvent = null;
 
-    private static ObservableList<NormalModelEvent> normalModelEvents = FXCollections.observableArrayList();
+    private static ObservableList<Event> normalModelEvents = FXCollections.observableArrayList();
 
     public Text event_text_required_participation;
     public Text event_required_event;

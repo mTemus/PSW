@@ -27,7 +27,7 @@ public class EventEntry {
     private String foodPreferences;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private String status = "waiting";
 
     public Long getEntryId() {
         return entryId;

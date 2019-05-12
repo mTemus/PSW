@@ -1,6 +1,8 @@
 package hibernateOperations;
 
 import hibernateModel.Event;
+import hibernateModel.EventEntry;
+import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,34 +30,25 @@ public class DatabaseEventOperations {
 
         return eventNames;
     }
-//
-//    public boolean registerUserOnEvent(NormalModelUser normalModelUser, NormalModelEvent normalModelEvent) {
-//
-//        try {
-//            String Query = "INSERT INTO events_entries " +
-//                    "(entry_id, " +
-//                    "event_id, " +
-//                    "user_id, " +
-//                    "participation_type, " +
-//                    "food_preferences, " +
-//                    "status) " +
-//                    "VALUES " +
-//                    "(default, " +
-//                    "'" + normalModelEvent.getId() + "', " +
-//                    "'" + normalModelUser.getId() + "', " +
-//                    "'" + normalModelUser.getParticipationType() + "', " +
-//                    "'" + normalModelUser.getFoodPreferences() + "', " +
-//                    "default);";
-//
-//            Statement Stm = MySQLConnection().createStatement();
-//            Stm.executeUpdate(Query);
-//            return true;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
+
+    public boolean registerUserOnEvent(User user, Event event) {
+        EventEntry tmpEntry = null;
+        try {
+           tmpEntry.setEventId(event.getId());
+           tmpEntry.setUserId(user.getId());
+           tmpEntry.setFoodPreferences(user.getFoodPreferences().toString());
+           tmpEntry.setParticipationType(user.getParticipationType().toString());
+
+           EMO.getEntityManager().persist(tmpEntry);
+           EMO.closeConnection();
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 //    public String checkIfEntryExists(Long userID, Long eventID) {
 //        String status = null;
 //        ResultSet entryRS;

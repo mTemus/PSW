@@ -218,11 +218,14 @@ public class DatabaseAdministratorOperations {
 
     private void modifyEntryStatus(String status, Long entryID) {
         String query = "UPDATE EventEntry ee SET ee.status = " + status + " WHERE ee.entryId = :eID";
-        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        EntityManager em = EMO.getEntityManager();
+
+        Query updateQuery = em.createQuery(query);
         updateQuery.setParameter("eID", entryID);
-        EMO.getEntityManager().getTransaction().begin();
+        em.getTransaction().begin();
         updateQuery.executeUpdate();
-        EMO.getEntityManager().getTransaction().commit();
+        em.getTransaction().commit();
+        em.close();
 
 
     }

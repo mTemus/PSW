@@ -12,37 +12,30 @@ public class DatabaseEventOperations {
     public ObservableList<Event> findAllEvents() {
         ObservableList<Event> events = FXCollections.observableArrayList();
         String query = "SELECT e FROM Event e";
-
         TypedQuery<Event> typedQuery = EMO.getEntityManager().createQuery(query, Event.class);
         events.addAll(typedQuery.getResultList());
-
-
-        for (Event e: events) {
-            System.out.println(e.getName());
-        }
-
         EMO.closeConnection();
         return events;
     }
-//
-//    public ObservableList<String> findAllEventNames() {
-//        ObservableList<String> eventNames = FXCollections.observableArrayList();
-//
-//        try {
-//            Statement eventNamesStatement = MySQLConnection().createStatement();
-//            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select event_name from event");
-//
-//            while (eventNamesResultSet.next()) {
-//                eventNames.add(eventNamesResultSet.getString("event_name"));
-//
-//            }
-//            MySQLConnection().close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return eventNames;
-//    }
+
+    public ObservableList<String> findAllEventNames() {
+        ObservableList<String> eventNames = FXCollections.observableArrayList();
+
+        try {
+            Statement eventNamesStatement = MySQLConnection().createStatement();
+            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select event_name from event");
+
+            while (eventNamesResultSet.next()) {
+                eventNames.add(eventNamesResultSet.getString("event_name"));
+
+            }
+            MySQLConnection().close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventNames;
+    }
 //
 //    public boolean registerUserOnEvent(NormalModelUser normalModelUser, NormalModelEvent normalModelEvent) {
 //

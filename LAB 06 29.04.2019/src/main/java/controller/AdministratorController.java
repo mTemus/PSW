@@ -1,10 +1,6 @@
 package controller;
 
-import model.NormalModelEvent;
 import model.TableEventEntry;
-import model.NormalModelUser;
-import operations.DatabaseAdministratorOperations;
-import operations.DatabaseEventOperations;
 import operations.StageOperations;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

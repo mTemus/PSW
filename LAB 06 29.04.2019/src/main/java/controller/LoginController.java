@@ -1,11 +1,9 @@
 package controller;
 
-import operations.DatabaseLoginOperations;
 import operations.EmailOperations;
 import operations.StageOperations;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import model.NormalModelUser;
 
 import java.io.IOException;
 

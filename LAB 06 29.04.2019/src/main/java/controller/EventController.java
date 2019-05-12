@@ -1,8 +1,5 @@
 package controller;
 
-import model.NormalModelEvent;
-import model.NormalModelUser;
-import operations.DatabaseEventOperations;
 import operations.StageOperations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

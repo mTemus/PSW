@@ -6,9 +6,6 @@ import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.TableEventEntry;
-import operations.DatabaseLoginOperations;
-import operations.DatabaseOperations;
-import org.hibernate.Session;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;

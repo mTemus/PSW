@@ -1,5 +1,7 @@
 package hibernateOperations;
 
+import hibernateModel.Event;
+import hibernateModel.EventEntry;
 import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,14 +52,13 @@ public class DatabaseAdministratorOperations {
         return eventEntries;
     }
 
-    public User findExistingUserToDelete(int userID) {
+    public User findExistingUserToDelete(long userID) {
         User tmpUser = null;
         String query = "SELECT u FROM User u WHERE u.id = :uID";
-        Long usrID = new Long(userID);
 
 
         TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
-        typedQuery.setParameter("uID", usrID);
+        typedQuery.setParameter("uID", userID);
 
         try {
             tmpUser = typedQuery.getSingleResult();
@@ -71,34 +72,55 @@ public class DatabaseAdministratorOperations {
 
         return tmpUser;
     }
-//
-//    public void deleteUserFromDatabase(long userID) {
-//        String query = "DELETE FROM user WHERE id = " + userID;
-//        executeStatementUpdate(query);
-//    }
-//
-//    private PreparedStatement findExistingEntry(String query) {
-//        PreparedStatement entryPrpStm = null;
-//
-//        try {
-//            entryPrpStm = DO.MySQLConnection().prepareStatement(query);
-//            DO.MySQLConnection().close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return entryPrpStm;
-//    }
-//
-//    public Boolean findExistingEntryToDelete(int userID) {
-//        Boolean tmpEntry = null;
-//        String query = "select * from events_entries where user_id = " + userID + ";";
-//        PreparedStatement entryPrpStm = findExistingEntry(query);
-//        tmpEntry = doFindingQueryOfEntry(entryPrpStm);
-//
-//        return tmpEntry;
-//    }
-//
+
+    public void deleteUserFromDatabase(long userID) {
+        User userToDelete = findExistingUserToDelete(userID);
+
+        EMO.getEntityManager().remove(userToDelete);
+        EMO.closeConnection();
+    }
+
+    private EventEntry findExistingEntry(Long entryID) {
+        EventEntry existingEntry = null;
+
+        String query = "SELECT ee FROM EventEntry ee WHERE ee.entryId = :eID";
+
+        TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
+        typedQuery.setParameter("eID", entryID);
+
+        try {
+            existingEntry = typedQuery.getSingleResult();
+
+            System.out.println(existingEntry.getEntryId() + " user id: " + existingEntry.getUserId());
+        } catch (NoResultException nre) {
+            nre.printStackTrace();
+        } finally {
+            EMO.closeConnection();
+        }
+
+
+        return existingEntry;
+    }
+
+    public EventEntry findExistingEntryToDelete(Long userID) {
+        EventEntry existingEntry;
+        String query = "SELECT ee FROM EventEntry ee WHERE ee.userId = :uID";
+
+        TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
+        typedQuery.setParameter("uID", userID);
+
+        try {
+            existingEntry = typedQuery.getSingleResult();
+            if (existingEntry != null)
+        } catch (NoResultException nre) {
+            nre.printStackTrace();
+        } finally {
+            EMO.closeConnection();
+        }
+        return existingEntry;
+    }
+
+    //
 //    public Boolean findExistingEntryToModify(int entryID) {
 //        Boolean tmpEntry = null;
 //        String query = "select * from events_entries where entry_id = " + entryID + ";";
@@ -108,25 +130,12 @@ public class DatabaseAdministratorOperations {
 //        return tmpEntry;
 //    }
 //
-//    private Boolean doFindingQueryOfEntry(PreparedStatement findStm) {
-//        ResultSet entryResultFind;
-//
-//        try {
-//            entryResultFind = findStm.executeQuery();
-//
-//            return entryResultFind.next();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
-//    public void deleteEntryFromDatabase(long userID) {
-//        String query = "DELETE FROM events_entries WHERE user_id = " + userID;
-//
-//        executeStatementUpdate(query);
-//    }
+
+    public void deleteEntryFromDatabase(long userID) {
+        EventEntry deletedEntry = findExistingEntryToDelete(userID);
+        EMO.getEntityManager().remove(deletedEntry);
+        EMO.closeConnection();
+    }
 //
 //    public void changeUserPassword(int userId, String newPassword) {
 //        String query = "UPDATE user " +

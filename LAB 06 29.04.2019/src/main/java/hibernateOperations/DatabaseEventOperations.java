@@ -20,20 +20,18 @@ public class DatabaseEventOperations {
 
     public ObservableList<String> findAllEventNames() {
         ObservableList<String> eventNames = FXCollections.observableArrayList();
+        ObservableList<Event> events = FXCollections.observableArrayList();
 
-        try {
-            Statement eventNamesStatement = MySQLConnection().createStatement();
-            ResultSet eventNamesResultSet = eventNamesStatement.executeQuery("select event_name from event");
+        events = findAllEvents();
 
-            while (eventNamesResultSet.next()) {
-                eventNames.add(eventNamesResultSet.getString("event_name"));
-
-            }
-            MySQLConnection().close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Event e: events) {
+            eventNames.add(e.getName());
         }
+
+        for (String s: eventNames) {
+            System.out.println(s);
+        }
+
         return eventNames;
     }
 //

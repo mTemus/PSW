@@ -103,7 +103,7 @@ public class DatabaseAdministratorOperations {
     }
 
     public EventEntry findExistingEntryToDelete(Long userID) {
-        EventEntry existingEntry;
+        EventEntry existingEntry = null;
         String query = "SELECT ee FROM EventEntry ee WHERE ee.userId = :uID";
 
         TypedQuery<EventEntry> typedQuery = EMO.getEntityManager().createQuery(query, EventEntry.class);
@@ -111,7 +111,6 @@ public class DatabaseAdministratorOperations {
 
         try {
             existingEntry = typedQuery.getSingleResult();
-            if (existingEntry != null)
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {

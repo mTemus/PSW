@@ -22,9 +22,9 @@ public class DatabaseEventOperations {
 
     public ObservableList<String> findAllEventNames() {
         ObservableList<String> eventNames = FXCollections.observableArrayList();
-        ObservableList<Event> events= findAllEvents();
+        ObservableList<Event> events = findAllEvents();
 
-        for (Event e: events) {
+        for (Event e : events) {
             eventNames.add(e.getName());
         }
 
@@ -32,16 +32,16 @@ public class DatabaseEventOperations {
     }
 
     public boolean registerUserOnEvent(User user, Event event) {
-        EventEntry tmpEntry = null;
+        EventEntry tmpEntry = new EventEntry();
         try {
-           tmpEntry.setEventId(event.getId());
-           tmpEntry.setUserId(user.getId());
-           tmpEntry.setFoodPreferences(user.getFoodPreferences().toString());
-           tmpEntry.setParticipationType(user.getParticipationType().toString());
-           tmpEntry.setStatus("waiting");
+            tmpEntry.setEventId(event.getId());
+            tmpEntry.setUserId(user.getId());
+            tmpEntry.setFoodPreferences(user.getFoodPreferences().toString());
+            tmpEntry.setParticipationType(user.getParticipationType().toString());
+            tmpEntry.setStatus("waiting");
 
-           EMO.getEntityManager().persist(tmpEntry);
-           EMO.closeConnection();
+            EMO.getEntityManager().persist(tmpEntry);
+            EMO.closeConnection();
 
             return true;
         } catch (Exception e) {
@@ -50,26 +50,26 @@ public class DatabaseEventOperations {
         }
     }
 
-//    public String checkIfEntryExists(Long userID, Long eventID) {
-//        String status = null;
-//        ResultSet entryRS;
-//
-//        PreparedStatement findingEntryStm = null;
-//        try {
-//            findingEntryStm = MySQLConnection().prepareStatement("SELECT * FROM events_entries WHERE event_id LIKE ? AND user_id LIKE ?");
-//            findingEntryStm.setLong(1, eventID);
-//            findingEntryStm.setLong(2, userID);
-//
-//            entryRS = findingEntryStm.executeQuery();
-//
-//            if (entryRS.next()){
-//                status = entryRS.getString("status");
-//                return status;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return null;
-//    }
+    public String checkIfEntryExists(Long userID, Long eventID) {
+        String status = null;
+        ResultSet entryRS;
+
+        PreparedStatement findingEntryStm = null;
+        try {
+            findingEntryStm = MySQLConnection().prepareStatement("SELECT * FROM events_entries WHERE event_id LIKE ? AND user_id LIKE ?");
+            findingEntryStm.setLong(1, eventID);
+            findingEntryStm.setLong(2, userID);
+
+            entryRS = findingEntryStm.executeQuery();
+
+            if (entryRS.next()) {
+                status = entryRS.getString("status");
+                return status;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return status;
+    }
 }

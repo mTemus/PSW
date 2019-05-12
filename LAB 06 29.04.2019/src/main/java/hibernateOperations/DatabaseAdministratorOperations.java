@@ -194,6 +194,17 @@ public class DatabaseAdministratorOperations {
         EMO.closeConnection();
     }
 
+    public void acceptEntry(Long entryID) {
+        String status = "'accepted'";
+
+        modifyEntryStatus(status, entryID);
+    }
+
+    public void discardEntry(Long entryID) {
+        String status = "'canceled'";
+
+        modifyEntryStatus(status, entryID);
+    }
 
     private void modifyEntryStatus(String status, Long entryID) {
         String query = "UPDATE EventEntry ee SET ee.status = " + status + " WHERE ee.entryId = :eID";
@@ -206,26 +217,5 @@ public class DatabaseAdministratorOperations {
         EMO.closeConnection();
     }
 
-    public void acceptEntry(Long entryID) {
-        String status = "'accepted'";
-
-        modifyEntryStatus(status, entryID);
-    }
-
-    public void discardEntry(Long entryID) {
-        String status = "'canceled'";
-
-        modifyEntryStatus(status, entryID);
-    }
-//
-//    private void executeStatementUpdate(String query) {
-//        try {
-//            Statement entryStm = DO.MySQLConnection().createStatement();
-//            entryStm.executeUpdate(query);
-//            DO.MySQLConnection().close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

@@ -166,6 +166,8 @@ public class DatabaseAdministratorOperations {
             EMO.closeConnection();
         }
 
+
+        System.out.println(tmpEvent.getName());
         return tmpEvent;
     }
 

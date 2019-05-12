@@ -19,7 +19,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         DatabaseAdministratorOperations DAO = new DatabaseAdministratorOperations();
 
-        DAO.changeUserPassword(1L, "1234");
+        DAO.lookForExistingEvent(1L);
 
         launch(args);
     }

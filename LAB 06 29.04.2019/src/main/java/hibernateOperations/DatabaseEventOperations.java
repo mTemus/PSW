@@ -6,6 +6,8 @@ import hibernateModel.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -32,6 +34,7 @@ public class DatabaseEventOperations {
     }
 
     public boolean registerUserOnEvent(User user, Event event) {
+        EntityManager em = EMO.getEntityManager();
         EventEntry tmpEntry = new EventEntry();
         try {
             tmpEntry.setEventId(event.getId());
@@ -40,7 +43,10 @@ public class DatabaseEventOperations {
             tmpEntry.setParticipationType(user.getParticipationType().toString());
             tmpEntry.setStatus("waiting");
 
-            EMO.getEntityManager().persist(tmpEntry);
+            em.getTransaction().begin();
+            em.persist(tmpEntry);
+            em.getTransaction().commit();
+            em.close();
 
             return true;
         } catch (Exception e) {
@@ -57,12 +63,15 @@ public class DatabaseEventOperations {
         typedQuery.setParameter("uID", userID);
         typedQuery.setParameter("eID", eventID);
 
+
         try {
             tmpEntry = typedQuery.getSingleResult();
+            System.out.println("tutaj");
             return tmpEntry.getStatus();
 
         } catch (NoResultException nre) {
-
+            System.out.println("jednak nie tam, a tutaj");
+            nre.printStackTrace();
             return null;
         }
     }

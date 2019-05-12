@@ -132,11 +132,9 @@ public class DatabaseAdministratorOperations {
     }
 
     public void changeUserPassword(Long userId, String newPassword) {
-        User tmpUser = null;
         String query = "UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID";
 
-
-        Query updateQuery = EMO.getEntityManager().createQuery("UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID");
+        Query updateQuery = EMO.getEntityManager().createQuery(query);
         updateQuery.setParameter("uNewPassword", newPassword);
         updateQuery.setParameter("uID", userId);
         EMO.getEntityManager().getTransaction().begin();

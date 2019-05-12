@@ -205,16 +205,18 @@ public class DatabaseAdministratorOperations {
 
         EMO.closeConnection();
     }
-//
-//    public void discardEntry(int entryID) {
-//
-//        String query = "UPDATE events_entries " +
-//                "SET " +
-//                "status = 'canceled'" +
-//                "WHERE entry_id = '" + entryID + "';";
-//
-//        executeStatementUpdate(query);
-//    }
+
+    public void discardEntry(int entryID) {
+        String query = "UPDATE EventEntry ee SET ee.status = 'canceled' WHERE ee.entryId = :eID";
+
+        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        updateQuery.setParameter("eID", entryID);
+        EMO.getEntityManager().getTransaction().begin();
+        updateQuery.executeUpdate();
+        EMO.getEntityManager().getTransaction().commit();
+
+        EMO.closeConnection();
+    }
 //
 //    private void executeStatementUpdate(String query) {
 //        try {

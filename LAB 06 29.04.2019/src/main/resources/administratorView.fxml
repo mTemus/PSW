@@ -262,7 +262,7 @@
                                     </GridPane.margin>
                                 </TextField>
                                 <Button fx:id="ev_a_mod_load_event_button" mnemonicParsing="false"
-                                        onAction="#loadEventToModify" text="Loae Event"
+                                        onAction="#loadEventToModify" text="Load event"
                                         GridPane.columnIndex="1"/>
                             </GridPane>
                             <GridPane GridPane.rowIndex="1">

@@ -143,12 +143,16 @@ public class DatabaseAdministratorOperations {
     }
 
     public void addEventToDatabase(String name, String agenda, String date) {
+        EntityManager em = EMO.getEntityManager();
         Event tmpEvent = new Event();
         tmpEvent.setName(name);
         tmpEvent.setAgenda(agenda);
         tmpEvent.setDate(date);
 
-        EMO.getEntityManager().persist(tmpEvent);
+        em.getTransaction().begin();
+        em.persist(tmpEvent);
+        em.getTransaction().commit();
+        em.close();
 
     }
 
@@ -172,23 +176,31 @@ public class DatabaseAdministratorOperations {
 
 
     public void deleteEvent(Long eventID) {
-        Event tmpEvent = lookForExistingEvent(eventID);
-        EMO.getEntityManager().remove(tmpEvent);
+        EntityManager EM = EMO.getEntityManager();
 
+        String query = "DELETE Event e WHERE e.id = :eID";
+
+        Query updateQuery = EM.createQuery(query);
+        updateQuery.setParameter("eID", eventID);
+        EM.getTransaction().begin();
+        updateQuery.executeUpdate();
+        EM.getTransaction().commit();
+        EM.close();
     }
 
     public void updateEvent(Event modifiedEvent) {
+        EntityManager em = EMO.getEntityManager();
         String query = "UPDATE Event e SET e.name = :eName, e.agenda = :eAgenda, e.date = :eDate WHERE e.id = :eID";
 
-        Query updateQuery = EMO.getEntityManager().createQuery(query);
+        Query updateQuery = em.createQuery(query);
         updateQuery.setParameter("eName", modifiedEvent.getName());
         updateQuery.setParameter("eAgenda", modifiedEvent.getAgenda());
         updateQuery.setParameter("eDate", modifiedEvent.getDate());
         updateQuery.setParameter("eID", modifiedEvent.getId());
-        EMO.getEntityManager().getTransaction().begin();
+        em.getTransaction().begin();
         updateQuery.executeUpdate();
-        EMO.getEntityManager().getTransaction().commit();
-
+        em.getTransaction().commit();
+        em.close();
 
     }
 

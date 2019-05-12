@@ -142,23 +142,13 @@ public class DatabaseAdministratorOperations {
         EMO.getEntityManager().getTransaction().commit();
 
         EMO.closeConnection();
-
     }
-//
-//    public void addEventToDatabase(String name, String agenda, String date) {
-//        String query = "INSERT INTO event " +
-//                "(id_event, " +
-//                "event_name, " +
-//                "agenda, " +
-//                "date) " +
-//
-//                "VALUES " +
-//                "(DEFAULT," +
-//                "'" + name + "', " +
-//                "'" + agenda + "', " +
-//                "'" + date + "');";
-//        executeStatementUpdate(query);
-//    }
+
+    public void addEventToDatabase(String name, String agenda, String date) {
+       Event tmpEvent = new Event(null, name, agenda, date);
+       EMO.getEntityManager().persist(tmpEvent);
+       EMO.closeConnection();
+    }
 //
 //    public PreparedStatement lookForExistingEvent(Long eventID) {
 //

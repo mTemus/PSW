@@ -145,7 +145,11 @@ public class DatabaseAdministratorOperations {
     }
 
     public void addEventToDatabase(String name, String agenda, String date) {
-        Event tmpEvent = new Event(null, name, agenda, date);
+        Event tmpEvent = new Event();
+        tmpEvent.setName(name);
+        tmpEvent.setAgenda(agenda);
+        tmpEvent.setDate(date);
+
         EMO.getEntityManager().persist(tmpEvent);
         EMO.closeConnection();
     }
@@ -171,29 +175,12 @@ public class DatabaseAdministratorOperations {
         return tmpEvent;
     }
 
-//    public NormalModelEvent doFindingEventQuery(PreparedStatement findStm) {
-//        ResultSet eventResultFind;
-//        NormalModelEvent tmp_NormalModel_event = null;
-//
-//        try {
-//            eventResultFind = findStm.executeQuery();
-//            if (eventResultFind.next()) {
-//                tmp_NormalModel_event = new NormalModelEvent(eventResultFind.getLong("id_event"),
-//                        eventResultFind.getString("event_name"),
-//                        eventResultFind.getString("agenda"),
-//                        eventResultFind.getString("date"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return tmp_NormalModel_event;
-//    }
-//
-//    public void deleteEvent(Long eventID) {
-//
-//        String query = "DELETE FROM event WHERE id_event = " + eventID;
-//        executeStatementUpdate(query);
-//    }
+
+    public void deleteEvent(Long eventID) {
+        Event tmpEvent = lookForExistingEvent(eventID);
+        EMO.getEntityManager().remove(tmpEvent);
+        EMO.closeConnection();
+    }
 //
 //    public void updateEvent(NormalModelEvent modifiedNormalModelEvent) {
 //

@@ -128,15 +128,20 @@ public class DatabaseAdministratorOperations {
         EMO.getEntityManager().remove(deletedEntry);
         EMO.closeConnection();
     }
-//
-//    public void changeUserPassword(int userId, String newPassword) {
-//        String query = "UPDATE user " +
-//                "SET " +
-//                "password = '" + newPassword + "'" +
-//                "WHERE id LIKE '" + userId + "';";
-//
-//        executeStatementUpdate(query);
-//    }
+
+    public void changeUserPassword(Long userId, String newPassword) {
+        User tmpUser = null;
+        String query = "UPDATE User u SET u.password = :uNewPassword WHERE u.id = :uID";
+
+
+        TypedQuery<User> typedQuery = EMO.getEntityManager().createQuery(query, User.class);
+        typedQuery.setParameter("uID", userId);
+        typedQuery.setParameter("uNewPassword", newPassword);
+
+        typedQuery.executeUpdate();
+        EMO.closeConnection();
+
+    }
 //
 //    public void addEventToDatabase(String name, String agenda, String date) {
 //        String query = "INSERT INTO event " +

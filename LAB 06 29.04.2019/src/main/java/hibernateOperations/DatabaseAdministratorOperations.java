@@ -63,7 +63,6 @@ public class DatabaseAdministratorOperations {
         try {
             tmpUser = typedQuery.getSingleResult();
 
-            System.out.println(tmpUser.getName());
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
@@ -80,7 +79,7 @@ public class DatabaseAdministratorOperations {
         EMO.closeConnection();
     }
 
-    private EventEntry findExistingEntry(Long entryID) {
+    public EventEntry findExistingEntry(Long entryID) {
         EventEntry existingEntry = null;
 
         String query = "SELECT ee FROM EventEntry ee WHERE ee.entryId = :eID";
@@ -90,8 +89,6 @@ public class DatabaseAdministratorOperations {
 
         try {
             existingEntry = typedQuery.getSingleResult();
-
-            System.out.println(existingEntry.getEntryId() + " user id: " + existingEntry.getUserId());
         } catch (NoResultException nre) {
             nre.printStackTrace();
         } finally {
@@ -119,16 +116,12 @@ public class DatabaseAdministratorOperations {
         return existingEntry;
     }
 
-    //
-//    public Boolean findExistingEntryToModify(int entryID) {
-//        Boolean tmpEntry = null;
-//        String query = "select * from events_entries where entry_id = " + entryID + ";";
-//        PreparedStatement entryPrpStm = findExistingEntry(query);
-//        tmpEntry = doFindingQueryOfEntry(entryPrpStm);
-//
-//        return tmpEntry;
-//    }
-//
+
+    public EventEntry findExistingEntryToModify(Long entryID) {
+        EventEntry entryToModify = findExistingEntry(entryID);
+        return entryToModify;
+    }
+
 
     public void deleteEntryFromDatabase(long userID) {
         EventEntry deletedEntry = findExistingEntryToDelete(userID);

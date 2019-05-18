@@ -66,11 +66,9 @@ public class DatabaseEventOperations {
 
         try {
             tmpEntry = typedQuery.getSingleResult();
-            System.out.println("tutaj");
             return tmpEntry.getStatus();
 
         } catch (NoResultException nre) {
-            System.out.println("jednak nie tam, a tutaj");
             nre.printStackTrace();
             return null;
         }
